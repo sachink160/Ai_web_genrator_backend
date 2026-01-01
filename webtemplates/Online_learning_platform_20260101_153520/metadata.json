@@ -1,0 +1,223 @@
+{
+  "created_at": "2026-01-01T15:35:20.510995",
+  "description": "Online learning platform for coding bootcamps with interactive tutorials, live mentoring, and career placement services",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Primary landing page for prospective students to understand the bootcamp value, explore key offerings, and convert via sign-up or consultation booking.",
+        "sections": [
+          "hero",
+          "credibility_bar",
+          "how_it_works_overview",
+          "bootcamp_tracks_highlight",
+          "interactive_learning_features",
+          "live_mentoring_highlight",
+          "career_outcomes_showcase",
+          "testimonials",
+          "partner_logos",
+          "cta_band",
+          "faq_preview"
+        ]
+      },
+      {
+        "name": "bootcamps",
+        "purpose": "Overview and comparison of all coding bootcamp programs with details on curriculum, schedule, and outcomes to help users pick the right track.",
+        "sections": [
+          "programs_hero",
+          "program_filters",
+          "program_cards_grid",
+          "curriculum_highlights",
+          "learning_experience_detail",
+          "schedule_and_format",
+          "pricing_and_financing_overview",
+          "who_it_is_for",
+          "admissions_process",
+          "student_success_snippets",
+          "program_faq",
+          "program_cta"
+        ]
+      },
+      {
+        "name": "career_services",
+        "purpose": "Showcase mentoring, career coaching, and job placement support to build trust around outcomes and ROI.",
+        "sections": [
+          "career_hero",
+          "mentoring_explained",
+          "career_coaching_process",
+          "job_placement_support",
+          "hiring_partner_network",
+          "success_stories",
+          "career_timeline_visual",
+          "career_faq",
+          "career_cta"
+        ]
+      },
+      {
+        "name": "about",
+        "purpose": "Build credibility by telling the company story, approach to education, team expertise, and mission.",
+        "sections": [
+          "about_hero",
+          "mission_and_vision",
+          "our_story",
+          "teaching_philosophy",
+          "team",
+          "advisors_and_instructors",
+          "stats_and_milestones",
+          "press_and_awards",
+          "values",
+          "about_cta"
+        ]
+      },
+      {
+        "name": "pricing",
+        "purpose": "Clearly explain tuition, payment options, financing, and any guarantees to reduce friction and support conversion.",
+        "sections": [
+          "pricing_hero",
+          "tuition_comparison_table",
+          "payment_options",
+          "scholarships_and_discounts",
+          "income_share_or_guarantee_explainer",
+          "value_breakdown",
+          "pricing_faq",
+          "pricing_cta"
+        ]
+      },
+      {
+        "name": "resources",
+        "purpose": "Attract and nurture leads via free content: blog, guides, and sample lessons, positioning the platform as an authority.",
+        "sections": [
+          "resources_hero",
+          "featured_resources",
+          "blog_list",
+          "guides_and_ebooks",
+          "free_sample_lessons",
+          "newsletter_signup",
+          "resources_cta"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "Provide clear ways to get in touch, book a call, or ask questions, and handle basic support inquiries.",
+        "sections": [
+          "contact_hero",
+          "contact_form",
+          "contact_information",
+          "office_hours_and_response_time",
+          "support_links",
+          "map_or_location_info",
+          "contact_faq",
+          "final_cta"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "modern tech-education",
+      "primary_color": "#2563EB",
+      "secondary_color": "#0F172A",
+      "accent_color": "#22C55E",
+      "background_color": "#F9FAFB",
+      "font_family": {
+        "headings": "Bold geometric sans-serif (e.g., Poppins, Inter, or SF Pro Display)",
+        "body": "Clean humanist sans-serif (e.g., Inter, Roboto, or Open Sans)",
+        "code": "Monospace for code snippets (e.g., Fira Code, Source Code Pro)"
+      },
+      "design_style": "clean, modern, and trustworthy with subtle tech flair (soft gradients, clear grid layout, generous white space, and accessible contrast)",
+      "ui_elements": {
+        "buttons": "Rounded corners, solid primary color for main CTAs, outlined secondary buttons; clear hover states.",
+        "cards": "Shadowed or bordered cards for programs, testimonials, and features; consistent spacing and icon usage.",
+        "icons": "Simple line or duotone icons to represent learning features, mentoring, and career services.",
+        "imagery_style": "Mix of high-quality photography (diverse students, mentors, remote learning scenes) and simple product UI mockups of the platform."
+      }
+    },
+    "image_sections": [
+      "hero",
+      "credibility_bar",
+      "how_it_works_overview",
+      "bootcamp_tracks_highlight",
+      "interactive_learning_features",
+      "live_mentoring_highlight",
+      "career_outcomes_showcase",
+      "testimonials",
+      "partner_logos",
+      "programs_hero",
+      "program_cards_grid",
+      "learning_experience_detail",
+      "student_success_snippets",
+      "career_hero",
+      "mentoring_explained",
+      "job_placement_support",
+      "hiring_partner_network",
+      "success_stories",
+      "career_timeline_visual",
+      "about_hero",
+      "our_story",
+      "team",
+      "advisors_and_instructors",
+      "stats_and_milestones",
+      "press_and_awards",
+      "pricing_hero",
+      "value_breakdown",
+      "resources_hero",
+      "featured_resources",
+      "blog_list",
+      "free_sample_lessons",
+      "contact_hero",
+      "map_or_location_info"
+    ],
+    "navigation": [
+      "home",
+      "bootcamps",
+      "career_services",
+      "pricing",
+      "resources",
+      "about",
+      "contact"
+    ]
+  },
+  "pages": [
+    "home",
+    "bootcamps",
+    "career_services",
+    "about",
+    "pricing",
+    "resources",
+    "contact"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "credibility_bar": "/uploads/placeholder.png",
+    "how_it_works_overview": "/uploads/placeholder.png",
+    "bootcamp_tracks_highlight": "/uploads/placeholder.png",
+    "interactive_learning_features": "/uploads/placeholder.png",
+    "live_mentoring_highlight": "/uploads/placeholder.png",
+    "career_outcomes_showcase": "/uploads/placeholder.png",
+    "testimonials": "/uploads/placeholder.png",
+    "partner_logos": "/uploads/placeholder.png",
+    "programs_hero": "/uploads/placeholder.png",
+    "program_cards_grid": "/uploads/placeholder.png",
+    "learning_experience_detail": "/uploads/placeholder.png",
+    "student_success_snippets": "/uploads/placeholder.png",
+    "career_hero": "/uploads/placeholder.png",
+    "mentoring_explained": "/uploads/placeholder.png",
+    "job_placement_support": "/uploads/placeholder.png",
+    "hiring_partner_network": "/uploads/placeholder.png",
+    "success_stories": "/uploads/placeholder.png",
+    "career_timeline_visual": "/uploads/placeholder.png",
+    "about_hero": "/uploads/placeholder.png",
+    "our_story": "/uploads/placeholder.png",
+    "team": "/uploads/placeholder.png",
+    "advisors_and_instructors": "/uploads/placeholder.png",
+    "stats_and_milestones": "/uploads/placeholder.png",
+    "press_and_awards": "/uploads/placeholder.png",
+    "pricing_hero": "/uploads/placeholder.png",
+    "value_breakdown": "/uploads/placeholder.png",
+    "resources_hero": "/uploads/placeholder.png",
+    "featured_resources": "/uploads/placeholder.png",
+    "blog_list": "/uploads/placeholder.png",
+    "free_sample_lessons": "/uploads/placeholder.png",
+    "contact_hero": "/uploads/placeholder.png",
+    "map_or_location_info": "/uploads/placeholder.png"
+  },
+  "has_global_css_theme": true
+}

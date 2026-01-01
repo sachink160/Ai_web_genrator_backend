@@ -1,0 +1,246 @@
+:root {
+    --primary-color: #4A90E2;
+    --primary-dark: #3B76B2;
+    --primary-light: #A1C8E8;
+    --secondary-color: #7F8C8D;
+    --accent-color: #E67E22;
+    --text-primary: #2C3E50;
+    --text-secondary: #95A5A6;
+    --background: #FFFFFF;
+    --surface: #F7F9FC;
+    --border-color: #E1E1E1;
+
+    --font-heading: 'Helvetica Neue', sans-serif;
+    --font-body: 'Arial', sans-serif;
+    --h1-size: 2.5rem;
+    --h2-size: 2rem;
+    --h3-size: 1.75rem;
+    --text-base: 1rem;
+    --text-sm: 0.875rem;
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-2xl: 4rem;
+
+    --container-width: 1200px;
+    --gap: 2rem;
+
+    --border-radius: 0.5rem;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: var(--line-height-normal);
+    color: var(--text-primary);
+    background-color: var(--background);
+}
+
+h1, h2, h3, p, a, ul, ol {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: var(--h1-size);
+    font-family: var(--font-heading);
+}
+
+h2 {
+    font-size: var(--h2-size);
+    font-family: var(--font-heading);
+}
+
+h3 {
+    font-size: var(--h3-size);
+    font-family: var(--font-heading);
+}
+
+p {
+    font-size: var(--text-base);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+.section-padding {
+    padding: var(--spacing-lg) 0;
+}
+
+.flex {
+    display: flex;
+}
+
+.grid {
+    display: grid;
+    gap: var(--gap);
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar {
+    background-color: var(--surface);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+}
+
+.nav-link {
+    margin-right: var(--spacing-md);
+    color: var(--text-primary);
+    transition: var(--transition);
+}
+
+.nav-link.active,
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
+.hero {
+    background-color: var(--primary-light);
+    padding: var(--spacing-xl) 0;
+}
+
+.hero-content {
+    text-align: center;
+}
+
+.btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: var(--text-secondary);
+}
+
+.card {
+    background-color: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.card-header, .card-body, .card-footer {
+    padding: var(--spacing-md);
+}
+
+.footer {
+    background-color: var(--surface);
+    padding: var(--spacing-lg);
+    text-align: center;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.input, .textarea, .select {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.input:focus, .textarea:focus, .select:focus {
+    border-color: var(--primary-color);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-primary {
+    color: var(--primary-color);
+}
+
+.bg-primary {
+    background-color: var(--primary-color);
+}
+
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

@@ -1,0 +1,73 @@
+{
+  "created_at": "2026-01-01T17:26:51.188897",
+  "description": "Business Type: Restaurant\n\nDescription:\nA modern restaurant serving delicious food with dine-in and takeaway options.\nFocus on quality, taste, and customer experience.\n\nTarget Audience:\nFood lovers, families\n\nTone:\nAppetizing, vibrant, welcoming\n\nExtra UI Notes:\n- Food image hero section\n- Menu section\n- Reservation CTA",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Landing page showcasing the restaurant's value proposition",
+        "sections": [
+          "hero",
+          "features",
+          "cta"
+        ]
+      },
+      {
+        "name": "about",
+        "purpose": "Information about the restaurant's story and mission",
+        "sections": [
+          "story",
+          "team",
+          "values"
+        ]
+      },
+      {
+        "name": "menu",
+        "purpose": "Display the restaurant's menu offerings",
+        "sections": [
+          "appetizers",
+          "main_courses",
+          "desserts",
+          "drinks"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "Provide contact information and reservation options",
+        "sections": [
+          "form",
+          "info",
+          "reservation"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "modern vibrant",
+      "primary_color": "red",
+      "secondary_color": "gold",
+      "font_family": "sans-serif",
+      "design_style": "clean and welcoming"
+    },
+    "image_sections": [
+      "hero",
+      "features"
+    ],
+    "navigation": [
+      "home",
+      "about",
+      "menu",
+      "contact"
+    ]
+  },
+  "pages": [
+    "home",
+    "about",
+    "menu",
+    "contact"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "features": "/uploads/placeholder.png"
+  },
+  "has_global_css_theme": false
+}

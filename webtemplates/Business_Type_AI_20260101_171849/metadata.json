@@ -1,0 +1,77 @@
+{
+  "created_at": "2026-01-01T17:18:49.580560",
+  "description": "Business Type: AI SaaS Startup\n\nDescription:\nAn AI-powered platform that helps businesses automate workflows,\nanalyze data, and improve productivity using machine learning.\n\nTarget Audience:\nTech startups, enterprises, developers\n\nTone:\nInnovative, futuristic, clean\n\nExtra UI Notes:\n- Dark mode or gradient background\n- Tech-style cards\n- Highlight features with icons",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Landing page",
+        "sections": [
+          "hero",
+          "features",
+          "testimonials",
+          "cta"
+        ]
+      },
+      {
+        "name": "about",
+        "purpose": "About the company and technology",
+        "sections": [
+          "story",
+          "technology",
+          "mission",
+          "team"
+        ]
+      },
+      {
+        "name": "features",
+        "purpose": "Highlight core offerings",
+        "sections": [
+          "workflow automation",
+          "data analysis",
+          "productivity tools",
+          "integration"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "Customer support and inquiries",
+        "sections": [
+          "contact form",
+          "office locations",
+          "social media links"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "futuristic tech",
+      "primary_color": "#1a1a2e",
+      "secondary_color": "#16213e",
+      "font_family": "sans-serif",
+      "design_style": "clean, modern, tech-style"
+    },
+    "image_sections": [
+      "hero",
+      "features",
+      "testimonials"
+    ],
+    "navigation": [
+      "home",
+      "about",
+      "features",
+      "contact"
+    ]
+  },
+  "pages": [
+    "home",
+    "about",
+    "features",
+    "contact"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "features": "/uploads/placeholder.png",
+    "testimonials": "/uploads/placeholder.png"
+  },
+  "has_global_css_theme": false
+}

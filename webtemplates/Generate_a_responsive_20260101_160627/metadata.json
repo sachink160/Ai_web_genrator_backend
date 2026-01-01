@@ -1,0 +1,75 @@
+{
+  "created_at": "2026-01-01T16:06:27.515603",
+  "description": "Generate a responsive Dairy Farm website showcasing fresh milk and dairy products, ethical farming, animal care, and sustainability with a clean, natural design and order inquiry section.",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Landing page to showcase the dairy farm's offerings",
+        "sections": [
+          "hero",
+          "features",
+          "testimonials",
+          "cta"
+        ]
+      },
+      {
+        "name": "about",
+        "purpose": "Information about the farm's history, values, and sustainability practices",
+        "sections": [
+          "story",
+          "team",
+          "ethics"
+        ]
+      },
+      {
+        "name": "products",
+        "purpose": "Details about the different dairy products available",
+        "sections": [
+          "product_list",
+          "features",
+          "pricing"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "Contact information and inquiry form for orders",
+        "sections": [
+          "form",
+          "info",
+          "cta"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "natural and clean",
+      "primary_color": "green",
+      "secondary_color": "white",
+      "font_family": "sans-serif",
+      "design_style": "minimal and fresh"
+    },
+    "image_sections": [
+      "hero",
+      "features",
+      "testimonials"
+    ],
+    "navigation": [
+      "home",
+      "about",
+      "products",
+      "contact"
+    ]
+  },
+  "pages": [
+    "home",
+    "about",
+    "products",
+    "contact"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "features": "/uploads/placeholder.png",
+    "testimonials": "/uploads/placeholder.png"
+  },
+  "has_global_css_theme": true
+}

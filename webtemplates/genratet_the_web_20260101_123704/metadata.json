@@ -1,0 +1,82 @@
+{
+  "created_at": "2026-01-01T12:37:05.157261",
+  "description": "genratet the web site for Electronic Shop\nshoe name is : Gada Electronics",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Landing page to introduce Gada Electronics and showcase featured products",
+        "sections": [
+          "hero",
+          "features",
+          "testimonials",
+          "cta"
+        ]
+      },
+      {
+        "name": "about",
+        "purpose": "Provide information about Gada Electronics and its mission",
+        "sections": [
+          "story",
+          "team",
+          "values"
+        ]
+      },
+      {
+        "name": "products",
+        "purpose": "Display a range of electronics products available for purchase",
+        "sections": [
+          "product_list",
+          "categories",
+          "special_offers"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "Facilitate customer inquiries and support requests",
+        "sections": [
+          "form",
+          "info"
+        ]
+      },
+      {
+        "name": "faq",
+        "purpose": "Provide answers to common customer queries",
+        "sections": [
+          "faq_list"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "modern professional",
+      "primary_color": "blue",
+      "secondary_color": "orange",
+      "font_family": "sans-serif",
+      "design_style": "clean and minimal"
+    },
+    "image_sections": [
+      "hero",
+      "features",
+      "testimonials"
+    ],
+    "navigation": [
+      "home",
+      "about",
+      "products",
+      "contact",
+      "faq"
+    ]
+  },
+  "pages": [
+    "home",
+    "about",
+    "products",
+    "contact",
+    "faq"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "features": "/uploads/placeholder.png",
+    "testimonials": "/uploads/placeholder.png"
+  }
+}

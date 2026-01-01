@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Apna Gift Shop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="home.html" class="logo">Apna Gift Shop</a>
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="home.html" class="nav-link">Home</a></li>
+                    <li><a href="shop.html" class="nav-link active">Shop</a></li>
+                    <li><a href="about_us.html" class="nav-link">About Us</a></li>
+                    <li><a href="contact_us.html" class="nav-link">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="product-category-showcase">
+            <div class="container">
+                <h1 class="section-title">Discover Our Unique Collections</h1>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">At Apna Gift Shop, we believe every occasion deserves a special touch. Explore our thoughtfully curated categories designed to make your gifting experience joyful and effortless.</p>
+                <div class="category-grid">
+                    <div class="category-card">
+                        <img src="/uploads/placeholder.png" alt="Birthday Gifts">
+                        <h3>Birthday Delights</h3>
+                        <p>Celebrate their special day with gifts that bring smiles.</p>
+                        <a href="#" class="btn">View Gifts</a>
+                    </div>
+                    <div class="category-card">
+                        <img src="/uploads/placeholder.png" alt="Anniversary Gifts">
+                        <h3>Anniversary Joys</h3>
+                        <p>Mark milestones with elegant and memorable presents.</p>
+                        <a href="#" class="btn">View Gifts</a>
+                    </div>
+                    <div class="category-card">
+                        <img src="/uploads/placeholder.png" alt="Custom & Personalized Gifts">
+                        <h3>Personalized Treasures</h3>
+                        <p>Add a unique touch with custom-made gifts for every relation.</p>
+                        <a href="#" class="btn">View Gifts</a>
+                    </div>
+                    <div class="category-card">
+                        <img src="/uploads/placeholder.png" alt="Festive & Seasonal Gifts">
+                        <h3>Festive & Seasonal</h3>
+                        <p>Spread holiday cheer with our exclusive seasonal collections.</p>
+                        <a href="#" class="btn">View Gifts</a>
+                    </div>
+                    <div class="category-card">
+                        <img src="/uploads/placeholder.png" alt="Home Decor Gifts">
+                        <h3>Home & Living</h3>
+                        <p>Gifts that enhance every home with style and comfort.</p>
+                        <a href="#" class="btn">View Gifts</a>
+                    </div>
+                    <div class="category-card">
+                        <img src="/uploads/placeholder.png" alt="Kids & Toys Gifts">
+                        <h3>Kids & Toys</h3>
+                        <p>Fun and educational gifts for the little ones in your life.</p>
+                        <a href="#" class="btn">View Gifts</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="filters-sorting">
+            <div class="container">
+                <div class="filter-group">
+                    <label for="category-filter">Category:</label>
+                    <select id="category-filter" name="category">
+                        <option value="all">All Gifts</option>
+                        <option value="birthday">Birthday</option>
+                        <option value="anniversary">Anniversary</option>
+                        <option value="personalized">Personalized</option>
+                        <option value="home-decor">Home Decor</option>
+                        <option value="kids">Kids & Toys</option>
+                        <option value="festive">Festive</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="price-filter">Price Range:</label>
+                    <select id="price-filter" name="price">
+                        <option value="all">Any Price</option>
+                        <option value="low">Under ₹500</option>
+                        <option value="medium">₹500 - ₹1500</option>
+                        <option value="high">₹1500 - ₹3000</option>
+                        <option value="premium">₹3000+</option>
+                    </select>
+                </div>
+                <div class="sort-group">
+                    <label for="sort-by">Sort By:</label>
+                    <select id="sort-by" name="sort">
+                        <option value="popularity">Popularity</option>
+                        <option value="newest">Newest Arrivals</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                        <option value="rating">Average Rating</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <section class="all-products-grid">
+            <div class="container">
+                <h2 class="section-title">All Our Wonderful Gifts</h2>
+                <div class="product-grid">
+                    <!-- Product Card 1 -->
+                    <div class="product-card">
+                        <img src="/uploads/placeholder.png" alt="Elegant Desk Plant" class="product-card-image">
+                        <div class="product-card-content">
+                            <h3>Elegant Desk Plant</h3>
+                            <p class="price">₹699</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <!-- Product Card 2 -->
+                    <div class="product-card">
+                        <img src="/uploads/placeholder.png" alt="Custom Engraved Watch" class="product-card-image">
+                        <div class="product-card-content">
+                            <h3>Custom Engraved Watch</h3>
+                            <p class="price">₹2,499</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <!-- Product Card 3 -->
+                    <div class="product-card">
+                        <img src="/uploads/placeholder.png" alt="Luxury Scented Candle Set" class="product-card-image">
+                        <div class="product-card-content">
+                            <h3>Luxury Scented Candle Set</h3>
+                            <p class="price">₹1,199</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <!-- Product Card 4 -->
+                    <div class="product-card">
+                        <img src="/uploads/placeholder.png" alt="Personalized Photo Album" class="product-card-image">
+                        <div class="product-card-content">
+                            <h3>Personalized Photo Album</h3>
+                            <p class="price">₹949</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                     <!-- Product Card 5 -->
+                     <div class="product-card">
+                        <img src="/uploads/placeholder.png" alt="Gourmet Chocolate Hamper" class="product-card-image">
+                        <div class="product-card-content">
+                            <h3>Gourmet Chocolate Hamper</h3>
+                            <p class="price">₹1,299</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <!-- Product Card 6 -->
+                    <div class="product-card">
+                        <img src="/uploads/placeholder.png" alt="Kid's Educational Robot Kit" class="product-card-image">
+                        <div class="product-card-content">
+                            <h3>Kid's Educational Robot Kit</h3>
+                            <p class="price">₹1,899</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <!-- Product Card 7 -->
+                    <div class="product-card">
+                        <img src="/uploads/placeholder.png" alt="Handcrafted Ceramic Mug" class="product-card-image">
+                        <div class="product-card-content">
+                            <h3>Handcrafted Ceramic Mug</h3>
+                            <p class="price">₹499</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <!-- Product Card 8 -->
+                    <div class="product-card">
+                        <img src="/uploads/placeholder.png" alt="Leather Wallet & Belt Set" class="product-card-image">
+                        <div class="product-card-content">
+                            <h3>Leather Wallet & Belt Set</h3>
+                            <p class="price">₹2,199</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 Apna Gift Shop. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

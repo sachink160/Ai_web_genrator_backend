@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Consulting Firm</title>
+    
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <header>
+        <div class="navbar container">
+            <a href="home.html" class="logo">Brand</a>
+            <button class="hamburger-menu" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="home.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                    <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="section-padding">
+            <div class="container">
+                <h2 class="section-title">Get in Touch</h2>
+                <div class="form-container">
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Book a Consultation</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+                <h2 class="section-title">Our Location</h2>
+                <div class="grid grid-cols-1 grid-cols-md-3 gap-lg">
+                    <div class="card">
+                        <p>We are located in the heart of the city, providing easy access for our clients. Reach out to us or visit us for consultations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Consulting Firm. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

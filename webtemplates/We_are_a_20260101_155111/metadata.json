@@ -1,0 +1,74 @@
+{
+  "created_at": "2026-01-01T15:51:11.256234",
+  "description": "We are a results-focused digital marketing agency helping brands grow online through strategic marketing, creative design, and data-driven campaigns. Our services include SEO, social media marketing, paid advertising, content creation, and brand strategy to increase visibility, engagement, and conversions.",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Landing page to introduce the agency and its offerings",
+        "sections": [
+          "hero",
+          "features",
+          "testimonials",
+          "cta"
+        ]
+      },
+      {
+        "name": "about",
+        "purpose": "To share the agency's story, mission, and team background",
+        "sections": [
+          "story",
+          "team",
+          "values"
+        ]
+      },
+      {
+        "name": "services",
+        "purpose": "To detail the digital marketing services provided by the agency",
+        "sections": [
+          "service_overview",
+          "featured_services",
+          "cta"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "To provide a means for potential clients to get in touch",
+        "sections": [
+          "form",
+          "info"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "modern professional",
+      "primary_color": "#4A90E2",
+      "secondary_color": "#7F8C8D",
+      "font_family": "sans-serif",
+      "design_style": "clean and minimal"
+    },
+    "image_sections": [
+      "hero",
+      "features",
+      "testimonials"
+    ],
+    "navigation": [
+      "home",
+      "about",
+      "services",
+      "contact"
+    ]
+  },
+  "pages": [
+    "home",
+    "about",
+    "services",
+    "contact"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "features": "/uploads/placeholder.png",
+    "testimonials": "/uploads/placeholder.png"
+  },
+  "has_global_css_theme": true
+}

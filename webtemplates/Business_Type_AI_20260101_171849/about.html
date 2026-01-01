@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - AI SaaS Platform</title>
+    
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+
+<header>
+    <div class="navbar container">
+        <a href="home.html" class="logo">AI SaaS Platform</a>
+        <button class="hamburger-menu" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="home.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link active">About</a></li>
+                <li><a href="features.html" class="nav-link">Features</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Our Story</h2>
+            <div class="grid grid-cols-1">
+                <div class="card">
+                    <p>Founded in the heart of Silicon Valley, our AI SaaS Platform is dedicated to revolutionizing the way businesses operate by integrating advanced machine learning tools to automate workflows, analyze data, and enhance productivity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Technology</h2>
+            <div class="grid grid-cols-1">
+                <div class="card">
+                    <p>Our platform utilizes cutting-edge AI algorithms designed to seamlessly integrate into your existing systems, providing insightful data analysis and actionable intelligence for real-world applications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Our Mission</h2>
+            <div class="grid grid-cols-1">
+                <div class="card">
+                    <p>We are committed to making AI accessible to businesses of all sizes, empowering them with the tools to not only compete but excel in the emerging tech-driven market landscape.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Meet Our Team</h2>
+            <div class="grid grid-cols-1 grid-cols-md-3 gap-lg">
+                <div class="card">
+                    <h3>John Doe</h3>
+                    <p>CEO & Founder</p>
+                </div>
+                <div class="card">
+                    <h3>Jane Smith</h3>
+                    <p>CTO</p>
+                </div>
+                <div class="card">
+                    <h3>Robert Brown</h3>
+                    <p>Lead Engineer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="section-padding">
+    <div class="container text-center">
+        <p>© 2023 AI SaaS Platform. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    const menuToggle = document.querySelector('.hamburger-menu');
+    const navMenu = document.querySelector('.nav-menu');
+
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+    });
+</script>
+
+</body>
+</html>

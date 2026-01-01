@@ -1,0 +1,82 @@
+{
+  "created_at": "2026-01-01T13:03:35.494128",
+  "description": "create the resporent site \nrestorent name is : Apna Dhaba\ni wnat to page : home, blog, menu, contact",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Serve as the main landing page, showcasing Apna Dhaba's ambiance, popular dishes, and inviting customers to explore more.",
+        "sections": [
+          "hero",
+          "about_us_short",
+          "popular_dishes",
+          "testimonials",
+          "call_to_action"
+        ]
+      },
+      {
+        "name": "menu",
+        "purpose": "Display the full range of food and drink offerings, categorized for easy navigation and selection.",
+        "sections": [
+          "menu_categories",
+          "specials",
+          "drinks_list"
+        ]
+      },
+      {
+        "name": "blog",
+        "purpose": "Share stories, recipes, news, and insights about Indian cuisine and Apna Dhaba to engage customers.",
+        "sections": [
+          "blog_posts_list",
+          "featured_posts",
+          "categories"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "Provide all necessary information for customers to get in touch, make reservations, or find the restaurant.",
+        "sections": [
+          "contact_form",
+          "location_map",
+          "contact_info",
+          "opening_hours"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "Rustic and vibrant Indian",
+      "primary_color": "#FF8C00",
+      "secondary_color": "#4CAF50",
+      "font_family": "Montserrat (sans-serif) for body, Playfair Display (serif) for headings",
+      "design_style": "Warm, authentic, and inviting"
+    },
+    "image_sections": [
+      "hero",
+      "popular_dishes",
+      "menu_categories",
+      "testimonials",
+      "blog_posts_list",
+      "location_map"
+    ],
+    "navigation": [
+      "home",
+      "menu",
+      "blog",
+      "contact"
+    ]
+  },
+  "pages": [
+    "home",
+    "menu",
+    "blog",
+    "contact"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "popular_dishes": "/uploads/placeholder.png",
+    "menu_categories": "/uploads/placeholder.png",
+    "testimonials": "/uploads/placeholder.png",
+    "blog_posts_list": "/uploads/placeholder.png",
+    "location_map": "/uploads/placeholder.png"
+  }
+}

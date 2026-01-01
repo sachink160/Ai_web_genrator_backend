@@ -1,0 +1,75 @@
+{
+  "created_at": "2026-01-01T16:56:38.037970",
+  "description": "create website for cloud kitchen site",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Landing page showcasing the cloud kitchen concept and offerings",
+        "sections": [
+          "hero",
+          "features",
+          "testimonials",
+          "cta"
+        ]
+      },
+      {
+        "name": "about",
+        "purpose": "Information about the cloud kitchen, its mission, and values",
+        "sections": [
+          "story",
+          "team",
+          "values"
+        ]
+      },
+      {
+        "name": "menu",
+        "purpose": "Detailed presentation of the food offerings and menu options",
+        "sections": [
+          "featured_dishes",
+          "specials",
+          "cta"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "Facilitate customer inquiries and orders",
+        "sections": [
+          "form",
+          "info",
+          "location"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "modern and minimal",
+      "primary_color": "green",
+      "secondary_color": "white",
+      "font_family": "sans-serif",
+      "design_style": "clean and inviting"
+    },
+    "image_sections": [
+      "hero",
+      "features",
+      "testimonials"
+    ],
+    "navigation": [
+      "home",
+      "about",
+      "menu",
+      "contact"
+    ]
+  },
+  "pages": [
+    "home",
+    "about",
+    "menu",
+    "contact"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "features": "/uploads/placeholder.png",
+    "testimonials": "/uploads/placeholder.png"
+  },
+  "has_global_css_theme": false
+}

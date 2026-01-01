@@ -1,0 +1,85 @@
+{
+  "created_at": "2026-01-01T13:25:21.447301",
+  "description": "genrate the website for Gift shop \ntake shop name: Apna Gift Shop",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Landing page to welcome visitors, showcase popular products, and highlight shop's offerings.",
+        "sections": [
+          "hero",
+          "featured_categories",
+          "new_arrivals",
+          "testimonials",
+          "promotional_banner",
+          "cta_shop_now"
+        ]
+      },
+      {
+        "name": "shop",
+        "purpose": "Comprehensive page for browsing all gift products with filtering and sorting options.",
+        "sections": [
+          "product_category_showcase",
+          "all_products_grid",
+          "filters_sorting"
+        ]
+      },
+      {
+        "name": "about_us",
+        "purpose": "Tell the story of Apna Gift Shop, its mission, and values to build customer trust and connection.",
+        "sections": [
+          "our_story",
+          "our_values",
+          "meet_the_team"
+        ]
+      },
+      {
+        "name": "contact_us",
+        "purpose": "Provide clear methods for customers to get in touch with the shop for inquiries or support.",
+        "sections": [
+          "contact_form",
+          "contact_info_map",
+          "faq"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "joyful and inviting",
+      "primary_color": "#FBC02D",
+      "secondary_color": "#FFF8E1",
+      "font_family": "Poppins (headings), Open Sans (body)",
+      "design_style": "clean, colorful, user-friendly"
+    },
+    "image_sections": [
+      "hero",
+      "featured_categories",
+      "new_arrivals",
+      "testimonials",
+      "promotional_banner",
+      "product_category_showcase",
+      "all_products_grid"
+    ],
+    "navigation": [
+      "home",
+      "shop",
+      "about_us",
+      "contact_us"
+    ]
+  },
+  "pages": [
+    "home",
+    "shop",
+    "about_us",
+    "contact_us"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "featured_categories": "/uploads/placeholder.png",
+    "new_arrivals": "/uploads/placeholder.png",
+    "testimonials": "/uploads/placeholder.png",
+    "promotional_banner": "/uploads/placeholder.png",
+    "product_category_showcase": "/uploads/placeholder.png",
+    "all_products_grid": "/uploads/placeholder.png"
+  },
+  "has_global_css_theme": true
+}

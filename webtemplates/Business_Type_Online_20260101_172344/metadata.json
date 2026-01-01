@@ -1,0 +1,77 @@
+{
+  "created_at": "2026-01-01T17:23:44.720019",
+  "description": "Business Type: Online Coaching Institute\n\nDescription:\nAn online learning platform providing professional courses, live classes,\ncertifications, and career guidance.\n\nTarget Audience:\nStudents, job seekers, professionals\n\nTone:\nMotivational, educational, clear\n\nExtra UI Notes:\n- Section for courses\n- Student testimonials\n- \u201cEnroll Now\u201d CTA",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Landing page",
+        "sections": [
+          "hero",
+          "intro",
+          "features",
+          "student_testimonials",
+          "enroll_cta"
+        ]
+      },
+      {
+        "name": "about",
+        "purpose": "About the institute",
+        "sections": [
+          "vision",
+          "team",
+          "career_guidance"
+        ]
+      },
+      {
+        "name": "courses",
+        "purpose": "List of available courses",
+        "sections": [
+          "course_overview",
+          "live_classes",
+          "certifications",
+          "cta"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "Contact page",
+        "sections": [
+          "contact_form",
+          "social_media_links",
+          "info"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "professional and motivational",
+      "primary_color": "navy blue",
+      "secondary_color": "light gray",
+      "font_family": "Arial, sans-serif",
+      "design_style": "clean and inspiring"
+    },
+    "image_sections": [
+      "hero",
+      "features",
+      "student_testimonials"
+    ],
+    "navigation": [
+      "home",
+      "about",
+      "courses",
+      "contact"
+    ]
+  },
+  "pages": [
+    "home",
+    "about",
+    "courses",
+    "contact"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "features": "/uploads/placeholder.png",
+    "student_testimonials": "/uploads/placeholder.png"
+  },
+  "has_global_css_theme": false
+}

@@ -1,0 +1,84 @@
+{
+  "created_at": "2026-01-01T15:19:06.781410",
+  "description": "AI-powered project management tool for remote teams with task automation, real-time collaboration, and intelligent analytics dashboard",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Landing page to introduce the AI-powered project management tool and its benefits.",
+        "sections": [
+          "hero",
+          "features",
+          "testimonials",
+          "cta"
+        ]
+      },
+      {
+        "name": "features",
+        "purpose": "Detail the specific features of the tool, focusing on task automation, collaboration, and analytics.",
+        "sections": [
+          "overview",
+          "features_list",
+          "cta"
+        ]
+      },
+      {
+        "name": "about",
+        "purpose": "Provide background information about the company, mission, and vision.",
+        "sections": [
+          "story",
+          "team",
+          "values"
+        ]
+      },
+      {
+        "name": "pricing",
+        "purpose": "Outline different pricing plans and what's included in each.",
+        "sections": [
+          "pricing_table",
+          "cta"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "Offer a way for potential users to inquire or get support.",
+        "sections": [
+          "form",
+          "info"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "modern professional",
+      "primary_color": "#4A90E2",
+      "secondary_color": "#F3F4F6",
+      "font_family": "sans-serif",
+      "design_style": "clean and minimal"
+    },
+    "image_sections": [
+      "hero",
+      "features",
+      "testimonials"
+    ],
+    "navigation": [
+      "home",
+      "features",
+      "about",
+      "pricing",
+      "contact"
+    ]
+  },
+  "pages": [
+    "home",
+    "features",
+    "about",
+    "pricing",
+    "contact"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "features": "/uploads/placeholder.png",
+    "testimonials": "/uploads/placeholder.png"
+  },
+  "has_global_css_theme": true
+}

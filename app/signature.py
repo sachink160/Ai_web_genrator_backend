@@ -1,0 +1,251 @@
+# define signatures for image , landingpage, template, genrate content modification
+import dspy  # type: ignore
+
+
+class ImagePromptSignature(dspy.Signature):
+    """Generate an image prompt for a landing page section."""
+    business_description: str = dspy.InputField(
+        desc="User provided business/product description"
+    )
+    section_type: str = dspy.InputField(
+        desc="Section type: hero, features, or testimonials"
+    )
+    section_focus: str = dspy.InputField(
+        desc="Focus description for this section"
+    )
+    section_details: str = dspy.InputField(
+        desc="Visual requirements and details for this section"
+    )
+    prompt: str = dspy.OutputField(
+        desc="Professional DALL-E 3 prompt for landing page. Must include: soft lighting, minimal contrast, clean modern aesthetic, muted professional colors (pastels, light blues, grays), simple composition, subtle gradients. Avoid: dramatic lighting, high saturation, complex busy scenes, dark moody tones."
+    )
+
+
+class LandingPageSignature(dspy.Signature):
+    """Generate a responsive HTML landing page."""
+    description: str = dspy.InputField(
+        desc="User provided business description"
+    )
+    image_urls_text: str = dspy.InputField(
+        desc="Available image URLs formatted as text"
+    )
+    html: str = dspy.OutputField(
+        desc="Complete responsive HTML landing page with embedded CSS"
+    )
+
+
+class TemplateModificationSignature(dspy.Signature):
+    """Modify an existing HTML template."""
+    template_html: str = dspy.InputField(
+        desc="Existing HTML template to modify"
+    )
+    description: str = dspy.InputField(
+        desc="Business description for content updates"
+    )
+    image_urls_text: str = dspy.InputField(
+        desc="Available image URLs formatted as text"
+    )
+    html: str = dspy.OutputField(
+        desc="Modified HTML with changes applied while preserving template structure"
+    )
+
+
+class HTMLEditSignature(dspy.Signature):
+    """Edit existing HTML/CSS based on user request."""
+    html_input: str = dspy.InputField(
+        desc="Current HTML content"
+    )
+    css_input: str = dspy.InputField(
+        desc="Current CSS content"
+    )
+    edit_request: str = dspy.InputField(
+        desc="User's edit instructions"
+    )
+    html_output: str = dspy.OutputField(
+        desc="Modified HTML with embedded CSS"
+    )
+
+
+# New Signatures for LangGraph Workflow
+
+class WebsitePlannerSignature(dspy.Signature):
+    """Generate a comprehensive website structure plan."""
+    description: str = dspy.InputField(
+        desc="User's business/product description"
+    )
+    plan: str = dspy.OutputField(
+        desc="""JSON-formatted website plan including:
+        - pages: Array of page objects with name, purpose, and sections
+        - styling: Object with theme, colors, fonts strategy
+        - image_sections: Array of section names requiring images (hero, features, testimonials)
+        - navigation: Array of navigation items
+        
+        Example structure:
+        {
+            "pages": [
+                {"name": "home", "purpose": "Landing page", "sections": ["hero", "features", "testimonials", "cta"]},
+                {"name": "about", "purpose": "About page", "sections": ["story", "team", "values"]},
+                {"name": "contact", "purpose": "Contact page", "sections": ["form", "info"]}
+            ],
+            "styling": {
+                "theme": "modern professional",
+                "primary_color": "blue",
+                "secondary_color": "gray",
+                "font_family": "sans-serif",
+                "design_style": "clean and minimal"
+            },
+            "image_sections": ["hero", "features", "testimonials"],
+            "navigation": ["home", "about", "features", "contact"]
+        }
+        """
+    )
+
+
+class ImageDescriptionSignature(dspy.Signature):
+    """Generate targeted image description for a specific section."""
+    plan: str = dspy.InputField(
+        desc="Complete website plan JSON"
+    )
+    section_name: str = dspy.InputField(
+        desc="Section name (hero, features, testimonials, etc.)"
+    )
+    page_name: str = dspy.InputField(
+        desc="Page name where section appears"
+    )
+    business_description: str = dspy.InputField(
+        desc="Original business description"
+    )
+    image_description: str = dspy.OutputField(
+        desc="""Professional DALL-E 3 image prompt optimized for web backgrounds.
+        
+        CRITICAL REQUIREMENTS:
+        - NO text, letters, numbers, words, quotes, headings, UI elements
+        - NO testimonial cards, review boxes, star ratings, speech bubbles
+        - NO dashboards, website mockups, or UI screenshots
+        - Images must be background/decorative only
+        - Professional, modern, clean aesthetic
+        - Suitable for overlaying web content
+        - Soft lighting, minimal contrast, breathable composition
+        - Aligned with website theme and section purpose
+        """
+    )
+
+
+
+
+class MultiPageSignature(dspy.Signature):
+    """Generate HTML/CSS for a specific page based on the plan."""
+    plan: str = dspy.InputField(
+        desc="Complete website plan JSON containing all pages and navigation structure"
+    )
+    page_name: str = dspy.InputField(
+        desc="Name of the page to generate"
+    )
+    page_config: str = dspy.InputField(
+        desc="Specific page configuration from plan"
+    )
+    image_urls: str = dspy.InputField(
+        desc="Available image URLs formatted as: section_name: url"
+    )
+    business_description: str = dspy.InputField(
+        desc="Original business description for content generation"
+    )
+    html: str = dspy.OutputField(
+        desc="""Complete responsive HTML page with embedded CSS.
+        
+        REQUIREMENTS:
+        - Include <!DOCTYPE html>
+        - Fully responsive design (mobile-first)
+        - Use provided image URLs for appropriate sections
+        - Generate realistic, professional content aligned with business description
+        - Include all sections specified in page_config
+        - Modern, clean design matching the styling strategy
+        - Proper semantic HTML5
+        - Embedded CSS in <style> tag
+        - No external dependencies or JavaScript
+        - Production-ready code
+        
+        CRITICAL - NAVIGATION LINKS:
+        ⚠️ IMPORTANT: You MUST create a navigation menu with proper page links.
+        
+        1. Extract the page list from the 'plan' JSON (look for "pages" array or "navigation" array)
+        2. For EACH page in the navigation, create a link with the pattern: href="[page_name].html"
+        3. NEVER use href="#" - this is incorrect and breaks navigation
+        4. The current page should have an "active" class or style
+        
+        CORRECT Navigation Examples:
+        ✅ <a href="home.html">Home</a>
+        ✅ <a href="about.html">About</a>
+        ✅ <a href="products.html">Products</a>
+        ✅ <a href="services.html">Services</a>
+        ✅ <a href="contact.html">Contact</a>
+        ✅ <a href="home.html" class="active">Home</a>  (if current page is home)
+        
+        INCORRECT Navigation Examples (DO NOT USE):
+        ❌ <a href="#">Home</a>
+        ❌ <a href="#">About</a>
+        ❌ <a href="/">Contact</a>
+        ❌ <a>Home</a>
+        
+        Navigation HTML Structure Example:
+        <nav>
+            <a href="home.html" class="active">Home</a>
+            <a href="about.html">About</a>
+            <a href="products.html">Products</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        
+        OR for styled navigation:
+        <nav class="navbar">
+            <ul class="nav-menu">
+                <li><a href="home.html" class="nav-link active">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+        
+        Remember: Every page link MUST follow the pattern href="[page_name].html"
+        
+        ⚠️ CRITICAL - CSS THEME CLASS USAGE:
+        
+        A global CSS theme has been pre-generated for this website.
+        YOU MUST USE THE CSS THEME CLASSES. DO NOT CREATE CUSTOM CLASSES.
+        
+        Available CSS Theme Classes:
+        
+        LAYOUT: .container, .grid .grid-cols-1 .grid-cols-md-3, .flex .justify-between .items-center, .section-padding
+        COMPONENTS: .navbar, .nav-menu, .nav-link, .hero, .hero-content, .btn .btn-primary, .card .product-card .testimonial-card
+        SPACING: .p-lg .py-md .px-sm, .mt-lg .mb-md, .gap-lg
+        TEXT: .text-center, .text-primary, .font-bold
+        
+        REQUIRED STRUCTURE FOR EVERY SECTION:
+        
+        <section class="section-padding">
+            <div class="container">
+                <h2 class="section-title">Title</h2>
+                <div class="grid grid-cols-1 grid-cols-md-3 gap-lg">
+                    <div class="card">Content</div>
+                </div>
+            </div>
+        </section>
+        
+        NAVIGATION MUST INCLUDE (for mobile):
+        
+        <div class="navbar container">
+            <a href="home.html" class="logo">Brand</a>
+            <button class="hamburger-menu" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="home.html" class="nav-link active">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        DO NOT create custom classes like: .product-grid, .feature-list, .category-wrapper
+        ALWAYS use: .grid .grid-cols-1 .grid-cols-md-3 .gap-lg with .card
+        """
+    )
+

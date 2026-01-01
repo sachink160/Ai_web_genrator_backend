@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apna Dhaba - Authentic Indian Cuisine</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght==700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container"><a href="home.html" class="logo">Apna Dhaba</a><button class="navbar-toggle"
+                aria-label="Toggle navigation"><span class="icon-bar">&#9776;</span></button>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="home.html" class="nav-link active">Home</a></li>
+                    <li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Experience the Authentic Flavors of India</h1>
+                <p>Where every dish tells a story of tradition and taste.</p><a href="menu.html" class="btn">View Our
+                    Menu</a>
+            </div>
+        </section>
+        <section class="about-us-short section-padding text-center">
+            <div class="container">
+                <h2>Welcome to Apna Dhaba</h2>
+                <p>Apna Dhaba brings the rich culinary heritage of India straight to your table. We blend age-old
+                    recipes with fresh, quality ingredients to create an unforgettable dining experience. Our warm
+                    ambiance and vibrant flavors promise a journey for your senses.</p><a href="about.html"
+                    class="btn">Learn More About Us</a>
+            </div>
+        </section>
+        <section class="popular-dishes section-padding text-center">
+            <div class="container">
+                <h2>Our Popular Dishes</h2>
+                <p>Savor the tastes that our customers rave about – handcrafted with passion and perfected over
+                    generations.</p>
+                <div class="dish-grid">
+                    <div class="dish-card"><img src="/uploads/placeholder.png" alt="Butter Chicken">
+                        <div class="dish-card-content">
+                            <h3>Butter Chicken</h3>
+                            <p>Tender chicken pieces simmered in a rich, creamy tomato sauce, a timeless classic.</p>
+                        </div>
+                    </div>
+                    <div class="dish-card"><img src="/uploads/placeholder.png" alt="Dal Makhani">
+                        <div class="dish-card-content">
+                            <h3>Dal Makhani</h3>
+                            <p>Slow-cooked black lentils in a buttery, spiced gravy, a hearty and comforting delight.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="dish-card"><img src="/uploads/placeholder.png" alt="Biryani">
+                        <div class="dish-card-content">
+                            <h3>Vegetable Biryani</h3>
+                            <p>Fragrant basmati rice cooked with fresh vegetables and aromatic spices, a true Indian
+                                feast.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="testimonials section-padding">
+            <div class="container">
+                <h2>What Our Guests Say</h2>
+                <p>Hear from those who have experienced the magic of Apna Dhaba.</p>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <p>"Apna Dhaba offers an incredible culinary journey. The food is authentic, bursting with
+                            flavor, and the service is exceptionally warm. A must-visit for Indian food lovers!"</p>
+                        <p class="author">- Priya Sharma</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"From the moment you step in, you feel the inviting ambiance. Every dish we tried was a
+                            masterpiece. The butter chicken is simply divine!"</p>
+                        <p class="author">- Rahul Kapoor</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"Truly a taste of home! Apna Dhaba perfectly captures the essence of traditional Indian
+                            cooking. Highly recommend their biryani and fresh naans."</p>
+                        <p class="author">- Anjali Singh</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="call-to-action section-padding">
+            <div class="container">
+                <h2>Ready for an Authentic Culinary Experience?</h2>
+                <p>Join us at Apna Dhaba and let your taste buds embark on an unforgettable journey.</p><a
+                    href="contact.html" class="btn">Make a Reservation</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Apna Dhaba. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>document.addEventListener('DOMContentLoaded', function () { const toggleButton = document.querySelector('.navbar-toggle'); const navMenu = document.querySelector('.nav-menu'); toggleButton.addEventListener('click', function () { navMenu.classList.toggle('active'); }); });</script>
+</body>
+
+</html>

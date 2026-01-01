@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coding Bootcamp Contact | Speak with Our Team</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Get in touch with our coding bootcamp team. Ask questions, book a consultation, or get help with admissions, payments, and career services.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+<header>
+    <div class="navbar container flex justify-between items-center">
+        <a href="home.html" class="logo">Launch<span>Code</span> Bootcamps</a>
+        <button class="hamburger-menu" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <nav aria-label="Main navigation">
+            <ul class="nav-menu">
+                <li><a href="home.html" class="nav-link">home</a></li>
+                <li><a href="bootcamps.html" class="nav-link">bootcamps</a></li>
+                <li><a href="career_services.html" class="nav-link">career_services</a></li>
+                <li><a href="about.html" class="nav-link">about</a></li>
+                <li><a href="pricing.html" class="nav-link">pricing</a></li>
+                <li><a href="resources.html" class="nav-link">resources</a></li>
+                <li><a href="contact.html" class="nav-link active">contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+    <!-- contact_hero -->
+    <section class="hero section-padding">
+        <div class="container">
+            <div class="hero-content">
+                <div>
+                    <div class="hero-eyebrow">Contact our team</div>
+                    <h1>Talk to a real person about your coding career path.</h1>
+                    <p>
+                        Whether you are comparing bootcamps, need help choosing a track, or have questions about
+                        tuition and job support, our admissions team is here to help you make a confident decision.
+                    </p>
+                    <div class="button-row mb-md">
+                        <a href="#contact-form" class="btn btn-primary">Book a free 15‑min call</a>
+                        <a href="#contact-information" class="btn btn-secondary-outline">Email our team</a>
+                    </div>
+                    <div class="hero-meta">
+                        <span>Average reply time &lt; 12 hours</span>
+                        <span>No pressure, no sales pitch</span>
+                    </div>
+                </div>
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="hero-visual-inner">
+                        <img src="/uploads/placeholder.png" alt="Student on a live video mentoring session">
+                        <div class="hero-visual-badge">
+                            <div class="hero-visual-badge-dot"></div>
+                            <div>
+                                <div style="font-size:0.78rem;font-weight:600;">Admissions mentor online</div>
+                                <div style="font-size:0.72rem;opacity:0.8;">Live support · Screen share ready</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- contact_form -->
+    <section id="contact-form" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Tell us how we can help</h2>
+            <p class="section-subtitle">
+                Share a few details and we will connect you with the right specialist—admissions, career services,
+                or technical support. We usually respond the same business day.
+            </p>
+
+            <div class="contact-grid-main">
+                <!-- Form card -->
+                <div class="card product-card">
+                    <div class="card-body">
+                        <form aria-label="Contact form">
+                            <div class="grid grid-cols-1 gap-lg">
+                                <div class="contact-form-field">
+                                    <label for="full-name">Full name <span class="required-indicator">*</span></label>
+                                    <input id="full-name" name="full-name" type="text" autocomplete="name" required aria-required="true" placeholder="Alex Johnson">
+                                </div>
+                                <div class="contact-form-field">
+                                    <label for="email">Email address <span class="required-indicator">*</span></label>
+                                    <input id="email" name="email" type="email" autocomplete="email" required aria-required="true" placeholder="you@example.com">
+                                </div>
+                                <div class="contact-form-field">
+                                    <label for="country">Location (time zone)</label>
+                                    <input id="country" name="country" type="text" placeholder="e.g., Berlin · CET or New York · EST">
+                                    <span class="helper">Helps us suggest call times that work for you.</span>
+                                </div>
+                                <div class="contact-form-field">
+                                    <label for="topic">What do you want to talk about? <span class="required-indicator">*</span></label>
+                                    <select id="topic" name="topic" required aria-required="true">
+                                        <option value="">Select a topic</option>
+                                        <option>Choosing the right bootcamp track</option>
+                                        <option>Admissions and application process</option>
+                                        <option>Tuition, scholarships, or financing</option>
+                                        <option>Career services and job placement</option>
+                                        <option>Technical support or platform issue</option>
+                                        <option>Partnerships and hiring graduates</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="contact-form-field">
+                                    <label for="experience">Current coding experience</label>
+                                    <select id="experience" name="experience">
+                                        <option value="">Choose your level</option>
+                                        <option>Complete beginner</option>
+                                        <option>Some online courses / tutorials</option>
+                                        <option>Self-taught with small projects</option>
+                                        <option>CS student or recent graduate</option>
+                                        <option>Working developer looking to upskill</option>
+                                    </select>
+                                </div>
+                                <div class="contact-form-field">
+                                    <label for="message">How can we help? <span class="required-indicator">*</span></label>
+                                    <textarea id="message" name="message" required aria-required="true" placeholder="Share any questions, goals, or deadlines—our team will review and respond with tailored next steps."></textarea>
+                                </div>
+                                <div class="contact-form-field">
+                                    <label for="preferred-time">Preferred time for a call (optional)</label>
+                                    <input id="preferred-time" name="preferred-time" type="text" placeholder="e.g., Weekdays after 6pm your local time">
+                                </div>
+                                <div class="flex items-center" style="gap:0.75rem;align-items:flex-start;">
+                                    <input id="newsletter" name="newsletter" type="checkbox" style="margin-top:0.2rem;">
+                                    <label for="newsletter" style="font-size:0.85rem;color:var(--muted);">
+                                        Keep me updated with upcoming cohorts, scholarships, and free coding workshops.
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-between items-center mt-lg" style="gap:1rem;flex-wrap:wrap;">
+                                <button type="submit" class="btn btn-primary">Submit message</button>
+                                <p class="footer-note" style="max-width:16rem;">
+                                    By submitting, you agree to be contacted by our team. We will never sell your data.
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Info column -->
+                <div class="grid grid-cols-1 gap-lg">
+                    <div id="contact-information" class="card product-card">
+                        <div class="card-body">
+                            <div class="pill mb-md">Direct contact</div>
+                            <div class="info-item">
+                                <div class="info-item-label">Email</div>
+                                <div class="info-item-value">hello@launchcodebootcamps.com</div>
+                            </div>
+                            <div class="mt-lg info-item">
+                                <div class="info-item-label">Admissions &amp; student success</div>
+                                <div class="info-item-value">+1 (415) 555‑0147</div>
+                            </div>
+                            <div class="mt-lg info-item">
+                                <div class="info-item-label">Technical support</div>
+                                <div class="info-item-value">support@launchcodebootcamps.com</div>
+                            </div>
+                            <div class="mt-lg">
+                                <span class="info-badge">
+                                    <span class="info-badge-dot"></span>
+                                    Live chat available inside the learning platform
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- office_hours_and_response_time -->
+                    <div class="card product-card">
+                        <div class="card-body">
+                            <h3 style="margin:0 0 0.5rem;font-size:1.02rem;">Office hours &amp; response times</h3>
+                            <p style="margin:0 0 1rem;font-size:0.9rem;color:var(--muted);">
+                                We are a remote-first team with staff across North America and Europe.
+                            </p>
+                            <div class="grid grid-cols-1 gap-lg">
+                                <div>
+                                    <div class="info-item-label">Admissions &amp; general inquiries</div>
+                                    <div class="info-item-value">Mon–Fri · 8:00–18:00 (US Pacific)</div>
+                                    <p style="margin:0.2rem 0 0;font-size:0.85rem;color:var(--muted);">
+                                        Average response time: under 12 business hours.
+                                    </p>
+                                </div>
+                                <div>
+                                    <div class="info-item-label">Technical support</div>
+                                    <div class="info-item-value">Mon–Sun · 24/7 via email</div>
+                                    <p style="margin:0.2rem 0 0;font-size:0.85rem;color:var(--muted);">
+                                        Priority support for students enrolled in active cohorts.
+                                    </p>
+                                </div>
+                                <div>
+                                    <div class="info-item-label">Career coaching</div>
+                                    <div class="info-item-value">By appointment only</div>
+                                    <p style="margin:0.2rem 0 0;font-size:0.85rem;color:var(--muted);">
+                                        Book 1:1 sessions inside your student dashboard once enrolled.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- support_links -->
+                    <div class="card product-card">
+                        <div class="card-body">
+                            <h3 style="margin:0 0 0.75rem;font-size:1.02rem;">Self-serve support</h3>
+                            <p style="margin:0 0 0.75rem;font-size:0.9rem;color:var(--muted);">
+                                Prefer to find answers on your own first? These resources cover our most common questions.
+                            </p>
+                            <ul class="support-links-list">
+                                <li class="support-link-item">
+                                    <a href="resources.html">Admissions guide: how to apply</a>
+                                </li>
+                                <li class="support-link-item">
+                                    <a href="pricing.html">Tuition, financing, and scholarship options</a>
+                                </li>
+                                <li class="support-link-item">
+                                    <a href="career_services.html">How career services and job placement work</a>
+                                </li>
+                                <li class="support-link-item">
+                                    <a href="resources.html">Free intro lesson: try a real project</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> <!-- end info column -->
+            </div>
+        </div>
+    </section>
+
+    <!-- map_or_location_info -->
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Where our team is based</h2>
+            <p class="section-subtitle">
+                We are a fully remote coding bootcamp with mentors and career coaches across multiple time zones to
+                support students globally.
+            </p>
+            <div class="grid grid-cols-1 grid-cols-md-3 gap-lg">
+                <div class="map-placeholder">
+                    <img src="/uploads/placeholder.png" alt="Global map illustration showing remote team locations">
+                    <div class="map-overlay">
+                        <div class="map-heading">Global HQ (Remote‑first)</div>
+                        <div class="map-address">
+                            548 Market Street, Suite 62460<br>
+                            San Francisco, CA 94104 · United States
+                        </div>
+                        <div class="map-tags">
+                            <span class="map-tag">Remote‑first</span>
+                            <span class="map-tag">Mentors in 10+ countries</span>
+                            <span class="map-tag">Virtual campus</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card product-card">
+                    <div class="card-body">
+                        <h3 style="margin:0 0 0.65rem;font-size:1.02rem;">Time zones we typically cover</h3>
+                        <p style="margin:0 0 0.9rem;font-size:0.9rem;color:var(--muted);">
+                            Our live classes and mentoring sessions are scheduled to be friendly to both North American
+                            and European learners.
+                        </p>
+                        <ul style="margin:0;padding-left:1.1rem;font-size:0.9rem;color:var(--muted);">
+                            <li>Americas: Pacific, Mountain, Central, Eastern</li>
+                            <li>Europe: GMT, CET, EET</li>
+                            <li>Other regions: we offer recordings and flexible office hours</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card testimonial-card">
+                    <div class="card-body">
+                        <p style="margin:0 0 0.9rem;font-size:0.9rem;color:var(--muted);">
+                            “I’m in Berlin and work full‑time. The admissions team helped me choose a cohort with live
+                            sessions in my evening hours, and mentors were flexible with 1:1s around my schedule.”
+                        </p>
+                        <div style="font-size:0.88rem;font-weight:600;color:var(--secondary);">
+                            Jana K · Frontend Bootcamp graduate
+                        </div>
+                        <div style="font-size:0.8rem;color:var(--muted);">
+                            Hired as Junior React Developer at a fintech startup
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- contact_faq -->
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Contact & admissions FAQ</h2>
+            <p class="section-subtitle">
+                Quick answers to common questions about getting in touch, booking calls, and what happens after you reach out.
+            </p>
+            <div class="faq-grid">
+                <div class="card product-card">
+                    <div class="card-body">
+                        <div class="faq-question">How quickly will someone respond after I submit the form?</div>
+                        <div class="faq-answer">
+                            During business hours, most prospective students hear from us within a few hours.
+                            Outside of those times, you can expect a response by the next business day. Technical
+                            support emails are monitored 24/7.
+                        </div>
+                    </div>
+                </div>
+                <div class="card product-card">
+                    <div class="card-body">
+                        <div class="faq-question">Is the consultation call really free and no obligation?</div>
+                        <div class="faq-answer">
+                            Yes. The goal of the call is to understand your goals, background, and constraints.
+                            We will help you decide if a coding bootcamp is the right move—and if not, we will
+                            recommend alternative paths without any pressure to enroll.
+                        </div>
+                    </div>
+                </div>
+                <div class="card product-card">
+                    <div class="card-body">
+                        <div class="faq-question">Can I talk directly to an instructor or mentor?</div>
+                        <div class="faq-answer">
+                            Admissions will be your first point of contact. If a technical deep dive would help,
+                            we are happy to arrange a follow‑up conversation with an instructor or mentor so you
+                            can see how we teach and support students.
+                        </div>
+                    </div>
+                </div>
+                <div class="card product-card">
+                    <div class="card-body">
+                        <div class="faq-question">Do you offer in‑person campus visits or only remote meetings?</div>
+                        <div class="faq-answer">
+                            We are a remote‑first bootcamp and currently do not offer in‑person campus tours.
+                            However, we can walk you through our learning platform on a video call and show you
+                            how live classes, projects, and mentoring sessions work in practice.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- final_cta -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="card product-card">
+                <div class="card-body flex justify-between items-center" style="flex-wrap:wrap;gap:1.5rem;">
+                    <div>
+                        <h2 class="section-title" style="margin-bottom:0.4rem;">Ready to take the next step?</h2>
+                        <p style="margin:0;font-size:0.95rem;color:var(--muted);max-width:32rem;">
+                            Share where you are today and where you want to be in 6–12 months. We will help you map a
+                            realistic path into a coding career—with the right bootcamp track, schedule, and support.
+                        </p>
+                    </div>
+                    <div class="button-row">
+                        <a href="#contact-form" class="btn btn-primary">Start your application conversation</a>
+                        <a href="bootcamps.html" class="btn btn-secondary-outline">Explore bootcamp tracks</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="container footer-inner flex justify-between items-center">
+        <div>© <span id="year">2026</span> LaunchCode Bootcamps. All rights reserved.</div>
+        <div>
+            <a href="resources.html">Student handbook</a> ·
+            <a href="pricing.html">Financing options</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

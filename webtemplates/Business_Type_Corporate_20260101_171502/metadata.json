@@ -1,0 +1,84 @@
+{
+  "created_at": "2026-01-01T17:15:02.390288",
+  "description": "Business Type: Corporate Consulting Firm\n\nDescription:\nA professional consulting firm offering business strategy, digital transformation,\nand operational excellence services to enterprises and startups.\n\nTarget Audience:\nCorporate clients, founders, executives\n\nTone:\nProfessional, trustworthy, premium\n\nExtra UI Notes:\n- Blue/gray color palette\n- Minimal design\n- Strong CTA for \u201cBook a Consultation\u201d",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Landing page to introduce the consulting firm and its expertise",
+        "sections": [
+          "hero",
+          "features",
+          "testimonials",
+          "cta"
+        ]
+      },
+      {
+        "name": "about",
+        "purpose": "Provide information about the firm's vision, mission, and team",
+        "sections": [
+          "story",
+          "team",
+          "values"
+        ]
+      },
+      {
+        "name": "services",
+        "purpose": "Detail the consulting services offered",
+        "sections": [
+          "service_overview",
+          "features",
+          "cta"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "Allow potential clients to reach out for inquiries or bookings",
+        "sections": [
+          "form",
+          "info"
+        ]
+      },
+      {
+        "name": "pricing",
+        "purpose": "Outline pricing models and packages (if applicable)",
+        "sections": [
+          "pricing_table",
+          "cta"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "professional",
+      "primary_color": "blue",
+      "secondary_color": "gray",
+      "font_family": "sans-serif",
+      "design_style": "minimal and clean"
+    },
+    "image_sections": [
+      "hero",
+      "features",
+      "testimonials"
+    ],
+    "navigation": [
+      "home",
+      "about",
+      "services",
+      "pricing",
+      "contact"
+    ]
+  },
+  "pages": [
+    "home",
+    "about",
+    "services",
+    "contact",
+    "pricing"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "features": "/uploads/placeholder.png",
+    "testimonials": "/uploads/placeholder.png"
+  },
+  "has_global_css_theme": false
+}
