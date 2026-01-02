@@ -1,8 +1,9 @@
-from fastapi import FastAPI, HTTPException # type: ignore
+from fastapi import FastAPI, HTTPException, Request # type: ignore
 from fastapi.middleware.cors import CORSMiddleware # type: ignore
-from fastapi.responses import StreamingResponse # type: ignore
+from fastapi.responses import StreamingResponse, JSONResponse # type: ignore
 from app.schema import *
 import os
+import time
 import logging
 from dotenv import load_dotenv # type: ignore
 import asyncio
@@ -11,12 +12,16 @@ from fastapi.staticfiles import StaticFiles # type: ignore
 import re
 from typing import Tuple
 
+load_dotenv()
+
+# Import utilities and constants
 from app.utils import call_dalle, find_local_images
 from app.const import fallback_html, fallback_css, edit_fallback_html, edit_fallback_css
 
-# Import config first to configure DSPy before importing DSPy modules
-import app.config  # This configures dspy.settings with the LM
+# Import config to configure DSPy
+import app.config
 
+# Import DSPy modules
 from app.dspy_modules import (
     ImagePromptGenerator,
     LandingPageGenerator,
@@ -27,7 +32,9 @@ from app.dspy_modules import (
 # Import LangGraph workflow
 from app.workflow_graph import website_workflow
 from app.workflow_state import WorkflowState
-load_dotenv()
+
+# Import rate limiter (keeping only this production component)
+from app.rate_limiter import init_rate_limiter, get_rate_limiter
 
 # Import litellm for error handling
 try:
@@ -43,7 +50,25 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="AI Landing Page Generator API", version="1.0.0")
+# Initialize FastAPI app
+app = FastAPI(
+    title="AI Landing Page Generator API",
+    version="1.0.0",
+    debug=False
+)
+
+# Initialize rate limiter with simple config
+init_rate_limiter({
+    'requests_per_minute': 60,
+    'requests_per_hour': 1000,
+    'burst_size': 10
+})
+
+logger.info("Starting AI Landing Page Generator API v1.0.0")
+
+
+
+
 
 # Configure CORS
 app.add_middleware(
@@ -123,8 +148,61 @@ def extract_css_and_replace_style_tags(html: str) -> Tuple[str, str]:
 
 @app.get("/")
 async def root():
+    """Root endpoint."""
     logger.info("Root endpoint accessed")
-    return {"message": "AI Landing Page Generator API", "version": "1.0.0"}
+    return {
+        "message": "AI Landing Page Generator API",
+        "version": "1.0.0",
+        "status": "running"
+    }
+
+
+@app.get("/health")
+async def health_check():
+    """Basic health check endpoint."""
+    return {
+        "status": "healthy",
+        "timestamp": time.time()
+    }
+
+
+@app.get("/health/ready")
+async def readiness_check():
+    """Readiness probe - checks if app can serve traffic."""
+    try:
+        # Check if DSPy is configured
+        import dspy
+        if not hasattr(dspy.settings, 'lm') or dspy.settings.lm is None:
+            return JSONResponse(
+                status_code=503,
+                content={
+                    "status": "not_ready",
+                    "reason": "DSPy LM not configured"
+                }
+            )
+        
+        return {
+            "status": "ready",
+            "timestamp": time.time()
+        }
+    except Exception as e:
+        logger.error(f"Readiness check failed: {e}")
+        return JSONResponse(
+            status_code=503,
+            content={
+                "status": "not_ready",
+                "error": str(e)
+            }
+        )
+
+
+@app.get("/health/live")
+async def liveness_check():
+    """Liveness probe - checks if app is running."""
+    return {
+        "status": "alive",
+        "timestamp": time.time()
+    }
 
 
 # User For OpenAi 
@@ -827,7 +905,7 @@ async def generate_website(request: GenerateWebsiteRequest):
             }
             
             # Create unique thread ID for checkpointing
-            thread_id = {"configurable": {"thread_id": "3"}}
+            thread_id = {"configurable": {"thread_id": str(int(time.time()))}}
             
             # Stream workflow execution
             logger.info("Starting LangGraph workflow execution...")

@@ -1,0 +1,48 @@
+{
+  "created_at": "2026-01-02T10:50:03.809636",
+  "description": "i want single page templat landing page \nfor Voucher management plz genrate",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "A single-page landing page to introduce the voucher management service, showcase its features, and convert visitors into customers or leads.",
+        "sections": [
+          "hero",
+          "features",
+          "how_it_works",
+          "pricing",
+          "testimonials",
+          "faq",
+          "cta"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "modern professional",
+      "primary_color": "#4A90E2",
+      "secondary_color": "#F4F7F9",
+      "font_family": "sans-serif",
+      "design_style": "clean, minimal, and tech-focused"
+    },
+    "image_sections": [
+      "hero",
+      "features",
+      "testimonials"
+    ],
+    "navigation": [
+      "features",
+      "pricing",
+      "testimonials",
+      "contact"
+    ]
+  },
+  "pages": [
+    "home"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "features": "/uploads/placeholder.png",
+    "testimonials": "/uploads/placeholder.png"
+  },
+  "has_global_css_theme": false
+}

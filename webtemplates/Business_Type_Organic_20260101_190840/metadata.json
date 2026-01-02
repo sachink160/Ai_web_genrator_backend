@@ -1,0 +1,85 @@
+{
+  "created_at": "2026-01-01T19:08:41.061533",
+  "description": "Business Type:\nOrganic Dairy Products Brand\n\nDescription:\nAn organic dairy brand offering chemical-free milk and milk products sourced\nfrom grass-fed cows, following eco-friendly and ethical farming practices.\n\nTarget Audience:\nHealth-conscious customers, organic food buyers\n\nTone:\nPure, premium, eco-friendly\n\nUI Notes:\n- Soft gradients\n- Eco icons\n- Subscription CTA (Daily Milk Delivery)",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Landing page for brand awareness and product overview",
+        "sections": [
+          "hero",
+          "features",
+          "testimonials",
+          "cta"
+        ]
+      },
+      {
+        "name": "about",
+        "purpose": "Providing brand story and values",
+        "sections": [
+          "story",
+          "mission",
+          "team"
+        ]
+      },
+      {
+        "name": "products",
+        "purpose": "Showcasing available organic dairy products",
+        "sections": [
+          "product_listing",
+          "features",
+          "cta"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "Facilitating customer inquiries and engagement",
+        "sections": [
+          "form",
+          "info",
+          "cta"
+        ]
+      },
+      {
+        "name": "faq",
+        "purpose": "Addressing common customer questions",
+        "sections": [
+          "questions",
+          "answers"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "eco-friendly premium",
+      "primary_color": "green",
+      "secondary_color": "soft beige",
+      "font_family": "sans-serif",
+      "design_style": "clean and minimal with soft gradients"
+    },
+    "image_sections": [
+      "hero",
+      "features",
+      "testimonials"
+    ],
+    "navigation": [
+      "home",
+      "about",
+      "products",
+      "contact",
+      "faq"
+    ]
+  },
+  "pages": [
+    "home",
+    "about",
+    "products",
+    "contact",
+    "faq"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "features": "/uploads/placeholder.png",
+    "testimonials": "/uploads/placeholder.png"
+  },
+  "has_global_css_theme": false
+}

@@ -1,0 +1,73 @@
+{
+  "created_at": "2026-01-01T18:33:45.178481",
+  "description": "Business Type:\nCow Breeding & Dairy Services\n\nDescription:\nA professional dairy service offering high-quality cow breeds, veterinary support,\nfeed management, and milk production consulting.\n\nTarget Audience:\nOther dairy farmers, rural entrepreneurs\n\nTone:\nInformative, professional, reliable\n\nDesign Notes:\n- Structured layout\n- Service cards\n- Contact inquiry form",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Landing page",
+        "sections": [
+          "hero",
+          "features",
+          "testimonials",
+          "cta"
+        ]
+      },
+      {
+        "name": "about",
+        "purpose": "About the business and its mission",
+        "sections": [
+          "story",
+          "team",
+          "values"
+        ]
+      },
+      {
+        "name": "services",
+        "purpose": "Detail the services offered",
+        "sections": [
+          "service_cards",
+          "cta"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "Contact page for inquiries",
+        "sections": [
+          "form",
+          "info"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "professional",
+      "primary_color": "green",
+      "secondary_color": "white",
+      "font_family": "sans-serif",
+      "design_style": "structured and clean"
+    },
+    "image_sections": [
+      "hero",
+      "features",
+      "testimonials"
+    ],
+    "navigation": [
+      "home",
+      "about",
+      "services",
+      "contact"
+    ]
+  },
+  "pages": [
+    "home",
+    "about",
+    "services",
+    "contact"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "features": "/uploads/placeholder.png",
+    "testimonials": "/uploads/placeholder.png"
+  },
+  "has_global_css_theme": false
+}

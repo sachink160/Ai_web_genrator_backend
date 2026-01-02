@@ -1,0 +1,74 @@
+{
+  "created_at": "2026-01-02T15:07:50.286059",
+  "description": "genrate the landing page for cloud kitchen",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Landing page for the cloud kitchen service",
+        "sections": [
+          "hero",
+          "features",
+          "testimonials",
+          "cta"
+        ]
+      },
+      {
+        "name": "about",
+        "purpose": "Information about the cloud kitchen concept and business philosophy",
+        "sections": [
+          "story",
+          "team",
+          "values"
+        ]
+      },
+      {
+        "name": "menu",
+        "purpose": "Showcase the menu offerings and specialties",
+        "sections": [
+          "highlights",
+          "meal_options",
+          "cta"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "Provide contact information and inquiry form",
+        "sections": [
+          "form",
+          "info"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "modern culinary",
+      "primary_color": "green",
+      "secondary_color": "orange",
+      "font_family": "sans-serif",
+      "design_style": "clean and inviting"
+    },
+    "image_sections": [
+      "hero",
+      "features",
+      "testimonials"
+    ],
+    "navigation": [
+      "home",
+      "about",
+      "menu",
+      "contact"
+    ]
+  },
+  "pages": [
+    "home",
+    "about",
+    "menu",
+    "contact"
+  ],
+  "image_urls": {
+    "hero": "http://localhost:8000/uploads/hero_1766668485.png",
+    "features": "http://localhost:8000/uploads/features_1766668478.png",
+    "testimonials": "http://localhost:8000/uploads/testimonials_1766668479.png"
+  },
+  "has_global_css_theme": false
+}

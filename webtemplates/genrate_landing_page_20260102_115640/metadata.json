@@ -1,0 +1,55 @@
+{
+  "created_at": "2026-01-02T11:56:40.180129",
+  "description": "genrate landing page for Steel Manufactuering \ngenrate only one page",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Single-page landing site showcasing steel manufacturing capabilities, quality standards, and driving customer inquiries",
+        "sections": [
+          "hero",
+          "capabilities",
+          "products",
+          "quality",
+          "why_choose_us",
+          "certifications",
+          "testimonials",
+          "cta",
+          "contact"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "industrial professional",
+      "primary_color": "steel-blue",
+      "secondary_color": "dark-gray",
+      "accent_color": "orange",
+      "font_family": "sans-serif",
+      "design_style": "bold and industrial with modern touches, heavy use of metallic textures and strong typography"
+    },
+    "image_sections": [
+      "hero",
+      "capabilities",
+      "products",
+      "quality"
+    ],
+    "navigation": [
+      "home",
+      "capabilities",
+      "products",
+      "quality",
+      "testimonials",
+      "contact"
+    ]
+  },
+  "pages": [
+    "home"
+  ],
+  "image_urls": {
+    "hero": "http://localhost:8000/uploads/hero_1766668485.png",
+    "capabilities": "http://localhost:8000/uploads/placeholder.png",
+    "products": "http://localhost:8000/uploads/placeholder.png",
+    "quality": "http://localhost:8000/uploads/placeholder.png"
+  },
+  "has_global_css_theme": false
+}

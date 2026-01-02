@@ -12,10 +12,11 @@ load_dotenv()
 # LLM_MODEL = os.getenv("LLM_MODEL")
 # print(LLM_MODEL)
 
+
 # llm = dspy.LM(
 #     model=f"{LLM_MODEL}",
 #     api_key=API_KEY,
-#     temperature=1.0,
+#     temperature=0.7,
 #     max_tokens=16000,
 #     cache=True,
 # )
@@ -38,7 +39,7 @@ llm = dspy.LM(
     api_base=API_BASE,
     api_version=API_VERSION,
     temperature=1.0,
-    max_tokens=16000,
+    max_tokens=10000,
     cache=True
 )
 

@@ -1,0 +1,85 @@
+{
+  "created_at": "2026-01-02T12:54:13.494776",
+  "description": "genrate the landing page for cloud kitchen site \ni want only one page with proper detailing\nkichen name : Apna Dhaba",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Landing page for Apna Dhaba cloud kitchen showcasing menu, ordering process, and brand story",
+        "sections": [
+          "hero",
+          "about",
+          "featured_dishes",
+          "how_it_works",
+          "menu_preview",
+          "testimonials",
+          "why_choose_us",
+          "cta_order",
+          "contact_info"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "warm and inviting traditional meets modern",
+      "primary_color": "#D4581E",
+      "secondary_color": "#F4A460",
+      "accent_color": "#2C3E50",
+      "font_family": "sans-serif",
+      "heading_font": "bold sans-serif",
+      "body_font": "regular sans-serif",
+      "design_style": "authentic Indian aesthetic with modern minimalism"
+    },
+    "image_sections": [
+      "hero",
+      "featured_dishes",
+      "menu_preview",
+      "testimonials",
+      "about"
+    ],
+    "navigation": [
+      {
+        "label": "Home",
+        "anchor": "#home"
+      },
+      {
+        "label": "About",
+        "anchor": "#about"
+      },
+      {
+        "label": "Menu",
+        "anchor": "#menu"
+      },
+      {
+        "label": "Reviews",
+        "anchor": "#testimonials"
+      },
+      {
+        "label": "Order Now",
+        "anchor": "#cta"
+      }
+    ],
+    "cta_buttons": [
+      {
+        "text": "Order Now",
+        "action": "external_link",
+        "destination": "order_platform"
+      },
+      {
+        "text": "View Full Menu",
+        "action": "scroll",
+        "destination": "#menu_preview"
+      }
+    ]
+  },
+  "pages": [
+    "home"
+  ],
+  "image_urls": {
+    "hero": "http://localhost:8000/uploads/hero_1766668485.png",
+    "featured_dishes": "http://localhost:8000/uploads/placeholder.png",
+    "menu_preview": "http://localhost:8000/uploads/placeholder.png",
+    "testimonials": "http://localhost:8000/uploads/testimonials_1766668479.png",
+    "about": "http://localhost:8000/uploads/placeholder.png"
+  },
+  "has_global_css_theme": false
+}

@@ -285,6 +285,7 @@ def image_description_node(state: WorkflowState) -> WorkflowState:
 def image_generation_node(state: WorkflowState) -> WorkflowState:
     """
     Step 2b: Generate images using DALL-E 3 based on descriptions.
+    Falls back to static images if API fails.
     """
     logger.info("Starting image generation node...")
     
@@ -292,10 +293,20 @@ def image_generation_node(state: WorkflowState) -> WorkflowState:
         image_descriptions = state["image_descriptions"]
         image_urls = {}
         
-        # Get upload directory
+        # Get upload directory and base URL
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         upload_dir = os.path.join(base_dir, "uploads")
         os.makedirs(upload_dir, exist_ok=True)
+        
+        # Get base URL from environment (default to localhost)
+        base_url = os.getenv("BASE_URL", "http://127.0.0.1:8000")
+        
+        # Static image mapping for fallback
+        static_images = {
+            "hero": "hero_1766668485.png",
+            "features": "features_1766668478.png",
+            "testimonials": "testimonials_1766668479.png"
+        }
         
         for section, description in image_descriptions.items():
             logger.info(f"Generating image for {section}")
@@ -310,7 +321,6 @@ def image_generation_node(state: WorkflowState) -> WorkflowState:
                     n=1
                 )
                 
-                # image_url = "http://127.0.0.1:8000/uploads/hero_1766649716.png"
                 image_url = response.data[0].url
                 
                 # Download and save image
@@ -322,19 +332,24 @@ def image_generation_node(state: WorkflowState) -> WorkflowState:
                     with open(filepath, "wb") as f:
                         f.write(image_response.content)
                     
-                    # Store relative URL
-                    image_urls[section] = f"/uploads/{filename}"
-                    logger.info(f"✓ Image saved for {section}")
+                    # Store full URL
+                    image_urls[section] = f"{base_url}/uploads/{filename}"
+                    logger.info(f"✓ Image saved for {section}: {image_urls[section]}")
                 else:
-                    logger.warning(f"Failed to download image for {section}")
-                    image_urls[section] = "/uploads/placeholder.png"
+                    logger.warning(f"Failed to download image for {section}, using static fallback")
+                    # Use static fallback
+                    fallback_filename = static_images.get(section, "placeholder.png")
+                    image_urls[section] = f"{base_url}/uploads/{fallback_filename}"
                     
             except Exception as img_error:
                 logger.error(f"Image generation failed for {section}: {str(img_error)}")
-                # Use fallback
-                image_urls[section] = "/uploads/placeholder.png"
+                logger.info(f"Using static fallback image for {section}")
+                # Use static fallback
+                fallback_filename = static_images.get(section, "placeholder.png")
+                image_urls[section] = f"{base_url}/uploads/{fallback_filename}"
         
         logger.info(f"Generated {len(image_urls)} images")
+        logger.info(f"Image URLs: {image_urls}")
         
         # Update state
         return {
@@ -402,13 +417,36 @@ def html_generation_node(state: WorkflowState) -> WorkflowState:
                 image_urls=image_urls_text,
                 business_description=state["description"]
             )
-            # html = generator.forward(
-            #     plan=json.dumps(enhanced_plan),
-            #     page_name=page_name,
-            #     page_config=json.dumps(page),
-            #     image_urls=image_urls_text,
-            #     business_description=state["description"]
-            # )
+            
+            # CRITICAL: Clean up markdown blocks and validate
+            html = html.strip()
+            
+            # Remove markdown code blocks if present
+            if html.startswith("```html"):
+                logger.info(f"Removing ```html markdown wrapper from {page_name}")
+                html = html[7:]  # Remove ```html
+            elif html.startswith("```"):
+                logger.info(f"Removing ``` markdown wrapper from {page_name}")
+                html = html[3:]  # Remove ```
+            
+            if html.endswith("```"):
+                logger.info(f"Removing trailing ``` from {page_name}")
+                html = html[:-3]
+            
+            html = html.strip()
+            
+            # Validate HTML content
+            if not html or len(html) < 100:
+                logger.error(f"❌ Empty or too short HTML generated for {page_name} ({len(html)} chars)")
+                raise ValueError(f"HTML generation failed for {page_name}: Response too short or empty")
+            
+            if not html.startswith("<!DOCTYPE") and not html.startswith("<html"):
+                logger.error(f"❌ Invalid HTML structure for {page_name}. First 100 chars: {html[:100]}")
+                raise ValueError(f"HTML generation failed for {page_name}: Invalid HTML structure")
+            
+            # Check for truncation warning
+            if "</html>" not in html.lower():
+                logger.warning(f"⚠ HTML for {page_name} might be truncated - missing closing </html> tag")
             
             # Extract CSS from HTML
             css = ""

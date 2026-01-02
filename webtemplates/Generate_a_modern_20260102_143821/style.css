@@ -1,0 +1,164 @@
+/* CSS for home page */
+body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f4e9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #5e2434;
+            color: white;
+            padding: 10px 0;
+        }
+        .logo {
+            font-size: 1.5em;
+            margin-left: 20px;
+        }
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+            margin-right: 20px;
+        }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+        }
+        .nav-link.active {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .section-padding {
+            padding: 40px 20px;
+        }
+        .hero {
+            background-image: url('http://localhost:8000/uploads/hero_1766668485.png');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .hero-content h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5em;
+            margin: 0;
+        }
+        .btn-primary {
+            background-color: #f9a602;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .grid {
+            display: grid;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f4e9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #5e2434;
+            color: white;
+            padding: 10px 0;
+        }
+        .logo {
+            font-size: 1.5em;
+            margin-left: 20px;
+        }
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+            margin-right: 20px;
+        }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+        }
+        .nav-link.active {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .section-padding {
+            padding: 40px 20px;
+        }
+        .hero {
+            background-image: url('http://localhost:8000/uploads/hero_1766668485.png');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .hero-content h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5em;
+            margin: 0;
+        }
+        .btn-primary {
+            background-color: #f9a602;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .grid {
+            display: grid;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }

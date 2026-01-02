@@ -516,6 +516,28 @@ OUTPUT: Complete, valid HTML5 document ready for production deployment."""
         
         full_prompt = f"{generation_rules}\n\nBUSINESS DESCRIPTION:\n{business_description}"
         
+        # PRINT COMPLETE PROMPT TO TERMINAL
+        print("\n" + "="*80)
+        print(f"🎯 GENERATING HTML FOR PAGE: {page_name}")
+        print("="*80)
+        print("\n📋 INPUTS TO DSPY:")
+        print("-"*80)
+        print(f"\n1️⃣  PAGE NAME: {page_name}")
+        print(f"\n2️⃣  PAGE CONFIG:\n{page_config[:500]}..." if len(page_config) > 500 else f"\n2️⃣  PAGE CONFIG:\n{page_config}")
+        print(f"\n3️⃣  IMAGE URLS:\n{image_urls}")
+        print(f"\n4️⃣  PLAN (first 500 chars):\n{plan[:500]}...")
+        print(f"\n5️⃣  BUSINESS DESCRIPTION:\n{business_description[:300]}...")
+        print("\n" + "-"*80)
+        print("📝 FULL PROMPT STRUCTURE:")
+        print("-"*80)
+        print(f"Length: {len(full_prompt)} characters")
+        print(f"Generation Rules: {len(generation_rules)} chars")
+        print(f"Business Context: {len(business_description)} chars")
+        print("\n💬 PROMPT PREVIEW (First 1000 chars):")
+        print("-"*80)
+        print(full_prompt[:1000] + "...")
+        print("\n" + "="*80 + "\n")
+        
         result = self.predict(
             plan=plan,
             page_name=page_name,

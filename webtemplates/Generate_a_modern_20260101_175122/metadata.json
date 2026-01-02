@@ -1,0 +1,98 @@
+{
+  "created_at": "2026-01-01T17:51:22.489857",
+  "description": "Generate a modern, responsive website using pure HTML and CSS (no frameworks).\n\nBusiness Type:\nDairy Farm\n\nDescription:\nA dairy farm producing fresh milk, curd, butter, paneer, and ghee using hygienic,\nnatural, and sustainable farming practices. The farm focuses on quality,\nanimal care, and farm-to-home delivery.\n\nTarget Audience:\nFamilies, local customers, organic food buyers\n\nTone:\nNatural, trustworthy, healthy, rural-modern\n\nWebsite Sections:\n- Hero section with farm and cows imagery\n- About the dairy farm and its values\n- Products section (Milk, Curd, Butter, Paneer, Ghee)\n- Quality & hygiene process\n- Testimonials from customers\n- Call-to-action for home delivery or contact\n- Footer with address and contact info\n\nDesign Preferences:\n- Green, white, and light brown color palette\n- Clean typography\n- Natural and fresh look\n- Mobile-first and fully responsive\n\nOutput:\nProvide complete HTML and CSS code in separate files.",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Introduce the dairy farm, its products, and core values with a focus on quality and natural practices.",
+        "sections": [
+          "hero",
+          "about_summary",
+          "products_overview",
+          "quality_highlights",
+          "testimonials",
+          "cta_delivery"
+        ]
+      },
+      {
+        "name": "products",
+        "purpose": "Showcase detailed information about each dairy product offered.",
+        "sections": [
+          "product_intro",
+          "milk_details",
+          "curd_details",
+          "butter_details",
+          "paneer_details",
+          "ghee_details",
+          "cta_order"
+        ]
+      },
+      {
+        "name": "about_us",
+        "purpose": "Share the farm's story, commitment to animal welfare, sustainable practices, and core values.",
+        "sections": [
+          "farm_story",
+          "our_values",
+          "animal_welfare",
+          "sustainability"
+        ]
+      },
+      {
+        "name": "quality_hygiene",
+        "purpose": "Detail the farm's stringent quality control, hygiene practices, and farm-to-home delivery process.",
+        "sections": [
+          "quality_intro",
+          "farming_standards",
+          "processing_hygiene",
+          "delivery_assurance"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "Provide customers with ways to inquire, place orders, and connect with the farm.",
+        "sections": [
+          "contact_form",
+          "contact_info",
+          "farm_location"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "Natural, Fresh, and Modern Farmhouse",
+      "primary_color": "green",
+      "secondary_color": "light brown",
+      "font_family": "sans-serif",
+      "design_style": "Clean, minimalist, mobile-first, natural aesthetic"
+    },
+    "image_sections": [
+      "hero",
+      "products_overview",
+      "testimonials",
+      "farm_story",
+      "quality_intro"
+    ],
+    "navigation": [
+      "home",
+      "products",
+      "about_us",
+      "quality_hygiene",
+      "contact"
+    ]
+  },
+  "pages": [
+    "home",
+    "products",
+    "about_us",
+    "quality_hygiene",
+    "contact"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "products_overview": "/uploads/placeholder.png",
+    "testimonials": "/uploads/placeholder.png",
+    "farm_story": "/uploads/placeholder.png",
+    "quality_intro": "/uploads/placeholder.png"
+  },
+  "has_global_css_theme": false
+}

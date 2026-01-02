@@ -1,0 +1,78 @@
+{
+  "created_at": "2026-01-01T19:33:00.565966",
+  "description": "Business Type:\nCosmetic & Skincare Brand\n\nDescription:\nA beauty brand offering natural skincare and cosmetic products made with\nsafe ingredients and dermatologically tested formulas.\n\nTarget Audience:\nWomen and men, beauty-conscious customers\n\nTone:\nElegant, clean, premium\n\nDesign Notes:\n- Soft pastel colors\n- Product showcase section\n- Customer reviews section",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Introduce the brand's elegant and natural philosophy, showcase best-selling products, and build trust with social proof.",
+        "sections": [
+          "hero",
+          "featured_products",
+          "brand_philosophy",
+          "testimonials",
+          "shop_cta"
+        ]
+      },
+      {
+        "name": "shop",
+        "purpose": "Allow customers to browse and purchase the full range of skincare and cosmetic products.",
+        "sections": [
+          "product_categories",
+          "product_grid",
+          "bestsellers"
+        ]
+      },
+      {
+        "name": "about_us",
+        "purpose": "Share the brand's story, commitment to safe and natural ingredients, and build a deeper connection with the customer.",
+        "sections": [
+          "brand_story",
+          "our_ingredients",
+          "our_commitment"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "Provide customers with an easy way to get in touch for support, inquiries, or collaborations.",
+        "sections": [
+          "contact_form",
+          "contact_info",
+          "faq"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "elegant and minimalist",
+      "primary_color": "soft_pink",
+      "secondary_color": "light_gray",
+      "font_family": "elegant serif for headings, clean sans-serif for body",
+      "design_style": "clean with ample white space"
+    },
+    "image_sections": [
+      "hero",
+      "featured_products",
+      "testimonials",
+      "brand_story"
+    ],
+    "navigation": [
+      "home",
+      "shop",
+      "about_us",
+      "contact"
+    ]
+  },
+  "pages": [
+    "home",
+    "shop",
+    "about_us",
+    "contact"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "featured_products": "/uploads/placeholder.png",
+    "testimonials": "/uploads/placeholder.png",
+    "brand_story": "/uploads/placeholder.png"
+  },
+  "has_global_css_theme": false
+}

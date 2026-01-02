@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Aura Naturalé</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="home.html" class="logo">Aura Naturalé</a>
+            <button class="hamburger-menu" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="home.html" class="nav-link">Home</a></li>
+                    <li><a href="shop.html" class="nav-link">Shop</a></li>
+                    <li><a href="about_us.html" class="nav-link">About Us</a></li>
+                    <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="section-padding">
+            <div class="container">
+                <h1 class="section-title text-center">Get In Touch</h1>
+                <div class="page-intro">
+                    <p>Have a question, a comment, or a collaboration idea? We'd love to hear from you. Fill out the form below or use our contact details to reach out. Our team is ready to assist you.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 grid-cols-md-2 gap-lg">
+                    <!-- Contact Form Section -->
+                    <div class="contact_form">
+                        <form action="#" method="POST" class="contact-form">
+                            <div>
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" placeholder="Jane Doe" required>
+                            </div>
+                            <div>
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="jane.doe@example.com" required>
+                            </div>
+                            <div>
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" placeholder="Question about an order" required>
+                            </div>
+                            <div>
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" placeholder="Your message here..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Info Section -->
+                    <div class="contact_info">
+                        <h3>Our Information</h3>
+                        <p>You can also reach us through the following channels. Our customer service hours are Monday to Friday, 9am to 5pm EST.</p>
+                        <div class="contact-info">
+                            <p><strong>Email:</strong><br> support@auranaturale.com</p>
+                            <p><strong>Phone:</strong><br> +1 (555) 123-4567</p>
+                            <p><strong>Mailing Address:</strong><br> Aura Naturalé<br>123 Beauty Lane<br>New York, NY 10001</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section-padding">
+            <div class="container">
+                <h2 class="section-title text-center">Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3>Are your products cruelty-free and vegan?</h3>
+                        <p>Absolutely. We are proud to be 100% cruelty-free and all of our skincare and cosmetic products are certified vegan. We never test on animals and use only plant-based ingredients.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>What is your shipping policy?</h3>
+                        <p>We offer standard shipping (5-7 business days) and expedited shipping (2-3 business days) within the United States. Orders over $50 qualify for free standard shipping.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>What is your return policy?</h3>
+                        <p>We stand by our products with a 30-day satisfaction guarantee. If you're not completely happy with your purchase, please contact us within 30 days for a full refund or exchange.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>How can I find the right product for my skin type?</h3>
+                        <p>Each product page features detailed information about the ingredients and the skin types it is best suited for. For a personalized recommendation, feel free to reach out to our skincare experts via the contact form!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <a href="home.html" class="logo">Aura Naturalé</a>
+            <p>&copy; 2024 Aura Naturalé. All Rights Reserved. <br> Discover the beauty of nature.</p>
+        </div>
+    </footer>
+    
+    <!-- A script would normally go here to toggle the 'active-menu' class on the hamburger click. 
+         As per instructions, no JS is included. The menu defaults to a stacked layout on mobile. -->
+
+</body>
+</html>

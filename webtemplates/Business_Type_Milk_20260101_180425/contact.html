@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - FreshMornings Milk Delivery</title>
+    
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+
+    <header class="header">
+        <div class="navbar container">
+            <a href="home.html" class="logo">FreshMornings</a>
+            <button class="hamburger-menu" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="home.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container text-center">
+                <h1>Contact Us</h1>
+                <p>We're here to help with any questions. Reach out and we'll respond as soon as we can.</p>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+                <div class="grid grid-cols-1 grid-cols-md-2 gap-lg items-center">
+                    
+                    <!-- Contact Form Section -->
+                    <div class="card">
+                        <h2 class="mb-md">Send Us a Message</h2>
+                        <form action="#" method="POST">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="you@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" class="form-control" placeholder="e.g., Question about plans" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Your Message</label>
+                                <textarea id="message" name="message" class="form-control" rows="5" placeholder="Write your message here..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Info Section -->
+                    <div class="contact-info-block">
+                        <h3>Contact Information</h3>
+                        <p>Feel free to reach us directly through any of the channels below during our business hours.</p>
+                        
+                        <div class="contact-detail">
+                            <strong>Email Address</strong>
+                            <span><a href="mailto:hello@freshmornings.com">hello@freshmornings.com</a></span>
+                        </div>
+                        
+                        <div class="contact-detail">
+                            <strong>Phone Number</strong>
+                            <span><a href="tel:+15551234567">(555) 123-4567</a></span>
+                        </div>
+                        
+                        <div class="contact-detail">
+                            <strong>Our Address</strong>
+                            <span>123 Dairy Lane, Milkville, ST 12345</span>
+                        </div>
+                        
+                        <div class="contact-detail">
+                            <strong>Business Hours</strong>
+                            <span>Monday - Friday: 8 AM - 6 PM<br>Saturday: 9 AM - 1 PM</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <a href="home.html" class="logo">FreshMornings</a>
+            <nav class="footer-nav">
+                <a href="home.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <p>&copy; 2024 FreshMornings. All Rights Reserved. Farm-to-home freshness, delivered daily.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality & Hygiene - Pure Harvest Dairy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <header>
+        <div class="navbar container">
+            <a href="home.html" class="logo">Pure Harvest Dairy</a>
+            <button class="hamburger-menu" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="home.html" class="nav-link">Home</a></li>
+                    <li><a href="products.html" class="nav-link">Products</a></li>
+                    <li><a href="about_us.html" class="nav-link">About Us</a></li>
+                    <li><a href="quality_hygiene.html" class="nav-link active">Quality & Hygiene</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Quality Intro Section -->
+        <section class="hero quality-intro">
+            <div class="hero-content">
+                <h1>Our Unwavering Commitment to Quality & Hygiene</h1>
+                <p>At Pure Harvest Dairy, every drop of milk and every product reflects our dedication to the highest standards of purity, safety, and natural goodness, from our farm to your home.</p>
+            </div>
+        </section>
+
+        <!-- Farming Standards Section -->
+        <section class="section-padding">
+            <div class="container">
+                <h2 class="section-title">Natural Farming Standards</h2>
+                <p class="section-subtitle">Healthy cows, healthy milk – it all starts on the farm.</p>
+                <div class="grid grid-cols-1 grid-cols-md-3 gap-lg mt-lg">
+                    <div class="card">
+                        <span class="quality-feature-icon">🐄</span>
+                        <h3>Animal Welfare</h3>
+                        <p>Our cows are our family. They enjoy spacious, clean barns, ample grazing time, and a stress-free environment, ensuring their well-being and the quality of their milk.</p>
+                    </div>
+                    <div class="card">
+                        <span class="quality-feature-icon">🌿</span>
+                        <h3>Natural Feed</h3>
+                        <p>Fed with natural, balanced diets primarily consisting of fresh green fodder, high-quality silage, and essential minerals, free from hormones and unnecessary antibiotics.</p>
+                    </div>
+                    <div class="card">
+                        <span class="quality-feature-icon">🔬</span>
+                        <h3>Regular Health Checks</h3>
+                        <p>Our veterinary team conducts regular health check-ups for every animal, implementing preventative care and ensuring the herd remains robust and disease-free.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Processing Hygiene Section -->
+        <section class="section-padding" style="background-color: var(--light-bg);">
+            <div class="container">
+                <h2 class="section-title">State-of-the-Art Hygienic Processing</h2>
+                <p class="section-subtitle">From milking to packaging, cleanliness is paramount.</p>
+                <div class="grid grid-cols-1 grid-cols-md-3 gap-lg mt-lg">
+                    <div class="card">
+                        <span class="quality-feature-icon">💧</span>
+                        <h3>Automated Milking</h3>
+                        <p>Our advanced automated milking systems ensure hygienic collection, minimizing human contact and maintaining the milk's purity from the very first drop.</p>
+                    </div>
+                    <div class="card">
+                        <span class="quality-feature-icon">🌡️</span>
+                        <h3>Optimal Temperature Control</h3>
+                        <p>Milk is immediately chilled to optimal temperatures after collection and maintained throughout processing to preserve freshness, nutrients, and natural flavor.</p>
+                    </div>
+                    <div class="card">
+                        <span class="quality-feature-icon">✨</span>
+                        <h3>Sterile Environment</h3>
+                        <p>Our processing facility adheres to strict sterilization protocols, with regular cleaning and sanitization of all equipment and surfaces, ensuring a germ-free environment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Delivery Assurance Section -->
+        <section class="section-padding">
+            <div class="container">
+                <h2 class="section-title">Farm-to-Home Delivery Assurance</h2>
+                <p class="section-subtitle">Freshness delivered right to your doorstep, every time.</p>
+                <div class="grid grid-cols-1 grid-cols-md-2 gap-lg mt-lg">
+                    <div class="card">
+                        <span class="quality-feature-icon">🚚</span>
+                        <h3>Temperature-Controlled Logistics</h3>
+                        <p>Our dedicated delivery vehicles are equipped with temperature control to maintain the cold chain, ensuring your products arrive as fresh as they left our farm.</p>
+                    </div>
+                    <div class="card">
+                        <span class="quality-feature-icon">⏰</span>
+                        <h3>Timely & Reliable Delivery</h3>
+                        <p>We pride ourselves on efficient and reliable delivery schedules, bringing you the freshest dairy products conveniently to your home without compromise.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Pure Harvest Dairy. All rights reserved. | <a href="contact.html">Contact Us</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburger = document.querySelector('.hamburger-menu');
+            const navMenu = document.querySelector('.nav-menu');
+
+            hamburger.addEventListener('click', function () {
+                navMenu.classList.toggle('active');
+            });
+
+            // Close menu when a link is clicked (for single-page navigation)
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{
+  "created_at": "2026-01-02T14:33:41.902201",
+  "description": "genrate the landing page for cloud kitchen site \ni want only one page with proper detailing\nkichen name : Apna Dhaba\nemail: sachin@gmail.com\naddress: 709, city center, Ahmedabad",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Single-page landing for Apna Dhaba, a cloud kitchen, to showcase its offerings, facilitate ordering, and provide essential contact information.",
+        "sections": [
+          "hero",
+          "about_us",
+          "menu_highlights",
+          "how_to_order",
+          "testimonials",
+          "call_to_action",
+          "contact_info",
+          "footer"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "Warm, inviting, and modern Indian",
+      "primary_color": "#FF6F00",
+      "secondary_color": "#4CAF50",
+      "font_family": "Montserrat, sans-serif",
+      "design_style": "Clean, food-focused, with rustic accents"
+    },
+    "image_sections": [
+      "hero",
+      "menu_highlights",
+      "testimonials"
+    ],
+    "navigation": [
+      "Home",
+      "Menu",
+      "How to Order",
+      "Testimonials",
+      "Contact"
+    ]
+  },
+  "pages": [
+    "home"
+  ],
+  "image_urls": {
+    "hero": "http://localhost:8000/uploads/hero_1766668485.png",
+    "menu_highlights": "http://localhost:8000/uploads/placeholder.png",
+    "testimonials": "http://localhost:8000/uploads/testimonials_1766668479.png"
+  },
+  "has_global_css_theme": false
+}

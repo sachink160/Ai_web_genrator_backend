@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Leading steel manufacturing company delivering premium quality steel products with advanced capabilities and ISO certifications.">
+    <title>Premier Steel Manufacturing | Quality Steel Products & Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <div class="navbar">
+            <a href="home.html" class="logo">STEELWORKS</a>
+            <button class="hamburger-menu" aria-label="Toggle menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="home.html" class="nav-link active">Home</a></li>
+                    <li><a href="home.html#capabilities" class="nav-link">Capabilities</a></li>
+                    <li><a href="home.html#products" class="nav-link">Products</a></li>
+                    <li><a href="home.html#quality" class="nav-link">Quality</a></li>
+                    <li><a href="home.html#testimonials" class="nav-link">Testimonials</a></li>
+                    <li><a href="home.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content container">
+            <h1>Forging Excellence in Steel Manufacturing</h1>
+            <p>Premium quality steel products engineered to meet the highest industry standards. Your trusted partner in structural steel, industrial fabrication, and custom metal solutions.</p>
+            <div>
+                <a href="#contact" class="btn btn-primary">Request a Quote</a>
+                <a href="#capabilities" class="btn btn-secondary">Our Capabilities</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Capabilities Section -->
+    <section class="section-padding" id="capabilities">
+        <div class="container">
+            <h2 class="section-title">Manufacturing Capabilities</h2>
+            <div class="grid grid-cols-1 grid-cols-md-3 gap-lg">
+                <div class="card">
+                    <div class="capabilities-icon">⚙️</div>
+                    <h3>Advanced Fabrication</h3>
+                    <p>State-of-the-art CNC machinery and automated welding systems capable of handling complex steel fabrication projects with precision and efficiency.</p>
+                </div>
+                <div class="card">
+                    <div class="capabilities-icon">🔥</div>
+                    <h3>Heat Treatment</h3>
+                    <p>Industrial-grade heat treatment facilities for hardening, tempering, and annealing processes to enhance material properties and durability.</p>
+                </div>
+                <div class="card">
+                    <div class="capabilities-icon">📏</div>
+                    <h3>Custom Engineering</h3>
+                    <p>In-house engineering team specializing in custom steel solutions, structural design, and prototype development for unique project requirements.</p>
+                </div>
+                <div class="card">
+                    <div class="capabilities-icon">🏗️</div>
+                    <h3>Heavy Structural</h3>
+                    <p>Large-capacity equipment for manufacturing heavy structural steel components, beams, columns, and industrial frameworks up to 50 tons.</p>
+                </div>
+                <div class="card">
+                    <div class="capabilities-icon">⚡</div>
+                    <h3>Precision Cutting</h3>
+                    <p>Laser and plasma cutting technology for intricate designs and tight tolerances, handling steel plates from 1mm to 150mm thickness.</p>
+                </div>
+                <div class="card">
+                    <div class="capabilities-icon">🎯</div>
+                    <h3>Quality Control</h3>
+                    <p>Comprehensive testing laboratory with non-destructive testing, material analysis, and dimensional inspection to ensure product excellence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="section-padding" id="products" style="background-color: var(--background-light);">
+        <div class="container">
+            <h2 class="section-title">Steel Product Range</h2>
+            <div class="grid grid-cols-1 grid-cols-md-3 gap-lg">
+                <div class="card product-card">
+                    <img src="http://localhost:8000/uploads/placeholder.png" alt="Structural Steel">
+                    <h3>Structural Steel</h3>
+                    <p>I-beams, H-beams, channels, angles, and plates for construction and infrastructure projects. Available in various grades including A36, A572, and A992.</p>
+                </div>
+                <div class="card product-card">
+                    <img src="http://localhost:8000/uploads/placeholder.png" alt="Steel Sheets & Plates">
+                    <h3>Steel Sheets & Plates</h3>
+                    <p>Hot-rolled and cold-rolled steel sheets, checker plates, and heavy industrial plates. Custom cutting and finishing services available.</p>
+                </div>
+                <div class="card product-card">
+                    <img src="http://localhost:8000/uploads/placeholder.png" alt="Steel Tubes & Pipes">
+                    <h3>Steel Tubes & Pipes</h3>
+                    <p>Seamless and welded pipes, square tubes, rectangular hollow sections for mechanical, structural, and fluid conveyance applications.</p>
+                </div>
+                <div class="card product-card">
+                    <img src="http://localhost:8000/uploads/placeholder.png" alt="Fabricated Components">
+                    <h3>Fabricated Components</h3>
+                    <p>Custom-fabricated steel parts, assemblies, brackets, and mounting systems engineered to your specifications and drawings.</p>
+                </div>
+                <div class="card product-card">
+                    <img src="http://localhost:8000/uploads/placeholder.png" alt="Reinforcement Steel">
+                    <h3>Reinforcement Steel</h3>
+                    <p>Deformed bars (rebar), wire mesh, and reinforcement products for concrete structures. Available in grades from 40 to 80 ksi.</p>
+                </div>
+                <div class="card product-card">
+                    <img src="http://localhost:8000/uploads/placeholder.png" alt="Specialty Alloys">
+                    <h3>Specialty Alloys</h3>
+                    <p>Stainless steel, galvanized steel, weathering steel (Corten), and other specialty alloys for corrosive environments and unique applications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Section -->
+    <section class="section-padding" id="quality">
+        <div class="container">
+            <h2 class="section-title">Quality Standards & Testing</h2>
+            <p class="text-center mb-md" style="max-width: 800px; margin: 0 auto 3rem; color: var(--text-light); font-size: 1.1rem;">
+                Our commitment to excellence is backed by rigorous quality control processes and industry-leading certifications. Every product undergoes comprehensive testing to ensure it meets or exceeds specifications.
+            </p>
+            <div class="quality-grid">
+                <div class="quality-item">
+                    <h3>🔬 Material Testing</h3>
+                    <p>Chemical composition analysis, tensile strength testing, hardness testing, and impact resistance evaluation for every batch.</p>
+                </div>
+                <div class="quality-item">
+                    <h3>📐 Dimensional Accuracy</h3>
+                    <p>Laser measurement systems and coordinate measuring machines (CMM) ensure tolerances within ±0.1mm for critical dimensions.</p>
+                </div>
+                <div class="quality-item">
+                    <h3>🛡️ NDT Inspection</h3>
+                    <p>Non-destructive testing including ultrasonic testing, radiographic inspection, and magnetic particle testing for weld quality.</p>
+                </div>
+                <div class="quality-item">
+                    <h3>✅ Quality Certification</h3>
+                    <p>Complete material traceability and mill test certificates (MTC) provided with every order for documentation and compliance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="section-padding" style="background-color: var(--background-light);">
+        <div class="container">
+            <h2 class="section-title">Why Choose Our Steel Manufacturing</h2>
+            <div class="features-list">
+                <div class="feature-item">
+                    <div class="feature-icon">1</div>
+                    <div>
+                        <h3>30+ Years Experience</h3>
+                        <p>Three decades of expertise in steel manufacturing, serving diverse industries from construction to aerospace.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">2</div>
+                    <div>
+                        <h3>Industry Leading Technology</h3>
+                        <p>Investment in cutting-edge manufacturing equipment ensures efficiency, precision, and competitive pricing.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">3</div>
+                    <div>
+                        <h3>On-Time Delivery</h3>
+                        <p>98% on-time delivery rate with expedited services available for urgent project requirements.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">4</div>
+                    <div>
+                        <h3>Custom Solutions</h3>
+                        <p>Flexible manufacturing capabilities to accommodate unique specifications and project-specific requirements.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">5</div>
+                    <div>
+                        <h3>Competitive Pricing</h3>
+                        <p>Optimal balance of quality and cost through efficient processes and strategic material sourcing.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">6</div>
+                    <div>
+                        <h3>Technical Support</h3>
+                        <p>Dedicated engineering support team to assist with material selection, design optimization, and technical challenges.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="section-padding" id="certifications">
+        <div class="container">
+            <h2 class="section-title">Certifications & Compliance</h2>
+            <div class="grid grid-cols-1 grid-cols-md-4 gap-lg">
+                <div class="cert-badge">
+                    <h3>ISO 9001:2015</h3>
+                    <p>Quality Management System</p>
+                </div>
+                <div class="cert-badge">
+                    <h3>ISO 14001</h3>
+                    <p>Environmental Management</p>
+                </div>
+                <div class="cert-badge">
+                    <h3>AISC Certified</h3>
+                    <p>Steel Fabrication</p>
+                </div>
+                <div class="cert-badge">
+                    <h3>AWS Welding</h3>
+                    <p>Certified Procedures</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section-padding" id="testimonials" style="background-color: var(--background-light);">
+        <div class="container">
+            <h2 class="section-title">Client Testimonials</h2>
+            <div class="grid grid-cols-1 grid-cols-md-3 gap-lg">
+                <div class="card testimonial-card">
+                    <p>"Outstanding quality and reliability. We've partnered with them on multiple large-scale construction projects, and they consistently deliver precision-engineered steel components on schedule. Their technical expertise is invaluable."</p>
+                    <div style="margin-top: 1.5rem;">
+                        <strong style="color: var(--primary-color);">Michael Rodriguez</strong>
+                        <p style="color: var(--text-light); font-size: 0.9rem;">Construction Director, Apex Builders Inc.</p>
+                    </div>
+                </div>
+                <div class="card testimonial-card">
+                    <p>"The custom fabrication capabilities exceeded our expectations. They worked closely with our engineering team to develop specialized steel components for our manufacturing equipment. Quality control is second to none."</p>
+                    <div style="margin-top: 1.5rem;">
+                        <strong style="color: var(--primary-color);">Sarah Chen</strong>
+                        <p style="color: var(--text-light); font-size: 0.9rem;">Procurement Manager, Industrial Systems Corp.</p>
+                    </div>
+                </div>
+                <div class="card testimonial-card">
+                    <p>"Competitive pricing without compromising quality. Their structural steel products have been instrumental in completing our infrastructure projects within budget. The mill test certificates and documentation are always thorough."</p>
+                    <div style="margin-top: 1.5rem;">
+                        <strong style="color: var(--primary-color);">James Patterson</strong>
+                        <p style="color: var(--text-light); font-size: 0.9rem;">Project Engineer, Metro Infrastructure Authority</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section section-padding">
+        <div class="container">
+            <h2>Ready to Start Your Steel Project?</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95;">Contact our team today for a free consultation and competitive quote. We're ready to bring your steel manufacturing requirements to life.</p>
+            <a href="#contact" class="btn btn-primary" style="background-color: var(--white); color: var(--primary-color);">Get Started Now</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section-padding" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <p class="text-center mb-md" style="color: var(--text-light); max-width: 600px; margin: 0 auto 3rem;">
+                Have a question or ready to request a quote? Fill out the form below and our team will respond within 24 hours.
+            </p>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="John Smith">
+                </div>
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" name="company" placeholder="Your Company">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="john@company.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                </div>
+                <div class="form-group">
+                    <label for="inquiry">Inquiry Type</label>
+                    <select id="inquiry" name="inquiry">
+                        <option value="quote">Request a Quote</option>
+                        <option value="product">Product Information</option>
+                        <option value="technical">Technical Support</option>
+                        <option value="general">General Inquiry</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" required placeholder="Please provide details about your steel manufacturing requirements, specifications, quantities, and timeline..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3 style="color: var(--white); margin-bottom: 1rem;">STEELWORKS</h3>
+                <p style="opacity: 0.8; margin-bottom: 1.5rem;">Premium Steel Manufacturing Since 1993</p>
+                <div class="footer-links">
+                    <a href="home.html">Home</a>
+                    <a href="#capabilities">Capabilities</a>
+                    <a href="#products">Products</a>
+                    <a href="#quality">Quality</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 1.5rem;">
+                <p style="opacity: 0.7;">&copy; 2024 Steelworks Manufacturing. All rights reserved. | ISO 9001:2015 Certified</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        const offsetTop = target.offsetTop - 70;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                        // Close mobile menu if open
+                        const navMenu = document.getElementById('navMenu');
+                        navMenu.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        // Form submission handler
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your inquiry! Our team will contact you within 24 hours.');
+            this.reset();
+        });
+
+        // Update active nav link on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current) && current !== '') {
+                    link.classList.add('active');
+                } else if (current === '' && link.getAttribute('href') === 'home.html') {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

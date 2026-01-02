@@ -1,0 +1,304 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Apna Dhaba - Cloud Kitchen delivering authentic Indian cuisine to your doorstep">
+    <meta name="keywords" content="cloud kitchen, Indian food, delivery, authentic cuisine">
+    <title>Apna Dhaba - Authentic Indian Cloud Kitchen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <!-- HEADER & NAVIGATION -->
+    <header>
+        <div class="navbar container">
+            <a href="home.html" class="logo">🍛 Apna Dhaba</a>
+            <button class="hamburger-menu" aria-label="Toggle menu" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="home.html" class="nav-link active">Home</a></li>
+                    <li><a href="home.html" class="nav-link">Menu</a></li>
+                    <li><a href="home.html" class="nav-link">About</a></li>
+                    <li><a href="home.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Welcome to Apna Dhaba</h1>
+                    <p>Authentic Indian cuisine delivered fresh to your doorstep. Experience the taste of traditional flavors with modern convenience.</p>
+                    <div class="hero-cta">
+                        <a href="tel:+919865321000" class="btn btn-primary">Order Now</a>
+                        <a href="#menu" class="btn btn-secondary">View Menu</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section class="section-padding" style="background: var(--light-bg);">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>About Apna Dhaba</h2>
+                        <p>Apna Dhaba is your neighborhood cloud kitchen specializing in authentic Indian cuisine. We bring the warmth and flavors of traditional Indian cooking directly to your home with the convenience of modern food delivery.</p>
+                        <p>Every dish is prepared fresh using premium ingredients and time-tested recipes passed down through generations. Our commitment to quality, taste, and hygiene makes us the preferred choice for authentic Indian food.</p>
+                        <div class="about-features">
+                            <div class="feature-item">
+                                <div class="feature-icon">⚡</div>
+                                <div>
+                                    <h3>Fast Delivery</h3>
+                                    <p>Quick preparation and timely delivery</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🥘</div>
+                                <div>
+                                    <h3>Fresh Ingredients</h3>
+                                    <p>Premium quality, sourced daily</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">👨‍🍳</div>
+                                <div>
+                                    <h3>Expert Chefs</h3>
+                                    <p>Experienced culinary professionals</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">✅</div>
+                                <div>
+                                    <h3>Hygiene First</h3>
+                                    <p>Strict food safety standards</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED DISHES -->
+        <section class="section-padding">
+            <div class="container">
+                <h2 class="section-title">Our Signature Dishes</h2>
+                <div class="featured-dishes-grid">
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="http://localhost:8000/uploads/placeholder.png" alt="Butter Chicken" style="background: linear-gradient(135deg, #D4531F 0%, #F39C12 100%); object-fit: cover;">
+                        </div>
+                        <div class="dish-info">
+                            <div class="dish-category">Non-Vegetarian</div>
+                            <h3>Butter Chicken</h3>
+                            <p class="dish-description">Tender chicken pieces in a rich, creamy tomato-based sauce with aromatic spices.</p>
+                            <div class="dish-price">₹299</div>
+                        </div>
+                    </div>
+
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="http://localhost:8000/uploads/placeholder.png" alt="Paneer Tikka Masala" style="background: linear-gradient(135deg, #D4531F 0%, #F39C12 100%); object-fit: cover;">
+                        </div>
+                        <div class="dish-info">
+                            <div class="dish-category">Vegetarian</div>
+                            <h3>Paneer Tikka Masala</h3>
+                            <p class="dish-description">Grilled cottage cheese cubes in a luscious creamy sauce with Indian spices.</p>
+                            <div class="dish-price">₹249</div>
+                        </div>
+                    </div>
+
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="http://localhost:8000/uploads/placeholder.png" alt="Biryani" style="background: linear-gradient(135deg, #D4531F 0%, #F39C12 100%); object-fit: cover;">
+                        </div>
+                        <div class="dish-info">
+                            <div class="dish-category">Non-Vegetarian</div>
+                            <h3>Hyderabadi Biryani</h3>
+                            <p class="dish-description">Fragrant basmati rice cooked with tender meat and aromatic spices.</p>
+                            <div class="dish-price">₹349</div>
+                        </div>
+                    </div>
+
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="http://localhost:8000/uploads/placeholder.png" alt="Dal Makhani" style="background: linear-gradient(135deg, #D4531F 0%, #F39C12 100%); object-fit: cover;">
+                        </div>
+                        <div class="dish-info">
+                            <div class="dish-category">Vegetarian</div>
+                            <h3>Dal Makhani</h3>
+                            <p class="dish-description">Creamy lentils slow-cooked with butter, cream, and traditional spices.</p>
+                            <div class="dish-price">₹199</div>
+                        </div>
+                    </div>
+
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="http://localhost:8000/uploads/placeholder.png" alt="Tandoori Chicken" style="background: linear-gradient(135deg, #D4531F 0%, #F39C12 100%); object-fit: cover;">
+                        </div>
+                        <div class="dish-info">
+                            <div class="dish-category">Non-Vegetarian</div>
+                            <h3>Tandoori Chicken</h3>
+                            <p class="dish-description">Marinated chicken pieces grilled in traditional tandoor for authentic flavor.</p>
+                            <div class="dish-price">₹279</div>
+                        </div>
+                    </div>
+
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="http://localhost:8000/uploads/placeholder.png" alt="Garlic Naan" style="background: linear-gradient(135deg, #D4531F 0%, #F39C12 100%); object-fit: cover;">
+                        </div>
+                        <div class="dish-info">
+                            <div class="dish-category">Bread</div>
+                            <h3>Garlic Naan</h3>
+                            <p class="dish-description">Soft, fluffy bread brushed with garlic butter and fresh herbs.</p>
+                            <div class="dish-price">₹79</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY CHOOSE US -->
+        <section class="section-padding" style="background: var(--light-bg);">
+            <div class="container">
+                <h2 class="section-title">Why Choose Apna Dhaba?</h2>
+                <div class="why-choose-grid">
+                    <div class="why-card">
+                        <div class="why-icon">🍽️</div>
+                        <h3>Authentic Recipes</h3>
+                        <p>Traditional recipes prepared with authentic techniques and premium ingredients for genuine taste.</p>
+                    </div>
+
+                    <div class="why-card">
+                        <div class="why-icon">⏱️</div>
+                        <h3>Quick Delivery</h3>
+                        <p>Fast preparation and reliable delivery service ensuring your food arrives hot and fresh.</p>
+                    </div>
+
+                    <div class="why-card">
+                        <div class="why-icon">💰</div>
+                        <h3>Affordable Pricing</h3>
+                        <p>Premium quality food at competitive prices without compromising on taste or quality.</p>
+                    </div>
+
+                    <div class="why-card">
+                        <div class="why-icon">🏆</div>
+                        <h3>Quality Assurance</h3>
+                        <p>Strict quality control and hygiene standards in every step of food preparation and delivery.</p>
+                    </div>
+
+                    <div class="why-card">
+                        <div class="why-icon">📱</div>
+                        <h3>Easy Ordering</h3>
+                        <p>Simple ordering process with multiple payment options for your convenience.</p>
+                    </div>
+
+                    <div class="why-card">
+                        <div class="why-icon">🌟</div>
+                        <h3>Customer Service</h3>
+                        <p>Dedicated support team ready to assist with any queries or special requests.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MENU PREVIEW -->
+        <section class="section-padding" id="menu">
+            <div class="container">
+                <h2 class="section-title">Our Menu Categories</h2>
+                <p class="text-center" style="color: var(--text-light); margin-bottom: 50px; font-size: 1.05rem;">Explore our diverse range of authentic Indian dishes</p>
+                <div class="menu-categories">
+                    <div class="category-card">
+                        <h3>🍖 Non-Veg Curries</h3>
+                        <p>Chicken, Mutton & Fish specialties</p>
+                    </div>
+                    <div class="category-card">
+                        <h3>🥬 Vegetarian</h3>
+                        <p>Paneer & Vegetable dishes</p>
+                    </div>
+                    <div class="category-card">
+                        <h3>🍚 Biryani & Rice</h3>
+                        <p>Fragrant rice preparations</p>
+                    </div>
+                    <div class="category-card">
+                        <h3>🍞 Breads</h3>
+                        <p>Naan, Roti & Parathas</p>
+                    </div>
+                    <div class="category-card">
+                        <h3>🥣 Dals & Soups</h3>
+                        <p>Lentil dishes & broths</p>
+                    </div>
+                    <div class="category-card">
+                        <h3>🍨 Desserts</h3>
+                        <p>Traditional Indian sweets</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="section-padding" style="background: var(--light-bg);">
+            <div class="container">
+                <h2 class="section-title">What Our Customers Say</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial">
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">"Apna Dhaba delivers authentic taste that reminds me of home-cooked food. The butter chicken is absolutely delicious!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">R</div>
+                            <div class="author-info">
+                                <h4>Rajesh Kumar</h4>
+                                <p>Regular Customer</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial">
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">"Best cloud kitchen in the area. Fresh ingredients, quick delivery, and excellent customer service. Highly recommended!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">P</div>
+                            <div class="author-info">
+                                <h4>Priya Sharma</h4>
+                                <p>Food Enthusiast</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial">
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">"The paneer tikka masala is outstanding. Perfect balance of spices and creaminess. Worth every rupee!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">A</div>
+                            <div class="author-info">
+                                <h4>Amit Patel</h4>
+                                <p>Vegetarian Customer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ORDERING PROCESS -->
+        <section class="section-padding">
+            <div class="container">
+                <h2 class="section-title">How to Order</h2>
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h3>Browse Menu</h3>
+                        <p>Explore our diverse menu and select your favorite dishes from various categories.</p>
+                    </div>

@@ -1,0 +1,69 @@
+{
+  "created_at": "2026-01-01T18:04:25.749405",
+  "description": "Business Type:\nMilk Delivery Startup\n\nDescription:\nA farm-to-home milk delivery service providing fresh milk every morning through\nsubscription-based plans with quality assurance.\n\nTarget Audience:\nUrban households, apartments\n\nTone:\nModern, clean, trustworthy\n\nDesign Notes:\n- App-style layout\n- Subscription plans section\n- Strong CTA: \u201cStart Daily Delivery\u201d",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "To introduce the milk delivery service, showcase its benefits, and convert visitors into subscribers.",
+        "sections": [
+          "hero",
+          "how_it_works",
+          "subscription_plans",
+          "quality_assurance",
+          "testimonials",
+          "faq",
+          "final_cta"
+        ]
+      },
+      {
+        "name": "about",
+        "purpose": "To build trust by sharing the company's story, mission, and commitment to fresh, quality milk.",
+        "sections": [
+          "our_story",
+          "our_promise",
+          "the_farm"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "To provide a clear way for customers and potential customers to get help or ask questions.",
+        "sections": [
+          "contact_form",
+          "contact_info"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "modern and clean",
+      "primary_color": "#4A90E2",
+      "secondary_color": "#F4F7F6",
+      "font_family": "modern sans-serif",
+      "design_style": "minimalist, app-style layout with clear, bold typography"
+    },
+    "image_sections": [
+      "hero",
+      "quality_assurance",
+      "testimonials",
+      "the_farm"
+    ],
+    "navigation": [
+      "Home",
+      "Our Plans",
+      "About Us",
+      "Contact"
+    ]
+  },
+  "pages": [
+    "home",
+    "about",
+    "contact"
+  ],
+  "image_urls": {
+    "hero": "/uploads/placeholder.png",
+    "quality_assurance": "/uploads/placeholder.png",
+    "testimonials": "/uploads/placeholder.png",
+    "the_farm": "/uploads/placeholder.png"
+  },
+  "has_global_css_theme": false
+}

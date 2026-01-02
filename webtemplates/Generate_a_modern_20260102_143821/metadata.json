@@ -1,0 +1,46 @@
+{
+  "created_at": "2026-01-02T14:38:21.872054",
+  "description": "Generate a modern, single-page landing website for a cloud kitchen.\n\nKitchen Details:\nName: Dinesh ka Dhaba\nType: Cloud Kitchen (Delivery-focused)\nCuisine: North Indian / Home-style food\nBrand Personality: Warm, homely, hygienic, affordable, trustworthy\n\nBusiness Information:\nEmail: sachin@gmail.com\nAddress: 709, City Center, Ahmedabad\n\nTarget Audience:\nOffice workers, students, families ordering food online.\n\nDesign Style:\n- Warm, Indian dhaba-inspired look\n- Clean and modern layout\n- Food-focused visuals\n- Friendly and trustworthy tone\n\nColor & Font Direction:\n- Primary color: Deep maroon or dark red (Indian spice tone)\n- Secondary color: Saffron / warm orange\n- Background: Cream or off-white\n- Accent: Fresh green for call-to-action buttons\n- Headings font: Poppins (bold, friendly)\n- Body font: Inter (clean and readable)\n\nPage Sections (One Page Only):\n1. Hero Section\n   - Kitchen name prominently displayed\n   - Short tagline highlighting home-style taste\n   - Call-to-action button (Order Now / Contact Us)\n\n2. About the Kitchen\n   - Brief story of Dinesh ka Dhaba\n   - Focus on home-style taste, hygiene, and quality ingredients\n\n3. Menu Highlights\n   - Popular dishes (Dal Tadka, Paneer Sabzi, Roti, Rice, Thali)\n   - Short descriptions for each item\n\n4. Why Choose Us\n   - Home-style taste\n   - Freshly cooked meals\n   - Hygienic kitchen\n   - Affordable pricing\n   - Fast delivery\n\n5. Contact & Location\n   - Email and address clearly displayed\n   - Simple contact section\n\nTechnical Requirements:\n- Generate only one-page website\n- Fully responsive (mobile, tablet, desktop)\n- Clean semantic HTML\n- Modern CSS styling\n- No JavaScript required\n- Fast-loading and production-ready\n\nOutput Requirements:\n- Output complete HTML and CSS\n- Do not include explanations\n- Keep the output concise and structured",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Landing page for Dinesh ka Dhaba cloud kitchen",
+        "sections": [
+          "hero",
+          "about",
+          "menu highlights",
+          "why choose us",
+          "contact & location"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "warm Indian dhaba-inspired",
+      "primary_color": "deep maroon",
+      "secondary_color": "saffron",
+      "font_family": {
+        "headings": "Poppins",
+        "body": "Inter"
+      },
+      "design_style": "clean and modern"
+    },
+    "image_sections": [
+      "hero",
+      "menu highlights",
+      "why choose us"
+    ],
+    "navigation": [
+      "home"
+    ]
+  },
+  "pages": [
+    "home"
+  ],
+  "image_urls": {
+    "hero": "http://localhost:8000/uploads/hero_1766668485.png",
+    "menu highlights": "http://localhost:8000/uploads/placeholder.png",
+    "why choose us": "http://localhost:8000/uploads/placeholder.png"
+  },
+  "has_global_css_theme": false
+}

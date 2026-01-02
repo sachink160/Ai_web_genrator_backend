@@ -1,0 +1,188 @@
+{
+  "created_at": "2026-01-02T12:31:00.259972",
+  "description": "genrate the landing page for Dairy Farm \ni wnat only one page with  proper detailing \n\nDairy Farm name is : Apna Tabela",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Single landing page showcasing Apna Tabela dairy farm, products, and services",
+        "sections": [
+          "hero",
+          "about",
+          "products",
+          "features",
+          "quality_assurance",
+          "testimonials",
+          "contact",
+          "cta"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "organic and trustworthy",
+      "primary_color": "#2D5016",
+      "secondary_color": "#F4E4C1",
+      "accent_color": "#E8A87C",
+      "font_family": "sans-serif",
+      "design_style": "clean, natural, and farm-inspired with warm earth tones"
+    },
+    "image_sections": [
+      "hero",
+      "about",
+      "products",
+      "features",
+      "testimonials"
+    ],
+    "navigation": [
+      {
+        "label": "Home",
+        "anchor": "#hero"
+      },
+      {
+        "label": "About Us",
+        "anchor": "#about"
+      },
+      {
+        "label": "Products",
+        "anchor": "#products"
+      },
+      {
+        "label": "Why Choose Us",
+        "anchor": "#features"
+      },
+      {
+        "label": "Contact",
+        "anchor": "#contact"
+      }
+    ],
+    "section_details": {
+      "hero": {
+        "headline": "Fresh, Pure Dairy from Apna Tabela",
+        "subheadline": "Farm-fresh milk and dairy products delivered to your doorstep",
+        "cta_button": "Order Now",
+        "background_image": "dairy_cows_in_field"
+      },
+      "about": {
+        "title": "About Apna Tabela",
+        "content": "Established family-owned dairy farm committed to quality and purity",
+        "highlights": [
+          "20+ years of dairy farming excellence",
+          "100% organic and natural practices",
+          "Hygienic and modern farming facilities"
+        ],
+        "image": "farm_landscape_or_facilities"
+      },
+      "products": {
+        "title": "Our Products",
+        "items": [
+          {
+            "name": "Fresh Milk",
+            "description": "Pure, unpasteurized milk from healthy cows"
+          },
+          {
+            "name": "Ghee",
+            "description": "Traditional clarified butter made the old-fashioned way"
+          },
+          {
+            "name": "Yogurt",
+            "description": "Creamy, probiotic-rich yogurt"
+          },
+          {
+            "name": "Paneer",
+            "description": "Fresh cottage cheese for daily cooking"
+          },
+          {
+            "name": "Butter",
+            "description": "Rich, creamy butter from premium milk"
+          }
+        ],
+        "product_images": "individual_product_photos"
+      },
+      "features": {
+        "title": "Why Choose Apna Tabela",
+        "features": [
+          {
+            "icon": "check",
+            "title": "100% Pure & Natural",
+            "description": "No additives, preservatives, or artificial ingredients"
+          },
+          {
+            "icon": "leaf",
+            "title": "Organic Farming",
+            "description": "Sustainable and environmentally conscious practices"
+          },
+          {
+            "icon": "shield",
+            "title": "Quality Assured",
+            "description": "Regular testing and hygiene certifications"
+          },
+          {
+            "icon": "truck",
+            "title": "Home Delivery",
+            "description": "Fresh products delivered daily to your doorstep"
+          }
+        ]
+      },
+      "quality_assurance": {
+        "title": "Our Commitment to Quality",
+        "content": "Every product undergoes rigorous quality checks and health certifications",
+        "certifications": [
+          "FSSAI Certified",
+          "ISO 9001 Certified",
+          "Regular health inspections"
+        ]
+      },
+      "testimonials": {
+        "title": "What Our Customers Say",
+        "testimonials": [
+          {
+            "name": "Customer Name",
+            "text": "Excellent quality milk and dairy products. Highly recommended!",
+            "rating": 5
+          },
+          {
+            "name": "Customer Name",
+            "text": "Fresh, pure, and delivered on time every single day.",
+            "rating": 5
+          },
+          {
+            "name": "Customer Name",
+            "text": "Best dairy products in town. Worth every penny!",
+            "rating": 5
+          }
+        ],
+        "background_image": "subtle_farm_pattern"
+      },
+      "contact": {
+        "title": "Get in Touch",
+        "contact_form": [
+          "name",
+          "email",
+          "phone",
+          "message"
+        ],
+        "contact_info": {
+          "phone": "+91-XXXXXXXXXX",
+          "email": "info@apnatbela.com",
+          "address": "Farm Address, City, State",
+          "hours": "6 AM - 8 PM, Daily"
+        }
+      },
+      "cta": {
+        "headline": "Ready for Fresh Dairy?",
+        "subheadline": "Order your first batch today and experience the difference",
+        "button_text": "Order Now",
+        "button_link": "#contact"
+      }
+    }
+  },
+  "pages": [
+    "home"
+  ],
+  "image_urls": {
+    "hero": "http://localhost:8000/uploads/hero_1766668485.png",
+    "features": "http://localhost:8000/uploads/features_1766668478.png",
+    "testimonials": "http://localhost:8000/uploads/testimonials_1766668479.png"
+  },
+  "has_global_css_theme": false
+}

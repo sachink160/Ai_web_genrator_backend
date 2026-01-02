@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Apna Dhaba - Authentic Cloud Kitchen delivering traditional Indian cuisine with modern convenience">
+    <meta name="keywords" content="cloud kitchen, Indian food delivery, authentic cuisine, Apna Dhaba">
+    <title>Apna Dhaba - Authentic Indian Cloud Kitchen</title>
+    
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="navbar container">
+            <a href="home.html" class="logo">Apna Dhaba</a>
+            <button class="hamburger-menu" aria-label="Toggle menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#menu" class="nav-link">Menu</a></li>
+                    <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+                    <li><a href="#cta" class="nav-link">Order Now</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1>Welcome to Apna Dhaba</h1>
+                <p>Authentic Indian Cloud Kitchen - Delivering Traditional Flavors to Your Doorstep</p>
+                <a href="#cta" class="btn btn-primary">Order Now</a>
+                <a href="#menu" class="btn btn-outline">View Menu</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about section-padding" id="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>About Apna Dhaba</h2>
+                        <p>Welcome to Apna Dhaba, where tradition meets innovation. Our cloud kitchen is dedicated to bringing you the authentic taste of India right to your home, prepared with the finest ingredients and time-honored recipes.</p>
+                        <p>Founded with a passion for culinary excellence, Apna Dhaba specializes in traditional Indian cuisine with a modern twist. Every dish is crafted by our experienced chefs who understand the art of balancing spices and flavors.</p>
+                        <p>We believe in quality, freshness, and customer satisfaction. From aromatic biryanis to mouth-watering curries, from crispy samosas to delectable desserts, we offer a complete culinary experience that celebrates Indian food culture.</p>
+                        <p>Our commitment is simple: deliver delicious, hygienic, and affordable meals that remind you of home-cooked food, prepared in our state-of-the-art cloud kitchen facility.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="http://localhost:8000/uploads/placeholder.png" alt="Apna Dhaba Cloud Kitchen">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Dishes Section -->
+        <section class="featured-dishes section-padding">
+            <div class="container">
+                <h2 class="section-title">Featured Dishes</h2>
+                <div class="grid grid-cols-1 grid-cols-md-3 gap-lg">
+                    <div class="card product-card">
+                        <img src="http://localhost:8000/uploads/placeholder.png" alt="Chicken Biryani">
+                        <h3>Chicken Biryani</h3>
+                        <p>Fragrant basmati rice layered with tender chicken, aromatic spices, and caramelized onions. A classic favorite that melts in your mouth.</p>
+                        <div class="price">₹299</div>
+                        <a href="#cta" class="btn btn-primary">Order</a>
+                    </div>
+                    <div class="card product-card">
+                        <img src="http://localhost:8000/uploads/placeholder.png" alt="Paneer Tikka Masala">
+                        <h3>Paneer Tikka Masala</h3>
+                        <p>Creamy tomato-based curry with marinated paneer cubes, cooked to perfection. A vegetarian delight that's absolutely divine.</p>
+                        <div class="price">₹249</div>
+                        <a href="#cta" class="btn btn-primary">Order</a>
+                    </div>
+                    <div class="card product-card">
+                        <img src="http://localhost:8000/uploads/placeholder.png" alt="Butter Chicken">
+                        <h3>Butter Chicken</h3>
+                        <p>Succulent chicken pieces in a rich, creamy butter sauce with a hint of tomato and spices. An all-time favorite that never disappoints.</p>
+                        <div class="price">₹279</div>
+                        <a href="#cta" class="btn btn-primary">Order</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works section-padding">
+            <div class="container">
+                <h2 class="section-title">How It Works</h2>
+                <div class="grid grid-cols-1 grid-cols-md-3 gap-lg">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Browse Menu</h3>
+                        <p>Explore our diverse menu featuring authentic Indian dishes, from appetizers to main courses and desserts.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Place Order</h3>
+                        <p>Select your favorite dishes, customize as needed, and place your order through our easy-to-use platform.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Quick Delivery</h3>
+                        <p>Your meal is prepared fresh and delivered to your doorstep hot and ready to enjoy within 30-45 minutes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Preview Section -->
+        <section class="menu-preview section-padding" id="menu">
+            <div class="container">
+                <h2 class="section-title">Menu Preview</h2>
+                <div class="grid grid-cols-1 grid-cols-md-2 gap-lg">
+                    <div class="card">
+                        <h3 style="color: var(--primary-color); margin-bottom: 20px;">Curries & Gravies</h3>
+                        <div class="menu-item">
+                            <div class="menu-item-info">
+                                <h4>Chicken Tikka Masala</h4>
+                                <p>Tender chicken in creamy tomato sauce</p>
+                            </div>
+                            <div class="menu-item-price">₹269</div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-info">
+                                <h4>Lamb Rogan Josh</h4>
+                                <p>Slow-cooked lamb with aromatic spices</p>
+                            </div>
+                            <div class="menu-item-price">₹329</div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-info">
+                                <h4>Vegetable Korma</h4>
+                                <p>Mixed vegetables in coconut cream sauce</p>
+                            </div>
+                            <div class="menu-item-price">₹199</div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-info">
+                                <h4>Chole Bhature</h4>
+                                <p>Chickpeas curry with fried bread</p>
+                            </div>
+                            <div class="menu-item-price">₹149</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 style="color: var(--primary-color); margin-bottom: 20px;">Rice & Breads</h3>
+                        <div class="menu-item">
+                            <div class="menu-item-info">
+                                <h4>Biryani (Chicken/Mutton)</h4>
+                                <p>Fragrant basmati with meat and spices</p>
+                            </div>
+                            <div class="menu-item-price">₹299</div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-info">
+                                <h4>Garlic Naan</h4>
+                                <p>Soft, fluffy bread with garlic butter</p>
+                            </div>
+                            <div class="menu-item-price">₹59</div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-info">
+                                <h4>Paratha (Aloo/Paneer)</h4>
+                                <p>Crispy layered bread with filling</p>
+                            </div>
+                            <div class="menu-item-price">₹79</div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-info">
+                                <h4>Plain Rice</h4>
+                                <p>Steamed basmati rice</p>
+                            </div>
+                            <div class="menu-item-price">₹49</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="#cta" class="btn btn-primary">View Full Menu & Order</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials section-padding" id="testimonials">
+            <div class="container">
+                <h2 class="section-title">What Our Customers Say</h2>
+                <div class="grid grid-cols-1 grid-cols-md-3 gap-lg">
+                    <div class="card testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"Apna Dhaba delivers authentic Indian food that tastes just like homemade. The Butter Chicken is absolutely delicious, and the delivery is always quick. Highly recommended!"</p>
+                        <div class="author">- Rajesh Kumar</div>
+                    </div>
+                    <div class="card testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"Finally found a cloud kitchen that doesn't compromise on quality. Every dish is prepared with care, and the flavors are spot on. The Paneer Tikka Masala is my favorite!"</p>
+                        <div class="author">- Priya Sharma</div>
+                    </div>
+                    <div class="card testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"Great food, amazing service, and reasonable prices. The biryani is perfectly cooked with the right balance of spices. Apna Dhaba has become my go-to place for Indian food."</p>
+                        <div class="author">- Amit Patel</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="why-choose section-padding">
+            <div class="container">
+                <h2 class="section-title">Why Choose Apna Dhaba?</h2>
+                <div class="grid grid-cols-1 grid-cols-md-2 gap-lg">
+                    <div class="feature">
+                        <div class="feature-icon">🍳</div>
+                        <div class="feature-content">
+                            <h3>Fresh & Authentic</h3>
+                            <p>We use only the finest ingredients and traditional cooking methods to deliver authentic Indian cuisine that tastes like home-cooked food.</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-content">
+                            <h3>Quick Delivery</h3>
+                            <p>Our efficient cloud kitchen ensures your meals are prepared fresh and delivered hot within 30-45 minutes of ordering.</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">💰</div>
+                        <div class="feature-content">
+                            <h3>Affordable Pricing</h3>
+                            <p>Enjoy restaurant-quality meals at reasonable prices. We believe authentic Indian food should be accessible to everyone.</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">✅</div>
+                        <div class="feature-content">
+                            <h3>Quality Assured</h3>
+                            <p>Our cloud kitchen follows strict hygiene standards and food safety protocols to ensure every meal is prepared with care and quality.</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👨‍🍳</div>
+                        <div class="feature-content">
+                            <h3>Expert Chefs</h3>
+                            <p>Our experienced chefs bring years of culinary expertise, ensuring every dish is perfectly balanced and deliciously prepared.</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🎯</div>
+                        <div class="feature-content">
+                            <h3>Customization</h3>
+                            <p>Have dietary preferences? We offer customization options to make every meal perfect for your taste and dietary requirements.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Order Section -->
+        <section class="cta-order section-padding" id="cta">
+            <div class="container">
+                <h2>Ready to Order?</h2>
+                <p>Experience the authentic taste of Apna Dhaba today. Order now and get your favorite Indian dishes delivered hot and fresh to your doorstep!</p>
+                <a href="#menu" class="btn btn-secondary">View Full Menu</a>
+                <a href="https://www.zomato.com" class="btn btn-outline" target="_blank">Order on Zomato</a>
+            </div>
+        </section>
+
+        <!-- Contact Info Section -->
+        <section class="contact-info section-padding">
+            <div class="container">
+                <h2 class="section-title">Get in Touch</h2>
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="contact-item-icon">📍</div>
+                        <h3>Location</h3>
+                        <p>Cloud Kitchen Hub<br>New Delhi, India</p>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">📞</div>
+                        <h3>Phone</h3>
+                        <p>+91 98765 43210</p>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">✉️</div>
+                        <h3>Email</h3>
+                        <p>hello@apnadhaba.com</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Apna Dhaba. All rights reserved. | Authentic Indian Cloud Kitchen</p>
+            <p>Delivering authentic flavors, one meal at a time.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Close menu when a link is clicked
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const navMenu = document.getElementById('navMenu');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

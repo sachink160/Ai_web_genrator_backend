@@ -1,0 +1,83 @@
+{
+  "created_at": "2026-01-02T11:09:53.482325",
+  "description": "Generate a modern, professional, and industrial-style landing page for a steel manufacturing company.\n\nBusiness Overview:\nThe company specializes in manufacturing high-quality steel products for construction, infrastructure, automotive, and industrial applications. They focus on strength, durability, precision engineering, and international quality standards.\n\nTarget Audience:\n- Construction companies\n- Infrastructure developers\n- Industrial manufacturers\n- B2B buyers and exporters\n\nBrand Tone:\nStrong, reliable, industrial, professional, and trustworthy.\n\nDesign Style:\n- Industrial and corporate look\n- Clean layout with bold typography\n- Metallic color palette (steel gray, dark blue, black, silver accents)\n- Strong visual hierarchy\n- Professional imagery related to steel plants, machinery, molten steel, and finished steel products\n\nLanding Page Sections:\n1. Hero Section\n   - Powerful headline highlighting strength and reliability\n   - Subheadline emphasizing quality, innovation, and scale\n   - Call-to-action button (Get a Quote / Contact Sales)\n\n2. About Us\n   - Company background\n   - Years of experience\n   - Commitment to quality and safety standards\n\n3. Products & Solutions\n   - Structural steel\n   - Steel sheets & coils\n   - Industrial steel components\n   - Custom steel fabrication\n\n4. Why Choose Us\n   - Advanced manufacturing technology\n   - ISO-certified quality standards\n   - On-time delivery\n   - Competitive pricing\n   - Skilled workforce\n\n5. Manufacturing Process\n   - Raw material sourcing\n   - Production & quality checks\n   - Finishing & logistics\n\n6. Industries We Serve\n   - Construction\n   - Infrastructure\n   - Automotive\n   - Heavy machinery\n   - Energy & power plants\n\n7. Certifications & Compliance\n   - ISO / Global quality certifications\n   - Safety and environmental compliance\n\n8. Testimonials / Client Trust Section\n   - Trusted by leading companies\n   - Long-term partnerships\n\n9. Call to Action\n   - Request quotation\n   - Contact sales team\n\n10. Footer\n    - Company address\n    - Phone & email\n    - Social links\n\nTechnical Requirements:\n- Fully responsive (desktop, tablet, mobile)\n- SEO-friendly structure\n- Clean, well-commented HTML & CSS\n- Optimized layout for fast loading\n- Accessible and professional UI\n\nOutput:\nGenerate production-ready HTML and CSS with modern styling suitable for a steel manufacturing company landing page.",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "The main landing page to showcase the company's strength, core offerings, and capture B2B leads.",
+        "sections": [
+          "hero",
+          "about_us_summary",
+          "products_and_solutions",
+          "why_choose_us",
+          "industries_served",
+          "client_trust_testimonials",
+          "cta"
+        ]
+      },
+      {
+        "name": "about",
+        "purpose": "To provide detailed information about the company's history, mission, and quality standards to build trust.",
+        "sections": [
+          "company_history",
+          "mission_and_vision",
+          "manufacturing_process_deep_dive",
+          "certifications_and_compliance"
+        ]
+      },
+      {
+        "name": "products",
+        "purpose": "A detailed catalog of all steel products offered, with specifications and applications.",
+        "sections": [
+          "structural_steel",
+          "steel_sheets_and_coils",
+          "industrial_components",
+          "custom_fabrication"
+        ]
+      },
+      {
+        "name": "contact",
+        "purpose": "A dedicated page for potential clients to get in touch for quotes and inquiries.",
+        "sections": [
+          "contact_form",
+          "contact_information",
+          "office_location_map"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "industrial and corporate",
+      "primary_color": "dark_blue",
+      "secondary_color": "steel_gray",
+      "font_family": "Bold, strong sans-serif for headings (e.g., Montserrat, Oswald), and a clean sans-serif for body text (e.g., Roboto, Open Sans).",
+      "design_style": "Clean and professional layout with a strong visual hierarchy, bold typography, and metallic silver accents."
+    },
+    "image_sections": [
+      "hero",
+      "products_and_solutions",
+      "manufacturing_process_deep_dive",
+      "industries_served"
+    ],
+    "navigation": [
+      "home",
+      "about",
+      "products",
+      "contact",
+      "get_a_quote_cta"
+    ]
+  },
+  "pages": [
+    "home",
+    "about",
+    "products",
+    "contact"
+  ],
+  "image_urls": {
+    "hero": "http://localhost:8000/uploads/hero_1766668485.png",
+    "products_and_solutions": "http://localhost:8000/uploads/placeholder.png",
+    "manufacturing_process_deep_dive": "http://localhost:8000/uploads/placeholder.png",
+    "industries_served": "http://localhost:8000/uploads/placeholder.png"
+  },
+  "has_global_css_theme": false
+}

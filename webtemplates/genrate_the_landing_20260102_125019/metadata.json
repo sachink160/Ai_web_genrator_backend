@@ -1,0 +1,70 @@
+{
+  "created_at": "2026-01-02T12:50:19.855464",
+  "description": "genrate the landing page for cloud kitchen site \ni want only one page with proper detailing\nkichen name : Apna Dhaba\nphone: +919865321000",
+  "plan": {
+    "pages": [
+      {
+        "name": "home",
+        "purpose": "Landing page for Apna Dhaba cloud kitchen showcasing menu, services, and ordering information",
+        "sections": [
+          "hero",
+          "about",
+          "featured_dishes",
+          "why_choose_us",
+          "menu_preview",
+          "testimonials",
+          "ordering_process",
+          "contact_cta"
+        ]
+      }
+    ],
+    "styling": {
+      "theme": "warm and inviting",
+      "primary_color": "#D4531F",
+      "secondary_color": "#F39C12",
+      "accent_color": "#2C3E50",
+      "font_family": "sans-serif",
+      "design_style": "modern with traditional Indian elements"
+    },
+    "image_sections": [
+      "hero",
+      "featured_dishes",
+      "menu_preview",
+      "testimonials"
+    ],
+    "navigation": [
+      "home",
+      "menu",
+      "about",
+      "contact"
+    ],
+    "business_info": {
+      "name": "Apna Dhaba",
+      "phone": "+919865321000",
+      "type": "Cloud Kitchen"
+    },
+    "cta_elements": [
+      {
+        "section": "hero",
+        "text": "Order Now",
+        "action": "phone_call"
+      },
+      {
+        "section": "contact_cta",
+        "text": "Call to Order",
+        "action": "phone_call",
+        "phone": "+919865321000"
+      }
+    ]
+  },
+  "pages": [
+    "home"
+  ],
+  "image_urls": {
+    "hero": "http://localhost:8000/uploads/hero_1766668485.png",
+    "featured_dishes": "http://localhost:8000/uploads/placeholder.png",
+    "menu_preview": "http://localhost:8000/uploads/placeholder.png",
+    "testimonials": "http://localhost:8000/uploads/testimonials_1766668479.png"
+  },
+  "has_global_css_theme": false
+}
