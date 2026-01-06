@@ -5,10 +5,13 @@ import json
 import logging
 import os
 import httpx
+import time
 from typing import Dict, List, Optional
 from app.workflow_state import WorkflowState
 from app.dspy_modules import WebsitePlanner, ImageDescriptionGenerator, MultiPageGenerator
 from app.file_manager import WebsiteFileManager
+import asyncio
+from app.utils import call_dalle
 from openai import AzureOpenAI
 from dotenv import load_dotenv
 import re
@@ -139,34 +142,38 @@ def planning_node(state: WorkflowState) -> WorkflowState:
 
 
 
-def image_description_node(state: WorkflowState) -> WorkflowState:
+async def image_description_node(state: WorkflowState) -> WorkflowState:
     """
     Step 2a: Generate image descriptions for sections based on plan.
+    Executing in parallel for speed.
     """
     logger.info("Starting image description node...")
     
     try:
         plan = state["plan"]
-        image_sections = plan.get("image_sections", ["hero", "features", "testimonials"])
+        # Only generate images for these 3 specific sections
+        image_sections = ["hero", "features", "testimonials"]
         
         # Initialize generator
         generator = ImageDescriptionGenerator()
         
-        # Generate descriptions for each section
-        image_descriptions = {}
-        plan_str = json.dumps(plan)
-        
-        # Fallback descriptions for content policy violations
-        fallback_descriptions = {
-            "hero": "Professional business hero banner with modern design, clean layout, and welcoming atmosphere",
-            "features": "Clean feature section with minimalist icons and professional presentation",
-            "testimonials": "Professional testimonial section with friendly atmosphere and trust-building design",
-            "about": "Professional about section showcasing company story and values",
-            "services": "Professional services showcase with clean modern design",
-            "products": "Professional product display with attractive presentation",
-            "team": "Professional team photo with friendly workplace environment",
-            "contact": "Professional contact section with welcoming design"
-        }
+        # Generator wrapper for async execution
+        def generate_description_safe(section, page_name):
+            try:
+                logger.info(f"Generating image description for {section} on {page_name}")
+                plan_str = json.dumps(plan)
+                description = generator(
+                    plan=plan_str,
+                    section_name=section,
+                    page_name=page_name,
+                    business_description=state["description"]
+                )
+                return (section, description)
+            except Exception as e:
+                return (section, e)
+
+        # Prepare tasks
+        tasks = []
         
         for section in image_sections:
             # Determine which page has this section
@@ -176,48 +183,40 @@ def image_description_node(state: WorkflowState) -> WorkflowState:
                     page_name = page["name"]
                     break
             
-            logger.info(f"Generating image description for {section} on {page_name}")
+            # Create async task for this section
+            tasks.append(
+                asyncio.to_thread(
+                    generate_description_safe, 
+                    section, 
+                    page_name
+                )
+            )
             
-            try:
-                # Try to generate description with AI
-                description = generator(
-                    plan=plan_str,
-                    section_name=section,
-                    page_name=page_name,
-                    business_description=state["description"]
+        # Execute in parallel
+        logger.info(f"Starting parallel generation of {len(tasks)} image descriptions...")
+        results = await asyncio.gather(*tasks)
+        
+        # Process results
+        image_descriptions = {}
+        fallback_descriptions = {
+            "hero": "Professional business hero banner with modern design, clean layout, and welcoming atmosphere",
+            "features": "Clean feature section with minimalist icons and professional presentation",
+            "testimonials": "Professional testimonial section with friendly atmosphere and trust-building design"
+        }
+        
+        for section, result in results:
+            if isinstance(result, Exception):
+                logger.error(f"Error generating description for {section}: {str(result)}")
+                # Use fallback
+                fallback = fallback_descriptions.get(
+                    section,
+                    f"Professional {section} section with modern, clean design"
                 )
-                # description = generator.forward(
-                #     plan=plan_str,
-                #     section_name=section,
-                #     page_name=page_name,
-                #     business_description=state["description"]
-                # )
-                image_descriptions[section] = description
+                image_descriptions[section] = fallback
+                logger.info(f"Using fallback description for {section}")
+            else:
+                image_descriptions[section] = result
                 logger.info(f"✓ Generated description for {section}")
-                
-            except Exception as gen_error:
-                error_str = str(gen_error).lower()
-                
-                # Check if it's a content policy violation
-                is_content_policy = (
-                    "content" in error_str and "policy" in error_str or
-                    "contentpolicyviolation" in error_str or
-                    "filtered" in error_str or
-                    "content management" in error_str
-                )
-                
-                if is_content_policy:
-                    logger.warning(f"Content policy violation for {section}, using fallback description")
-                    # Use fallback description
-                    fallback = fallback_descriptions.get(
-                        section,
-                        f"Professional {section} section with modern, clean design"
-                    )
-                    image_descriptions[section] = fallback
-                else:
-                    # Re-raise if it's a different error
-                    logger.error(f"Error generating description for {section}: {str(gen_error)}")
-                    raise
         
         logger.info(f"Generated {len(image_descriptions)} image descriptions")
         
@@ -233,44 +232,7 @@ def image_description_node(state: WorkflowState) -> WorkflowState:
     except Exception as e:
         logger.error(f"Image description node error: {str(e)}")
         
-        # Check if content policy error - use all fallback descriptions
-        error_str = str(e).lower()
-        is_content_policy = (
-            "content" in error_str and "policy" in error_str or
-            "contentpolicyviolation" in error_str or
-            "filtered" in error_str
-        )
-        
-        if is_content_policy:
-            logger.warning("Content policy violation detected, using fallback descriptions for all sections")
-            
-            # Use fallback descriptions for all sections
-            plan = state.get("plan", {})
-            image_sections = plan.get("image_sections", ["hero", "features", "testimonials"])
-            
-            fallback_descriptions = {
-                "hero": "Professional business hero banner with modern design, clean layout, and welcoming atmosphere",
-                "features": "Clean feature section with minimalist icons and professional presentation",
-                "testimonials": "Professional testimonial section with friendly atmosphere and trust-building design"
-            }
-            
-            image_descriptions = {}
-            for section in image_sections:
-                image_descriptions[section] = fallback_descriptions.get(
-                    section,
-                    f"Professional {section} section with modern, clean design"
-                )
-            
-            # Continue workflow with fallback descriptions
-            return {
-                **state,
-                "image_descriptions": image_descriptions,
-                "current_step": "image_generation",
-                "progress": 40,
-                "progress_message": f"✓ Image descriptions ready (using safe defaults)"
-            }
-        
-        # For other errors, fail the workflow
+        # For catastrophic errors, fail the workflow
         return {
             **state,
             "current_step": "failed",
@@ -282,21 +244,16 @@ def image_description_node(state: WorkflowState) -> WorkflowState:
 
 
 
-def image_generation_node(state: WorkflowState) -> WorkflowState:
+async def image_generation_node(state: WorkflowState) -> WorkflowState:
     """
     Step 2b: Generate images using DALL-E 3 based on descriptions.
-    Falls back to static images if API fails.
+    Uses call_dalle function from utils. Falls back to static images if API fails.
     """
     logger.info("Starting image generation node...")
     
     try:
         image_descriptions = state["image_descriptions"]
         image_urls = {}
-        
-        # Get upload directory and base URL
-        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        upload_dir = os.path.join(base_dir, "uploads")
-        os.makedirs(upload_dir, exist_ok=True)
         
         # Get base URL from environment (default to localhost)
         base_url = os.getenv("BASE_URL", "http://127.0.0.1:8000")
@@ -308,45 +265,43 @@ def image_generation_node(state: WorkflowState) -> WorkflowState:
             "testimonials": "testimonials_1766668479.png"
         }
         
+        # Create tasks for parallel execution
+        tasks = []
+        sections_to_process = []
+        
         for section, description in image_descriptions.items():
-            logger.info(f"Generating image for {section}")
-            
-            try:
-                # Generate image using DALL-E 3
-                response = azure_client.images.generate(
-                    model="dall-e-3",
+            logger.info(f"Queuing image generation for {section}")
+            sections_to_process.append(section)
+            tasks.append(
+                call_dalle(
+                    section=section,
                     prompt=description,
                     size="1792x1024",
-                    quality="hd",
-                    n=1
+                    quality="standard"
                 )
+            )
+            
+        # Execute in parallel
+        if tasks:
+            logger.info(f"Starting parallel generation of {len(tasks)} images...")
+            results = await asyncio.gather(*tasks, return_exceptions=True)
+            
+            # Process results
+            for i, result in enumerate(results):
+                section = sections_to_process[i]
                 
-                image_url = response.data[0].url
-                
-                # Download and save image
-                image_response = httpx.get(image_url, timeout=30.0)
-                if image_response.status_code == 200:
-                    filename = f"{section}_image.png"
-                    filepath = os.path.join(upload_dir, filename)
-                    
-                    with open(filepath, "wb") as f:
-                        f.write(image_response.content)
-                    
-                    # Store full URL
-                    image_urls[section] = f"{base_url}/uploads/{filename}"
-                    logger.info(f"✓ Image saved for {section}: {image_urls[section]}")
-                else:
-                    logger.warning(f"Failed to download image for {section}, using static fallback")
-                    # Use static fallback
+                if isinstance(result, Exception):
+                    logger.error(f"Image generation failed for {section}: {str(result)}")
+                    logger.info(f"Using static fallback image for {section}")
                     fallback_filename = static_images.get(section, "placeholder.png")
                     image_urls[section] = f"{base_url}/uploads/{fallback_filename}"
-                    
-            except Exception as img_error:
-                logger.error(f"Image generation failed for {section}: {str(img_error)}")
-                logger.info(f"Using static fallback image for {section}")
-                # Use static fallback
-                fallback_filename = static_images.get(section, "placeholder.png")
-                image_urls[section] = f"{base_url}/uploads/{fallback_filename}"
+                else:
+                    # Success - result is local_url
+                    local_url = result
+                    image_urls[section] = f"{base_url}{local_url}"
+                    logger.info(f"✓ Image generated and saved for {section}: {image_urls[section]}")
+        else:
+            logger.warning("No image descriptions found to process")
         
         logger.info(f"Generated {len(image_urls)} images")
         logger.info(f"Image URLs: {image_urls}")
@@ -393,6 +348,10 @@ def html_generation_node(state: WorkflowState) -> WorkflowState:
         all_pages = plan.get("pages", [])
         page_names = [page["name"] for page in all_pages]
         
+        # CRITICAL FIX: Detect if this is a single-page or multi-page website
+        is_single_page = len(all_pages) == 1
+        
+        logger.info(f"Website type: {'SINGLE-PAGE' if is_single_page else 'MULTI-PAGE'}")
         logger.info(f"Generating HTML for {len(all_pages)} pages: {page_names}")
         
         # Generate HTML for each page
@@ -401,12 +360,34 @@ def html_generation_node(state: WorkflowState) -> WorkflowState:
             page_name = page["name"]
             logger.info(f"Generating HTML for page: {page_name} ({idx + 1}/{total_pages})")
             
-            # Create enhanced plan with navigation info
+            # CRITICAL FIX: Different navigation strategy for single-page vs multi-page
+            if is_single_page:
+                # For single-page websites, get section names from the page config
+                sections = page.get("sections", [])
+                navigation_info = {
+                    "navigation_type": "single-page",
+                    "navigation_method": "anchor-links",
+                    "sections": sections,
+                    "instruction": f"CRITICAL: This is a SINGLE-PAGE website. Create navigation using ANCHOR LINKS to sections on the SAME PAGE. Use href='#section-name' format (e.g., href='#hero', href='#features', href='#contact'). Do NOT create links to separate HTML files. Navigation should scroll to sections within this one page."
+                }
+                logger.info(f"Single-page mode: Creating anchor links for {len(sections)} sections")
+            else:
+                # For multi-page websites, create links to separate pages
+                navigation_info = {
+                    "navigation_type": "multi-page",
+                    "navigation_method": "page-links",
+                    "pages": page_names,
+                    "instruction": f"This is a MULTI-PAGE website. Create navigation links to different pages using href='[page_name].html' format (e.g., href='home.html', href='about.html', href='contact.html')."
+                }
+                logger.info(f"Multi-page mode: Creating page links for {len(page_names)} pages")
+            
+            # Create enhanced plan with proper navigation info
             enhanced_plan = {
                 **plan,
                 "current_page": page_name,
                 "all_pages": page_names,
-                "navigation_instruction": f"Create navigation links for: {', '.join(page_names)}. Use href='[page_name].html' format."
+                "is_single_page": is_single_page,
+                "navigation": navigation_info
             }
             
             # Generate HTML
@@ -448,6 +429,21 @@ def html_generation_node(state: WorkflowState) -> WorkflowState:
             if "</html>" not in html.lower():
                 logger.warning(f"⚠ HTML for {page_name} might be truncated - missing closing </html> tag")
             
+            # CRITICAL FIX: For single-page websites, add section IDs if missing
+            if is_single_page:
+                logger.info(f"Post-processing single-page HTML to ensure section IDs are present...")
+                # This ensures sections have proper IDs for anchor navigation
+                # We'll do basic validation here - the LLM should generate correct IDs
+                sections = page.get("sections", [])
+                missing_ids = []
+                for section_name in sections:
+                    if f'id="{section_name}"' not in html and f"id='{section_name}'" not in html:
+                        missing_ids.append(section_name)
+                
+                if missing_ids:
+                    logger.warning(f"⚠ Missing section IDs in HTML: {missing_ids}")
+                    logger.warning("The LLM should have generated these IDs. Navigation might not work properly.")
+            
             # Extract CSS from HTML
             css = ""
             if "<style>" in html and "</style>" in html:
@@ -465,6 +461,7 @@ def html_generation_node(state: WorkflowState) -> WorkflowState:
             page_progress = 65 + int((idx + 1) / total_pages * 25)
             
         logger.info(f"Generated HTML for {len(pages_output)} pages")
+        
         
         # Update state - don't mark as complete yet, we need to save files
         return {

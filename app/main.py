@@ -1,46 +1,51 @@
-from fastapi import FastAPI, HTTPException, Request # type: ignore
-from fastapi.middleware.cors import CORSMiddleware # type: ignore
-from fastapi.responses import StreamingResponse, JSONResponse # type: ignore
-from app.schema import *
+# Standard library imports
 import os
 import time
 import logging
-from dotenv import load_dotenv # type: ignore
 import asyncio
 import json
-from fastapi.staticfiles import StaticFiles # type: ignore
 import re
 from typing import Tuple
 
-load_dotenv()
+# Third-party imports
+from dotenv import load_dotenv # type: ignore
+from fastapi import FastAPI, HTTPException, Request # type: ignore
+from fastapi.middleware.cors import CORSMiddleware # type: ignore
+from fastapi.responses import StreamingResponse, JSONResponse, FileResponse # type: ignore
+from fastapi.staticfiles import StaticFiles # type: ignore
+import dspy # type: ignore - Used for DSPy configuration and LM settings
+import uvicorn # type: ignore - Used for running the FastAPI server
 
-# Import utilities and constants
+# Local application imports
+from app.schema import (
+    GeneratePromptsRequest, PromptsResponse,
+    GenerateImagesRequest, ImagesResponse,
+    GenerateHTMLRequest, HTMLResponse,
+    EditHTMLRequest, EditHTMLResponse,
+    GenerateWebsiteRequest, WebsitePlanResponse, WebsiteGenerationResponse,
+    UpdateWebsiteRequest, UpdateWebsiteResponse
+)
 from app.utils import call_dalle, find_local_images
 from app.const import fallback_html, fallback_css, edit_fallback_html, edit_fallback_css
-
-# Import config to configure DSPy
-import app.config
-
-# Import DSPy modules
+import app.config  # Import config to configure DSPy
 from app.dspy_modules import (
     ImagePromptGenerator,
     LandingPageGenerator,
     TemplateModifier,
     HTMLEditor,
 )
-
-# Import LangGraph workflow
 from app.workflow_graph import website_workflow
 from app.workflow_state import WorkflowState
-
-# Import rate limiter (keeping only this production component)
 from app.rate_limiter import init_rate_limiter, get_rate_limiter
 
-# Import litellm for error handling
+# Import litellm for error handling (optional dependency)
 try:
     import litellm # type: ignore
 except ImportError:
     litellm = None
+
+# Load environment variables
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(
@@ -87,9 +92,6 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 # Mount static directories
 app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
-
-# Serve index.html for testing
-from fastapi.responses import FileResponse
 
 @app.get("/test")
 async def serve_test_page():
@@ -170,8 +172,7 @@ async def health_check():
 async def readiness_check():
     """Readiness probe - checks if app can serve traffic."""
     try:
-        # Check if DSPy is configured
-        import dspy
+        # Check if DSPy is configured (dspy imported at top)
         if not hasattr(dspy.settings, 'lm') or dspy.settings.lm is None:
             return JSONResponse(
                 status_code=503,
@@ -235,46 +236,39 @@ async def generate_prompts(request: GeneratePromptsRequest):
         }
     }
     
-    prompts = {}
-    
-    # Initialize DSPy module
     prompt_generator = ImagePromptGenerator()
-    
-    # Track token usage for Stage 1
     stage1_prompt_tokens = 0
     stage1_completion_tokens = 0
     stage1_total_tokens = 0
     
-    for section, config in section_configs.items():
+    async def generate_single_prompt(section: str, config: dict) -> tuple:
+        """Generate a single prompt for a section"""
         logger.info(f"Generating prompt for section: {section}")
         
         try:
             logger.info(f"Calling DSPy module for {section} prompt generation...")
-            # Use DSPy module instead of direct OpenAI call
-            prompt = prompt_generator(
-                business_description=request.description,
-                section_type=section,
-                section_focus=config['focus'],
-                section_details=config['details']
+            loop = asyncio.get_event_loop()
+            prompt = await loop.run_in_executor(
+                None,
+                lambda: prompt_generator(
+                    business_description=request.description,
+                    section_type=section,
+                    section_focus=config['focus'],
+                    section_details=config['details']
+                )
             )
-            prompts[section] = prompt
+            logger.info(f"✓ Generated {section} prompt successfully")
+            return (section, prompt)
             
         except HTTPException as e:
             logger.error(f"HTTPException for {section}: {e.detail}")
-            # Fallback to dummy prompts on OpenAI key issues
-            if "OPENAI_API_KEY" in str(e.detail) or "api key" in str(e.detail).lower():
-                logger.warning("OpenAI API key error in Stage 1, returning dummy prompts")
-                dummy_prompts = {
-                    "hero": "Wide hero background with abstract gradient shapes and soft lighting, modern SaaS style.",
-                    "features": "Minimal feature section backdrop with subtle geometric accents and light gradients.",
-                    "testimonials": "Warm testimonial backdrop with soft gradients and subtle textures for trust."
-                }
-                return PromptsResponse(prompts=dummy_prompts)
-            raise
+            raise HTTPException(
+                status_code=e.status_code,
+                detail=f"FALLBACK:{e.detail}"
+            )
         except Exception as e:
             logger.error(f"Exception generating {section} prompt: {str(e)}", exc_info=True)
             
-            # Check for rate limit or quota errors
             is_rate_limit_error = (
                 (litellm and isinstance(e, litellm.RateLimitError)) or
                 "RateLimitError" in str(type(e).__name__) or
@@ -283,25 +277,80 @@ async def generate_prompts(request: GeneratePromptsRequest):
                 "exceeded" in str(e).lower()
             )
             
-            if is_rate_limit_error:
-                logger.warning(f"Rate limit/quota error in Stage 1 for {section}, returning static prompts")
-                static_prompts = {
-                    "hero": "Wide hero background with abstract gradient shapes and soft lighting, modern SaaS style.",
-                    "features": "Minimal feature section backdrop with subtle geometric accents and light gradients.",
-                    "testimonials": "Warm testimonial backdrop with soft gradients and subtle textures for trust."
-                }
-                return PromptsResponse(prompts=static_prompts)
+            is_api_key_error = (
+                "OPENAI_API_KEY" in str(e) or 
+                "api key" in str(e).lower()
+            )
             
-            # Fallback to dummy prompts on OpenAI key issues
-            if "OPENAI_API_KEY" in str(e) or "api key" in str(e).lower():
-                logger.warning("OpenAI API key error in Stage 1, returning dummy prompts")
-                dummy_prompts = {
-                    "hero": "Wide hero background with abstract gradient shapes and soft lighting, modern SaaS style.",
-                    "features": "Minimal feature section backdrop with subtle geometric accents and light gradients.",
-                    "testimonials": "Warm testimonial backdrop with soft gradients and subtle textures for trust."
-                }
-                return PromptsResponse(prompts=dummy_prompts)
+            if is_rate_limit_error or is_api_key_error:
+                logger.warning(f"Error in Stage 1 for {section}, flagging for fallback")
+                # Re-raise with special flag for outer handler
+                raise HTTPException(
+                    status_code=500,
+                    detail=f"FALLBACK:Error generating {section} prompt: {str(e)}"
+                )
             raise HTTPException(status_code=500, detail=f"Error generating {section} prompt: {str(e)}")
+    
+    # Create tasks for parallel prompt generation
+    tasks = [
+        generate_single_prompt(section, config)
+        for section, config in section_configs.items()
+    ]
+    
+    try:
+        logger.info("Starting parallel prompt generation for all 3 sections...")
+        # Generate all prompts in parallel
+        results = await asyncio.gather(*tasks)
+        prompts = {section: prompt for section, prompt in results}
+        logger.info(f"✓ Generated all {len(prompts)} prompts in parallel")
+        
+    except HTTPException as e:
+        logger.error(f"HTTPException in prompt generation: {e.detail}")
+        error_detail = str(e.detail)
+        error_detail_lower = error_detail.lower()
+        
+        is_fallback = "FALLBACK:" in error_detail
+        is_api_key_error = (
+            "OPENAI_API_KEY" in error_detail or
+            "api key" in error_detail_lower
+        )
+        
+        if is_fallback or is_api_key_error:
+            logger.warning("Error in Stage 1, returning dummy prompts")
+            dummy_prompts = {
+                "hero": "Wide hero background with abstract gradient shapes and soft lighting, modern SaaS style.",
+                "features": "Minimal feature section backdrop with subtle geometric accents and light gradients.",
+                "testimonials": "Warm testimonial backdrop with soft gradients and subtle textures for trust."
+            }
+            return PromptsResponse(prompts=dummy_prompts)
+        raise
+    except Exception as e:
+        logger.error(f"Exception in prompt generation: {str(e)}", exc_info=True)
+        error_str = str(e).lower()
+        
+        is_rate_limit_error = (
+            (litellm and isinstance(e, litellm.RateLimitError)) or
+            "RateLimitError" in str(type(e).__name__) or
+            "rate limit" in error_str or
+            "quota" in error_str or
+            "exceeded" in error_str
+        )
+        
+        is_api_key_error = (
+            "OPENAI_API_KEY" in str(e) or 
+            "api key" in error_str
+        )
+        
+        if is_rate_limit_error or is_api_key_error:
+            logger.warning("Error in Stage 1, returning static prompts")
+            static_prompts = {
+                "hero": "Wide hero background with abstract gradient shapes and soft lighting, modern SaaS style.",
+                "features": "Minimal feature section backdrop with subtle geometric accents and light gradients.",
+                "testimonials": "Warm testimonial backdrop with soft gradients and subtle textures for trust."
+            }
+            return PromptsResponse(prompts=static_prompts)
+        
+        raise HTTPException(status_code=500, detail=f"Error generating prompts: {str(e)}")
     
     logger.info(f"STAGE 1 Complete: Generated {len(prompts)} prompts")
     logger.info("=" * 60)
@@ -819,9 +868,9 @@ async def edit_html(request: EditHTMLRequest):
         logger.info("✓ STAGE 4 Complete: HTML edited successfully")
         logger.info("=" * 60)
         logger.info("STAGE 4 (EDIT) TOKEN USAGE SUMMARY:")
-        logger.info(f"  Prompt tokens: {edit_prompt_tokens}")
-        logger.info(f"  Completion tokens: {edit_completion_tokens}")
-        logger.info(f"  Total tokens: {edit_total_tokens}")
+        # logger.info(f"  Prompt tokens: {edit_prompt_tokens}")
+        # logger.info(f"  Completion tokens: {edit_completion_tokens}")
+        # logger.info(f"  Total tokens: {edit_total_tokens}")
         logger.info("=" * 60)
         return EditHTMLResponse(html=html_with_link, css=extracted_css)
         
@@ -855,6 +904,160 @@ async def edit_html(request: EditHTMLRequest):
         
         raise HTTPException(status_code=500, detail=f"Error editing HTML: {str(e)}")
 
+
+@app.post("/api/update-website", response_model=UpdateWebsiteResponse)
+async def update_website(request: UpdateWebsiteRequest):
+    """
+    Smart Website Update: Update multi-page websites based on natural language instructions.
+    
+    This endpoint intelligently determines what to update based on the user's request:
+    - Global styling (colors, fonts, spacing in style.css)
+    - Individual page content (HTML)
+    - Multiple pages at once
+    - Combination of styling + content
+    
+    The API analyzes the request and applies updates accordingly, returning only the
+    modified files.
+    
+    Optionally, if folder_path is provided, saves the updates directly to the website folder.
+    """
+    logger.info("=" * 60)
+    logger.info("SMART WEBSITE UPDATE - Request Received")
+    logger.info(f"Edit request: {request.edit_request[:100]}...")
+    logger.info(f"Number of pages provided: {len(request.pages)}")
+    logger.info(f"Pages: {list(request.pages.keys())}")
+    logger.info(f"Global CSS provided: {bool(request.global_css)}")
+    logger.info(f"Folder path provided: {bool(request.folder_path)}")
+    logger.info("=" * 60)
+    
+    # Validation
+    if not request.edit_request or len(request.edit_request.strip()) < 5:
+        logger.warning("Invalid request: Edit request too short")
+        raise HTTPException(
+            status_code=400,
+            detail="Edit request must be at least 5 characters long"
+        )
+    
+    if not request.pages or len(request.pages) == 0:
+        logger.warning("Invalid request: No pages provided")
+        raise HTTPException(
+            status_code=400,
+            detail="At least one page must be provided"
+        )
+    
+    try:
+        # Import WebsiteUpdater module
+        from app.dspy_modules import WebsiteUpdater
+        
+        logger.info("Initializing WebsiteUpdater module...")
+        updater = WebsiteUpdater()
+        
+        # Apply smart updates
+        logger.info("Analyzing and applying updates...")
+        result = updater(
+            pages=request.pages,
+            global_css=request.global_css or "",
+            edit_request=request.edit_request
+        )
+        
+        updated_pages = result.get("updated_pages", {})
+        updated_global_css = result.get("updated_global_css")
+        changes_summary = result.get("changes_summary", "Updates applied")
+        
+        logger.info(f"Updates complete: {changes_summary}")
+        logger.info(f"Updated pages: {list(updated_pages.keys())}")
+        logger.info(f"Global CSS updated: {bool(updated_global_css)}")
+        
+        # Optional: Save to folder if path provided
+        saved_folder_path = None
+        if request.folder_path and (updated_pages or updated_global_css):
+            try:
+                logger.info(f"Saving updates to folder: {request.folder_path}")
+                from app.file_manager import WebsiteFileManager
+                
+                file_manager = WebsiteFileManager()
+                
+                # Verify folder exists
+                if not os.path.exists(request.folder_path):
+                    logger.warning(f"Folder does not exist: {request.folder_path}")
+                    raise HTTPException(
+                        status_code=400,
+                        detail=f"Folder path does not exist: {request.folder_path}"
+                    )
+                
+                # Save updated pages
+                if updated_pages:
+                    for page_name, page_content in updated_pages.items():
+                        html = page_content.get('html', '')
+                        css = page_content.get('css', '')
+                        
+                        # Clean HTML and extract CSS
+                        html_clean, extracted_css = file_manager.extract_css_from_html(html)
+                        
+                        # If global CSS is being used, link to it
+                        if updated_global_css:
+                            html_final = file_manager.add_css_link_to_html(html_clean, "style.css")
+                        else:
+                            html_final = html_clean
+                        
+                        # Save HTML file
+                        html_path = os.path.join(request.folder_path, f"{page_name}.html")
+                        with open(html_path, 'w', encoding='utf-8') as f:
+                            f.write(html_final)
+                        logger.info(f"✓ Saved updated HTML: {html_path}")
+                
+                # Save updated global CSS
+                if updated_global_css:
+                    css_path = os.path.join(request.folder_path, "style.css")
+                    with open(css_path, 'w', encoding='utf-8') as f:
+                        f.write(updated_global_css)
+                    logger.info(f"✓ Saved updated global CSS: {css_path}")
+                
+                saved_folder_path = request.folder_path
+                logger.info(f"✓ All updates saved to: {saved_folder_path}")
+                
+            except HTTPException:
+                raise
+            except Exception as e:
+                logger.error(f"Error saving to folder: {str(e)}", exc_info=True)
+                # Don't fail the request, just log the error
+                logger.warning("File saving failed, but updates are still returned in response")
+        
+        logger.info("✓ SMART WEBSITE UPDATE Complete")
+        logger.info("=" * 60)
+        
+        return UpdateWebsiteResponse(
+            updated_pages=updated_pages,
+            updated_global_css=updated_global_css,
+            changes_summary=changes_summary,
+            folder_path=saved_folder_path,
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error in smart website update: {str(e)}", exc_info=True)
+        
+        # Check for rate limit or quota errors
+        is_rate_limit_error = (
+            (litellm and isinstance(e, litellm.RateLimitError)) or
+            "RateLimitError" in str(type(e).__name__) or
+            "rate limit" in str(e).lower() or
+            "quota" in str(e).lower() or
+            "exceeded" in str(e).lower()
+        )
+        
+        if is_rate_limit_error:
+            logger.warning("Rate limit/quota error in website update")
+            raise HTTPException(
+                status_code=429,
+                detail="Rate limit exceeded. Please try again later."
+            )
+        
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error updating website: {str(e)}"
+        )
 
 
 # New LangGraph workflow endpoint
@@ -905,12 +1108,13 @@ async def generate_website(request: GenerateWebsiteRequest):
             }
             
             # Create unique thread ID for checkpointing
+            # thread_id = {"configurable": {"thread_id": "12"}}
             thread_id = {"configurable": {"thread_id": str(int(time.time()))}}
             
             # Stream workflow execution
             logger.info("Starting LangGraph workflow execution...")
             
-            for event in website_workflow.stream(initial_state, thread_id):
+            async for event in website_workflow.astream(initial_state, thread_id):
                 # Extract state from event
                 if isinstance(event, dict):
                     # Get the latest node's state
@@ -991,7 +1195,6 @@ async def generate_website(request: GenerateWebsiteRequest):
     )
 
 
-
+# Run the application (uvicorn imported at top)
 if __name__ == "__main__":
-    import uvicorn # type: ignore
     uvicorn.run(app, host="0.0.0.0", port=8000)

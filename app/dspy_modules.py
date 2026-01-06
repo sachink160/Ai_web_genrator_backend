@@ -1,21 +1,27 @@
+# Standard library imports
+import json
+import logging
+import re
+
+# Third-party imports
 import dspy
+
+# Local application imports
 from app.prompts.doc_prompt import user_prompt_html, system_prompt_html, user_prompt_edit_html
-from app.signature import ( ImagePromptSignature,
-                            LandingPageSignature,
-                            TemplateModificationSignature,
-                            HTMLEditSignature,
-                            WebsitePlannerSignature,
-                            ImageDescriptionSignature,
-                            MultiPageSignature
-                        )
+from app.signature import (
+    ImagePromptSignature,
+    LandingPageSignature,
+    TemplateModificationSignature,
+    HTMLEditSignature,
+    WebsitePlannerSignature,
+    ImageDescriptionSignature,
+    MultiPageSignature,
+    WebsiteUpdateAnalyzerSignature
+)
+# Import LLM configurations from config module (used in various DSPy modules)
+from app.config import planning_llm, update_llm
 
 
-
-
-
-
-
-#DSPy Modules
 class ImagePromptGenerator(dspy.Module):
     """Generate image prompts for landing page sections."""
     
@@ -85,7 +91,9 @@ class TemplateModifier(dspy.Module):
     
     def __init__(self):
         super().__init__()
+        # Use update_llm for template modifications (4K tokens sufficient) - imported at top
         self.predict = dspy.Predict(TemplateModificationSignature)
+        self.predict.lm = update_llm
     
     def forward(self, template_html: str, description: str, image_urls_text: str):
         modification_rules = f"""You are an expert frontend engineer specializing in modifying existing HTML templates while preserving their structure and design patterns.
@@ -166,7 +174,9 @@ class HTMLEditor(dspy.Module):
     
     def __init__(self):
         super().__init__()
+        # Use update_llm for HTML editing (4K tokens sufficient) - imported at top
         self.predict = dspy.Predict(HTMLEditSignature)
+        self.predict.lm = update_llm
     
     def forward(self, html: str, css: str, edit_request: str):
         
@@ -189,7 +199,11 @@ class WebsitePlanner(dspy.Module):
     
     def __init__(self):
         super().__init__()
+        # Import planning_llm from config and use it for this module - imported at top
         self.predict = dspy.Predict(WebsitePlannerSignature)
+        # Configure this specific predict to use planning_llm
+        self.predict.lm = planning_llm
+    
     
     def forward(self, description: str):
         planning_instructions = """You are an expert website architect and UX designer.
@@ -230,7 +244,7 @@ PLANNING REQUIREMENTS:
 OUTPUT FORMAT: Return ONLY valid JSON matching the structure specified in the signature.
 Do not include any explanatory text, only the JSON object."""
         
-        full_description = f"{planning_instructions}\n\nBUSINESS DESCRIPTION:\n{description}"
+        full_description = f"{planning_instructions}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nBUSINESS DESCRIPTION TO ANALYZE:\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n{description}\n\nNow create an EXCEPTIONAL website plan based on this business."
         
         result = self.predict(description=full_description)
         return result.plan.strip()
@@ -241,7 +255,11 @@ class ImageDescriptionGenerator(dspy.Module):
     
     def __init__(self):
         super().__init__()
+        # Import planning_llm from config - image descriptions are short - imported at top
         self.predict = dspy.Predict(ImageDescriptionSignature)
+        # Configure this specific predict to use planning_llm (descriptions are short prompts)
+        self.predict.lm = planning_llm
+    
     
     def forward(self, plan: str, section_name: str, page_name: str, business_description: str):
         system_rules = """You are a professional visual designer creating DALL-E 3 prompts for website background images.
@@ -279,136 +297,6 @@ OUTPUT: A detailed DALL-E 3 prompt (2-4 sentences) describing the visual composi
             business_description=f"{system_rules}\n\nBusiness: {business_description}"
         )
         return result.image_description.strip()
-
-
-class CSSThemeGenerator(dspy.Module):
-    """Generate unified CSS theme for entire website."""
-    
-    def __init__(self):
-        super().__init__()
-        self.predict = dspy.Predict(CSSThemeSignature)
-    
-    def forward(self, plan: str, business_description: str):
-        theme_instructions = """You are a senior frontend developer and UI/UX designer specializing in creating cohesive, production-ready web design systems.
-
-YOUR MISSION:
-Create a comprehensive CSS theme that will be used across ALL pages of the website, ensuring perfect consistency and professional quality.
-
-KEY PRINCIPLES:
-
-1. DESIGN SYSTEM APPROACH:
-   - Every color, font, spacing value should be defined as a CSS variable
-   - Create a complete set of reusable component classes
-   - All pages will use these same classes - NO page-specific CSS
-   - Think like you're building a design system for a company
-
-2. CSS VARIABLES (CRITICAL):
-   Set up a complete variable system:
-   
-   :root {
-     /* Colors - Full Palette */
-     --primary-color: #...;
-     --primary-dark: #...;
-     --primary-light: #...;
-     --secondary-color: #...;
-     --accent-color: #...;
-     --text-primary: #...;
-     --text-secondary: #...;
-     --background: #...;
-     --surface: #...;
-     --border-color: #...;
-     
-     /* Typography */
-     --font-heading: '...', sans-serif;
-     --font-body: '...', sans-serif;
-     --h1-size: ...;
-     --h2-size: ...;
-     --h3-size: ...;
-     --text-base: ...;
-     --text-sm: ...;
-     --line-height-tight: ...;
-     --line-height-normal: ...;
-     --line-height-relaxed: ...;
-     
-     /* Spacing System */
-     --spacing-xs: 0.5rem;
-     --spacing-sm: 1rem;
-     --spacing-md: 1.5rem;
-     --spacing-lg: 2rem;
-     --spacing-xl: 3rem;
-     --spacing-2xl: 4rem;
-     
-     /* Layout */
-     --container-width: 1200px;
-     --gap: 2rem;
-     
-     /* Design Elements */
-     --border-radius: 0.5rem;
-     --shadow-sm: ...;
-     --shadow-md: ...;
-     --shadow-lg: ...;
-     --transition: all 0.3s ease;
-   }
-
-3. COMPONENT LIBRARY:
-   Create reusable classes that all pages will use:
-   
-   - Navigation (.navbar, .nav-menu, .nav-link, .nav-link.active)
-   - Hero sections (.hero, .hero-content, .hero-title, .hero-subtitle)
-   - Buttons (.btn, .btn-primary, .btn-secondary, .btn-outline)
-   - Cards (.card, .card-header, .card-body, .card-footer)
-   - Product/feature cards (.product-card, .feature-card, .testimonial-card)
-   - Forms (.form-group, .input, .textarea, .select, .label)
-   - Sections (.section, .section-padding, .section-title)
-   - Footer (.footer, .footer-content, .footer-links)
-
-4. UTILITY CLASSES:
-   - Layout: .container, .flex, .grid, .flex-center
-   - Text: .text-center, .text-left, .text-right
-   - Spacing: .mt-*, .mb-*, .p-*, .m-* (using spacing system)
-   - Colors: .text-primary, .bg-primary, etc.
-
-5. RESPONSIVE DESIGN:
-   - Mobile-first approach
-   - Breakpoints: 768px (tablet), 1024px (desktop)
-   - Responsive navigation (hamburger menu for mobile)
-   - Flexible grid systems
-
-6. PROFESSIONAL POLISH:
-   - Smooth hover transitions on all interactive elements
-   - Focus states for accessibility
-   - Box shadows for depth and dimension
-   - Subtle gradients where appropriate
-   - Consistent border radius
-   - Professional color relationships
-
-7. CONSISTENCY RULES:
-   - NEVER use hardcoded colors - ALWAYS use CSS variables
-   - NEVER use hardcoded spacing - ALWAYS use spacing variables
-   - All components MUST be reusable across pages
-   - Maintain visual hierarchy through consistent sizing
-
-IMPORTANT INSTRUCTIONS:
-- Output ONLY the CSS code
-- NO explanations, NO comments (except for section headers)
-- NO markdown code blocks (```css)
-- Start directly with CSS
-- Make it production-ready and comprehensive
-- Every page will include this same CSS file
-
-Analyze the website plan and business description to choose appropriate:
-- Color schemes (professional/corporate vs creative/vibrant)
-- Typography (modern sans-serif vs elegant serif)
-- Visual style (minimal/clean vs rich/detailed)
-- Component designs matching the business type"""
-
-        full_plan = f"{theme_instructions}\n\nWEBSITE PLAN:\n{plan}\n\nBUSINESS:\n{business_description}"
-        
-        result = self.predict(
-            plan=full_plan,
-            business_description=business_description
-        )
-        return result.css_theme.strip()
 
 
 class MultiPageGenerator(dspy.Module):
@@ -514,7 +402,7 @@ TECHNICAL REQUIREMENTS:
 
 OUTPUT: Complete, valid HTML5 document ready for production deployment."""
         
-        full_prompt = f"{generation_rules}\n\nBUSINESS DESCRIPTION:\n{business_description}"
+        full_prompt = f"{generation_rules}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n📋 GENERATION INPUTS:\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nBUSINESS DESCRIPTION:\n{business_description}\n\nNow create an EXCEPTIONAL HTML page for this business!"
         
         # PRINT COMPLETE PROMPT TO TERMINAL
         print("\n" + "="*80)
@@ -530,8 +418,8 @@ OUTPUT: Complete, valid HTML5 document ready for production deployment."""
         print("\n" + "-"*80)
         print("📝 FULL PROMPT STRUCTURE:")
         print("-"*80)
-        print(f"Length: {len(full_prompt)} characters")
-        print(f"Generation Rules: {len(generation_rules)} chars")
+        # print(f"Length: {len(full_prompt)} characters")
+        # print(f"Generation Rules: {len(generation_rules)} chars")
         print(f"Business Context: {len(business_description)} chars")
         print("\n💬 PROMPT PREVIEW (First 1000 chars):")
         print("-"*80)
@@ -546,3 +434,201 @@ OUTPUT: Complete, valid HTML5 document ready for production deployment."""
             business_description=full_prompt
         )
         return result.html.strip()
+
+
+class WebsiteUpdater(dspy.Module):
+    """Intelligently update website pages and global CSS based on natural language requests."""
+    
+    def __init__(self):
+        super().__init__()
+        # Use planning_llm for analysis (short task, 2K tokens) - imported at top
+        self.analyzer = dspy.Predict(WebsiteUpdateAnalyzerSignature)
+        self.analyzer.lm = update_llm
+        
+        # Use HTMLEditor for actual modifications (which now uses update_llm with 4K tokens)
+        self.html_editor = HTMLEditor()
+    
+    def forward(self, pages: dict, global_css: str, edit_request: str):
+        """
+        Analyze edit request and apply updates intelligently.
+        
+        Args:
+            pages: Dict of page_name -> {html: str, css: str}
+            global_css: Current global CSS content
+            edit_request: User's natural language edit instructions
+        
+        Returns:
+            Dict with:
+                - updated_pages: Dict of modified pages only
+                - updated_global_css: Modified global CSS if changed
+                - changes_summary: Description of what was changed
+        """
+        # json, logging imported at top of file
+        logger = logging.getLogger(__name__)
+        
+        # Step 1: Analyze the edit request
+        available_pages_list = list(pages.keys())
+        available_pages_text = ", ".join(available_pages_list)
+        
+        logger.info(f"Analyzing edit request: {edit_request[:100]}...")
+        logger.info(f"Available pages: {available_pages_text}")
+        
+        try:
+            analysis_result = self.analyzer(
+                edit_request=edit_request,
+                available_pages=available_pages_text,
+                current_global_css=global_css[:500] if global_css else ""  # Just a sample for context
+            )
+            
+            # Parse analysis
+            try:
+                analysis = json.loads(analysis_result.analysis)
+                logger.info(f"Analysis result: {analysis}")
+            except json.JSONDecodeError as e:
+                logger.warning(f"Failed to parse analysis JSON: {e}, using fallback")
+                # Fallback: try to determine from keywords
+                edit_lower = edit_request.lower()
+                
+                # Check for global styling keywords
+                global_keywords = ['color', 'font', 'theme', 'all pages', 'everywhere', 'global', 'button', 'spacing']
+                is_global = any(keyword in edit_lower for keyword in global_keywords)
+                
+                # Check for page-specific keywords
+                page_specific = any(page_name in edit_lower for page_name in available_pages_list)
+                
+                if is_global and not page_specific:
+                    analysis = {
+                        "update_type": "global_css",
+                        "target_pages": [],
+                        "requires_css_update": True,
+                        "interpretation": "Applying global styling changes"
+                    }
+                elif page_specific and not is_global:
+                    # Try to identify which pages
+                    target_pages = [page for page in available_pages_list if page in edit_lower]
+                    analysis = {
+                        "update_type": "specific_pages",
+                        "target_pages": target_pages if target_pages else [available_pages_list[0]],
+                        "requires_css_update": False,
+                        "interpretation": f"Updating content on specific pages: {', '.join(target_pages)}"
+                    }
+                else:
+                    # Both or ambiguous
+                    target_pages = [page for page in available_pages_list if page in edit_lower]
+                    if not target_pages:
+                        target_pages = [available_pages_list[0]]  # Default to first page
+                    analysis = {
+                        "update_type": "both",
+                        "target_pages": target_pages,
+                        "requires_css_update": True,
+                        "interpretation": "Updating both styling and page content"
+                    }
+        except Exception as e:
+            logger.error(f"Analysis failed: {e}, using fallback analysis")
+            # Ultra-fallback: update first page only
+            analysis = {
+                "update_type": "specific_pages",
+                "target_pages": [available_pages_list[0]] if available_pages_list else [],
+                "requires_css_update": False,
+                "interpretation": "Updating page content"
+            }
+        
+        # Step 2: Apply updates based on analysis
+        updated_pages = {}
+        updated_global_css = None
+        changes_made = []
+        
+        # Update global CSS if needed
+        if analysis.get("requires_css_update") and global_css:
+            logger.info("Updating global CSS...")
+            try:
+                # Create a minimal HTML wrapper for CSS editing
+                css_wrapper_html = f"""<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    {global_css}
+    </style>
+</head>
+<body>
+    <p>CSS Template</p>
+</body>
+</html>"""
+                
+                # Use HTMLEditor to modify the CSS
+                modified_html = self.html_editor(
+                    html=css_wrapper_html,
+                    css=global_css,
+                    edit_request=f"Update the CSS styling based on this request: {edit_request}. Only modify the CSS, preserve the HTML structure."
+                )
+                
+                # Extract the modified CSS from the result
+                import re
+                style_pattern = r'<style[^>]*>(.*?)</style>'
+                css_matches = re.findall(style_pattern, modified_html, re.DOTALL | re.IGNORECASE)
+                if css_matches:
+                    updated_global_css = '\n\n'.join(css_matches).strip()
+                    changes_made.append("Updated global CSS styling")
+                    logger.info(f"✓ Global CSS updated ({len(updated_global_css)} chars)")
+                else:
+                    logger.warning("Could not extract CSS from modified HTML, keeping original")
+                    updated_global_css = global_css
+            except Exception as e:
+                logger.error(f"Error updating global CSS: {e}")
+                updated_global_css = global_css
+        
+        # Update specific pages if needed
+        target_pages = analysis.get("target_pages", [])
+        if target_pages and analysis.get("update_type") in ["specific_pages", "both"]:
+            for page_name in target_pages:
+                if page_name not in pages:
+                    logger.warning(f"Page '{page_name}' not found in provided pages")
+                    continue
+                
+                logger.info(f"Updating page: {page_name}...")
+                try:
+                    page_data = pages[page_name]
+                    current_html = page_data.get('html', '')
+                    current_css = page_data.get('css', global_css if global_css else '')
+                    
+                    # Use HTMLEditor to modify the page
+                    modified_html = self.html_editor(
+                        html=current_html,
+                        css=current_css,
+                        edit_request=edit_request
+                    )
+                    
+                    # Extract CSS if any (re imported at top)
+                    html_clean, extracted_css = self._extract_css(modified_html)
+                    
+                    updated_pages[page_name] = {
+                        'html': html_clean,
+                        'css': extracted_css if extracted_css else current_css
+                    }
+                    changes_made.append(f"Updated {page_name} page")
+                    logger.info(f"✓ Page '{page_name}' updated")
+                except Exception as e:
+                    logger.error(f"Error updating page '{page_name}': {e}")
+        
+        # Generate summary
+        if not changes_made:
+            changes_summary = "No changes were made. Please check your request."
+        else:
+            changes_summary = f"Successfully applied changes: {', '.join(changes_made)}"
+        
+        logger.info(f"Update complete: {changes_summary}")
+        
+        return {
+            "updated_pages": updated_pages,
+            "updated_global_css": updated_global_css,
+            "changes_summary": changes_summary,
+            "analysis": analysis
+        }
+    
+    def _extract_css(self, html: str):
+        """Helper method to extract CSS from HTML. (re imported at top)"""
+        style_pattern = r'<style[^>]*>(.*?)</style>'
+        css_matches = re.findall(style_pattern, html, re.DOTALL | re.IGNORECASE)
+        extracted_css = '\n\n'.join(css_matches).strip()
+        html_without_style = re.sub(style_pattern, '', html, flags=re.DOTALL | re.IGNORECASE)
+        return html_without_style, extracted_css

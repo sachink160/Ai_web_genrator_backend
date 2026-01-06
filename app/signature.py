@@ -133,6 +133,34 @@ class ImageDescriptionSignature(dspy.Signature):
 
 
 
+class WebsiteUpdateAnalyzerSignature(dspy.Signature):
+    """Analyze edit request and determine what needs to be updated."""
+    edit_request: str = dspy.InputField(
+        desc="User's natural language edit request (e.g., 'change colors to blue', 'update hero text on home page')"
+    )
+    available_pages: str = dspy.InputField(
+        desc="List of available page names in the website"
+    )
+    current_global_css: str = dspy.InputField(
+        desc="Current global CSS content (optional, can be empty)"
+    )
+    analysis: str = dspy.OutputField(
+        desc="""JSON-formatted analysis of what needs to be updated:
+        {
+            "update_type": "global_css" | "specific_pages" | "both",
+            "target_pages": ["home", "about"] or [],
+            "requires_css_update": true/false,
+            "interpretation": "Brief explanation of what will be changed"
+        }
+        
+        Examples:
+        - "Change all colors to blue" → {"update_type": "global_css", "target_pages": [], "requires_css_update": true}
+        - "Update hero text on home page" → {"update_type": "specific_pages", "target_pages": ["home"], "requires_css_update": false}
+        - "Make buttons larger and update about page content" → {"update_type": "both", "target_pages": ["about"], "requires_css_update": true}
+        """
+    )
+
+
 class MultiPageSignature(dspy.Signature):
     """Generate HTML/CSS for a specific page based on the plan."""
     plan: str = dspy.InputField(
@@ -152,6 +180,21 @@ class MultiPageSignature(dspy.Signature):
     )
     html: str = dspy.OutputField(
         desc="""Complete responsive HTML page with embedded CSS.
+        
+        ⚠️ TOKEN LIMIT - CRITICAL REQUIREMENT:
+        - TOTAL OUTPUT MUST BE UNDER 8000 TOKENS (approximately 5000-6000 words)
+        - Keep ALL content SHORT and CONCISE
+        - NO verbose descriptions or lengthy paragraphs
+        - Maximum 2-3 sentences per section text
+        - Maximum 3-4 items in any list/grid
+        - Minimize CSS - use only essential styles, no redundant rules
+        
+        CONTENT LENGTH LIMITS (STRICT):
+        - Hero section: 1 heading (6-10 words) + 1 description (15-25 words) + 1 CTA button
+        - Features: Max 3 features, each with title (3-5 words) + text (15-20 words max)
+        - Testimonials: Max 2-3 items, each quote under 20 words
+        - About/Other sections: 2-3 sentences maximum (30-50 words total)
+        - Footer: Minimal - just essential links and copyright
         
         REQUIREMENTS:
         - Include <!DOCTYPE html>
