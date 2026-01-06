@@ -35,6 +35,7 @@ class EditHTMLResponse(BaseModel):
 
 class GenerateWebsiteRequest(BaseModel):
     description: str
+    template: Optional[str] = None  # Single-page HTML template for styling reference
 
 class WebsitePlanResponse(BaseModel):
     plan: Dict

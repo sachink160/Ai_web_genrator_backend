@@ -11,10 +11,13 @@ class WorkflowState(TypedDict):
     
     # User input
     description: str
+    template: Optional[str]  # Original template HTML for styling reference
     
     # Step 1: Planning output
     plan: Optional[Dict]  # Website structure plan
     plan_json: Optional[str]  # Raw JSON string from LLM
+    template_styling: Optional[Dict]  # Extracted styling patterns (fonts, colors, CSS structure)
+    css_theme: Optional[str]  # Global CSS theme extracted/derived from template
     
     # Step 2: Image generation
     image_descriptions: Optional[Dict]  # Section name -> image description

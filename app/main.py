@@ -1077,6 +1077,10 @@ async def generate_website(request: GenerateWebsiteRequest):
     logger.info("=" * 60)
     logger.info("LangGraph Website Generation - Request Received")
     logger.info(f"Description: {request.description[:100]}...")
+    template_provided = hasattr(request, 'template') and request.template
+    logger.info(f"Template provided: {bool(template_provided)}")
+    if template_provided:
+        logger.info(f"Template length: {len(request.template)} chars")
     logger.info("=" * 60)
     
     if not request.description or len(request.description.strip()) < 10:
@@ -1092,8 +1096,11 @@ async def generate_website(request: GenerateWebsiteRequest):
             # Initialize workflow state
             initial_state: WorkflowState = {
                 "description": request.description,
+                "template": request.template if hasattr(request, 'template') else None,
                 "plan": None,
                 "plan_json": None,
+                "template_styling": None,
+                "css_theme": None,
                 "image_descriptions": None,
                 "image_urls": None,
                 "pages": None,

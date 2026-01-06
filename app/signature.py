@@ -161,6 +161,45 @@ class WebsiteUpdateAnalyzerSignature(dspy.Signature):
     )
 
 
+class TemplateAnalysisSignature(dspy.Signature):
+    """Analyze HTML template to extract styling patterns."""
+    template_html: str = dspy.InputField(
+        desc="HTML template to analyze for styling patterns"
+    )
+    styling_analysis: str = dspy.OutputField(
+        desc="""JSON-formatted styling analysis including:
+        {
+            "fonts": {
+                "primary_font": "font-family name",
+                "secondary_font": "font-family name or null",
+                "font_sizes": ["base size", "heading sizes"],
+                "font_weights": ["normal", "bold", etc.]
+            },
+            "colors": {
+                "primary_color": "hex color",
+                "secondary_color": "hex color",
+                "accent_color": "hex color or null",
+                "background_color": "hex color",
+                "text_color": "hex color"
+            },
+            "css_structure": {
+                "grid_system": "description of grid/layout system",
+                "spacing_scale": "description of spacing patterns",
+                "typography_scale": "description of typography hierarchy",
+                "breakpoints": ["mobile", "tablet", "desktop"] or null
+            },
+            "design_patterns": {
+                "button_style": "description of button styling",
+                "card_style": "description of card styling",
+                "section_layout": "description of section structure",
+                "navigation_style": "description of navigation styling"
+            },
+            "theme": "overall theme description (modern, minimal, professional, etc.)"
+        }
+        """
+    )
+
+
 class MultiPageSignature(dspy.Signature):
     """Generate HTML/CSS for a specific page based on the plan."""
     plan: str = dspy.InputField(

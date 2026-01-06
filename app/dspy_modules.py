@@ -2,6 +2,7 @@
 import json
 import logging
 import re
+from typing import Dict, Optional
 
 # Third-party imports
 import dspy
@@ -15,6 +16,7 @@ from app.signature import (
     HTMLEditSignature,
     WebsitePlannerSignature,
     ImageDescriptionSignature,
+    TemplateAnalysisSignature,
     MultiPageSignature,
     WebsiteUpdateAnalyzerSignature
 )
@@ -205,46 +207,73 @@ class WebsitePlanner(dspy.Module):
         self.predict.lm = planning_llm
     
     
-    def forward(self, description: str):
+    def forward(self, description: str, template_styling: Optional[Dict] = None):
         planning_instructions = """You are an expert website architect and UX designer.
         
 Your task is to create a comprehensive, professional website structure plan based on the business description.
 
-PLANNING REQUIREMENTS:
+PLANNING STRATEGY - PRIORITIZE BUSINESS REQUIREMENTS:
 
+**PRIMARY FOCUS: Business Requirements**
 1. PAGES STRUCTURE:
-   - Determine the optimal number of pages (typically 3-5 for most businesses)
-   - Each page should have a clear purpose and target audience
-   - Define sections for each page that support the page's purpose
+   - Analyze the business description to determine required pages
+   - Each page should serve a clear business purpose and target audience
+   - Define sections for each page that support business goals
    - Common pages: home (landing), about, features/services, contact, pricing (if applicable)
+   - Add business-specific pages as needed (portfolio, blog, FAQ, etc.)
 
 2. SECTION PLANNING:
-   - Hero: Main value proposition, CTA
-   - Features: Product/service highlights
-   - Testimonials: Social proof, customer reviews
-   - CTA: Call-to-action sections
-   - Additional: FAQ, pricing, team, portfolio, etc.
+   - Hero: Main value proposition aligned with business goals, CTA
+   - Features: Product/service highlights that address business needs
+   - Testimonials: Social proof relevant to the business
+   - CTA: Call-to-action sections that drive business objectives
+   - Additional: Business-specific sections (FAQ, pricing, team, portfolio, etc.)
 
-3. STYLING STRATEGY:
-   - Choose a theme that matches the business type (modern, professional, creative, minimal, etc.)
-   - Select a primary and secondary color scheme
+3. CONTENT STRUCTURE:
+   - Plan content that serves business purposes
+   - User journey that supports business goals
+   - Business-specific features and functionality
+
+**SECONDARY REFERENCE: Template Styling (if provided)**
+4. STYLING STRATEGY:
+   - **If template styling is provided**: Use it as design reference for:
+     - Color scheme (adapt template colors to business if needed, but maintain consistency)
+     - Font family and typography (use template fonts as base)
+     - Design style and theme (match template aesthetic where appropriate)
+     - CSS structure patterns (follow template's grid/spacing system)
+   - **If no template**: Choose a theme that matches the business type (modern, professional, creative, minimal, etc.)
+   - Select primary and secondary color scheme
    - Define font strategy (professional sans-serif, elegant serif, etc.)
    - Specify overall design style
 
-4. IMAGE REQUIREMENTS:
+5. IMAGE REQUIREMENTS:
    - Identify which sections need background/decorative images
    - Typically: hero, features, testimonials
    - Images should enhance, not distract
 
-5. NAVIGATION:
+6. NAVIGATION:
    - Define clear navigation structure
    - Should include all main pages
    - Logical order for user journey
 
+**BALANCE**: Generate a plan that serves business requirements FIRST, then applies template styling for visual consistency.
+
 OUTPUT FORMAT: Return ONLY valid JSON matching the structure specified in the signature.
 Do not include any explanatory text, only the JSON object."""
         
-        full_description = f"{planning_instructions}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nBUSINESS DESCRIPTION TO ANALYZE:\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n{description}\n\nNow create an EXCEPTIONAL website plan based on this business."
+        # Build description with template styling reference if available
+        if template_styling:
+            template_info = f"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TEMPLATE STYLING REFERENCE (Use as design guide):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+{json.dumps(template_styling, indent=2)}
+
+Use these styling patterns as a design reference while prioritizing business requirements above.
+"""
+            full_description = f"{planning_instructions}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nBUSINESS DESCRIPTION TO ANALYZE:\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n{description}\n{template_info}\nNow create an EXCEPTIONAL website plan that serves business needs while maintaining template design consistency."
+        else:
+            full_description = f"{planning_instructions}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nBUSINESS DESCRIPTION TO ANALYZE:\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n{description}\n\nNow create an EXCEPTIONAL website plan based on this business."
         
         result = self.predict(description=full_description)
         return result.plan.strip()
@@ -299,6 +328,83 @@ OUTPUT: A detailed DALL-E 3 prompt (2-4 sentences) describing the visual composi
         return result.image_description.strip()
 
 
+class TemplateAnalyzer(dspy.Module):
+    """Analyze HTML template to extract styling patterns."""
+    
+    def __init__(self):
+        super().__init__()
+        # Use planning_llm for template analysis (JSON output, moderate size)
+        self.predict = dspy.Predict(TemplateAnalysisSignature)
+        self.predict.lm = planning_llm
+    
+    def forward(self, template_html: str):
+        analysis_instructions = """You are an expert frontend designer and CSS analyst.
+
+Your task is to analyze an HTML template and extract comprehensive styling patterns that can be used as a design reference for generating consistent multi-page websites.
+
+ANALYSIS REQUIREMENTS:
+
+1. FONTS:
+   - Identify primary font family (most commonly used)
+   - Identify secondary font family (if any, for headings or special sections)
+   - Extract font sizes used (base size, heading sizes)
+   - Identify font weights (normal, bold, etc.)
+
+2. COLORS:
+   - Extract primary color (most prominent, used for buttons, links, accents)
+   - Extract secondary color (supporting color, used for backgrounds or secondary elements)
+   - Extract accent color (if present, used for highlights or CTAs)
+   - Extract background color (main page background)
+   - Extract text color (primary text color)
+
+3. CSS STRUCTURE:
+   - Identify grid/layout system (CSS Grid, Flexbox patterns)
+   - Analyze spacing scale (padding, margins, gaps)
+   - Identify typography scale (heading hierarchy, line heights)
+   - Note responsive breakpoints if visible in CSS
+
+4. DESIGN PATTERNS:
+   - Analyze button styling (colors, padding, border-radius, hover effects)
+   - Analyze card styling (shadows, borders, padding, background)
+   - Analyze section layout structure (containers, spacing, alignment)
+   - Analyze navigation styling (menu style, links, active states)
+
+5. THEME:
+   - Determine overall theme (modern, minimal, professional, creative, etc.)
+   - Note design aesthetic and visual style
+
+OUTPUT FORMAT: Return ONLY valid JSON matching the structure specified in the signature.
+Do not include any explanatory text, only the JSON object."""
+        
+        full_prompt = f"{analysis_instructions}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nTEMPLATE HTML TO ANALYZE:\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n{template_html[:5000]}\n\nExtract styling patterns from this template."
+        
+        result = self.predict(template_html=full_prompt)
+        
+        # Parse JSON response
+        styling_json = result.styling_analysis.strip()
+        
+        # Clean up markdown code blocks if present
+        if "```json" in styling_json:
+            styling_json = styling_json.split("```json")[1].split("```")[0].strip()
+        elif "```" in styling_json:
+            styling_json = styling_json.split("```")[1].split("```")[0].strip()
+        
+        # Parse to dict
+        try:
+            styling_dict = json.loads(styling_json)
+            return styling_dict
+        except json.JSONDecodeError as e:
+            # Fallback: return basic structure if parsing fails
+            logging.warning(f"Failed to parse template styling JSON: {e}")
+            return {
+                "fonts": {"primary_font": "sans-serif", "font_sizes": ["16px"], "font_weights": ["normal", "bold"]},
+                "colors": {"primary_color": "#3B82F6", "secondary_color": "#64748B", "text_color": "#1F2937"},
+                "css_structure": {"grid_system": "CSS Grid/Flexbox", "spacing_scale": "standard"},
+                "design_patterns": {"button_style": "modern", "card_style": "clean"},
+                "theme": "modern professional"
+            }
+
+
 class MultiPageGenerator(dspy.Module):
     """Generate HTML/CSS for individual pages."""
     
@@ -306,15 +412,26 @@ class MultiPageGenerator(dspy.Module):
         super().__init__()
         self.predict = dspy.Predict(MultiPageSignature)
     
-    def forward(self, plan: str, page_name: str, page_config: str, image_urls: str, business_description: str):
+    def forward(self, plan: str, page_name: str, page_config: str, image_urls: str, business_description: str, template_styling: Optional[Dict] = None):
         generation_rules = """You are an expert frontend developer specializing in creating professional, responsive websites.
 
+GENERATION STRATEGY - PRIORITIZE BUSINESS REQUIREMENTS:
+
+**PRIMARY FOCUS: Business-Driven Content**
 YOUR TASK:
 - Generate a complete, production-ready HTML page based on the website plan
 - Follow the page configuration and include all specified sections
 - Use the provided image URLs for appropriate sections (hero, features, testimonials)
 - Create realistic, professional content aligned with the business description
-- Apply the styling strategy from the plan
+- Serve business purposes and goals with appropriate content
+
+**SECONDARY REFERENCE: Template Styling (if provided)**
+- Apply template styling patterns for visual consistency:
+  - Use template font families and typography scale
+  - Apply template color scheme (adapt if business needs different tone)
+  - Follow template CSS structure patterns (grid systems, spacing)
+  - Use template design patterns (buttons, cards, sections)
+- Maintain template's design language while serving business-specific purposes
 
 TECHNICAL REQUIREMENTS:
 

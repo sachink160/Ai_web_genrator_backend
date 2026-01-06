@@ -8,7 +8,7 @@ import httpx
 import time
 from typing import Dict, List, Optional
 from app.workflow_state import WorkflowState
-from app.dspy_modules import WebsitePlanner, ImageDescriptionGenerator, MultiPageGenerator
+from app.dspy_modules import WebsitePlanner, ImageDescriptionGenerator, MultiPageGenerator, TemplateAnalyzer
 from app.file_manager import WebsiteFileManager
 import asyncio
 from app.utils import call_dalle
@@ -34,15 +34,51 @@ azure_client = AzureOpenAI(
 def planning_node(state: WorkflowState) -> WorkflowState:
     """
     Step 1: Generate comprehensive website plan.
+    PRIMARY: Analyze business requirements
+    SECONDARY: Extract template styling as reference (if template provided)
+    BALANCE: Generate plan prioritizing business needs with template design consistency
     """
     logger.info("Starting planning node...")
     
     try:
-        # Initialize WebsitePlanner module
+        # PRIMARY: Analyze business description (always done)
+        business_description = state["description"]
+        logger.info("Analyzing business requirements from description...")
+        
+        # SECONDARY: Analyze template if provided
+        template_styling = None
+        css_theme = None
+        template = state.get("template")
+        
+        if template and template.strip():
+            logger.info("Template provided - extracting styling patterns as design reference...")
+            try:
+                # Initialize TemplateAnalyzer
+                template_analyzer = TemplateAnalyzer()
+                
+                # Extract styling patterns from template
+                template_styling = template_analyzer(template_html=template)
+                logger.info(f"✓ Extracted template styling patterns: {list(template_styling.keys())}")
+                
+                # Extract CSS theme from template
+                css_theme = extract_css_theme_from_template(template)
+                if css_theme:
+                    logger.info(f"✓ Extracted CSS theme ({len(css_theme)} chars)")
+                else:
+                    logger.info("No CSS found in template")
+                    
+            except Exception as e:
+                logger.warning(f"Template analysis failed: {str(e)}, continuing without template styling")
+                template_styling = None
+                css_theme = None
+        else:
+            logger.info("No template provided - generating plan based on business requirements only")
+        
+        # BALANCE: Generate plan prioritizing business requirements, using template styling as reference
         planner = WebsitePlanner()
         
-        # Generate plan
-        plan_json = planner(description=state["description"])
+        # Generate plan with template styling as reference (if available)
+        plan_json = planner(description=business_description, template_styling=template_styling)
         # plan_json = planner.forward(description=state["description"])
         
         logger.info(f"Raw plan response length: {len(plan_json)} chars")
@@ -117,15 +153,17 @@ def planning_node(state: WorkflowState) -> WorkflowState:
         logger.info(f"✓ Generated plan with {len(plan.get('pages', []))} pages")
         logger.info(f"Pages: {[p.get('name', 'unknown') for p in plan.get('pages', [])]}")
         
-        # Update state
+        # Update state with plan, template styling, and CSS theme
         return {
             **state,
             "plan": plan,
             "plan_json": json.dumps(plan),  # Store normalized JSON
+            "template_styling": template_styling,  # Store extracted template styling
+            "css_theme": css_theme,  # Store extracted CSS theme
             "current_step": "image_description",
             "status": "in_progress",
             "progress": 25,
-            "progress_message": f"✓ Planning complete: {len(plan.get('pages', []))} pages planned"
+            "progress_message": f"✓ Planning complete: {len(plan.get('pages', []))} pages planned" + (", template styling applied" if template_styling else "")
         }
         
     except Exception as e:
@@ -140,6 +178,31 @@ def planning_node(state: WorkflowState) -> WorkflowState:
         }
 
 
+def extract_css_theme_from_template(template_html: str) -> Optional[str]:
+    """
+    Extract and normalize CSS from template HTML.
+    Returns CSS string or None if no CSS found.
+    """
+    try:
+        # Extract CSS from <style> tags
+        style_pattern = r'<style[^>]*>(.*?)</style>'
+        css_matches = re.findall(style_pattern, template_html, re.DOTALL | re.IGNORECASE)
+        
+        if css_matches:
+            # Combine all CSS from style tags
+            extracted_css = '\n\n'.join(css_matches).strip()
+            
+            # Basic normalization (remove comments, normalize whitespace)
+            # Keep it simple - just clean up excessive whitespace
+            normalized_css = re.sub(r'\n\s*\n\s*\n+', '\n\n', extracted_css)
+            
+            logger.info(f"Extracted {len(normalized_css)} chars of CSS from template")
+            return normalized_css
+        
+        return None
+    except Exception as e:
+        logger.warning(f"Error extracting CSS from template: {str(e)}")
+        return None
 
 
 async def image_description_node(state: WorkflowState) -> WorkflowState:
@@ -390,13 +453,17 @@ def html_generation_node(state: WorkflowState) -> WorkflowState:
                 "navigation": navigation_info
             }
             
-            # Generate HTML
+            # Get template styling from state (if available)
+            template_styling = state.get("template_styling")
+            
+            # Generate HTML with template styling as reference (if available)
             html = generator(
                 plan=json.dumps(enhanced_plan),
                 page_name=page_name,
                 page_config=json.dumps(page),
                 image_urls=image_urls_text,
-                business_description=state["description"]
+                business_description=state["description"],
+                template_styling=template_styling
             )
             
             # CRITICAL: Clean up markdown blocks and validate
