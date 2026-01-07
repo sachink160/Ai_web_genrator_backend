@@ -11,7 +11,7 @@ from typing import Tuple
 from dotenv import load_dotenv # type: ignore
 from fastapi import FastAPI, HTTPException, Request # type: ignore
 from fastapi.middleware.cors import CORSMiddleware # type: ignore
-from fastapi.responses import StreamingResponse, JSONResponse, FileResponse # type: ignore
+from fastapi.responses import StreamingResponse, JSONResponse, FileResponse, RedirectResponse # type: ignore
 from fastapi.staticfiles import StaticFiles # type: ignore
 import dspy # type: ignore - Used for DSPy configuration and LM settings
 import uvicorn # type: ignore - Used for running the FastAPI server
@@ -88,7 +88,9 @@ app.add_middleware(
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UPLOAD_DIR = os.path.join(BASE_DIR, "uploads")
+WEBTEMPLATES_DIR = os.path.join(BASE_DIR, "webtemplates")
 os.makedirs(UPLOAD_DIR, exist_ok=True)
+os.makedirs(WEBTEMPLATES_DIR, exist_ok=True)
 
 # Mount static directories
 app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
@@ -98,6 +100,120 @@ async def serve_test_page():
     """Serve the test page for /api/generate-website endpoint"""
     index_path = os.path.join(BASE_DIR, "index.html")
     return FileResponse(index_path)
+
+@app.get("/api/serve-website/{folder_name}/{file_path:path}")
+async def serve_website_file(folder_name: str, file_path: str):
+    """
+    Serve static files from a generated website folder.
+    
+    Args:
+        folder_name: Name of the website folder (e.g., 'website_20260107_120500')
+        file_path: Path to the file within the folder (e.g., 'index.html', 'style.css', 'home.html')
+    
+    Returns:
+        FileResponse with the requested file
+    """
+    # Sanitize folder_name to prevent directory traversal
+    folder_name = os.path.basename(folder_name)
+    
+    # Construct full path
+    website_folder = os.path.join(WEBTEMPLATES_DIR, folder_name)
+    full_path = os.path.join(website_folder, file_path)
+    
+    # Security check: ensure the resolved path is within webtemplates
+    try:
+        real_path = os.path.realpath(full_path)
+        real_webtemplates = os.path.realpath(WEBTEMPLATES_DIR)
+        
+        if not real_path.startswith(real_webtemplates):
+            raise HTTPException(status_code=403, detail="Access denied")
+    except Exception as e:
+        logger.error(f"Security check failed: {str(e)}")
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    # Check if file exists
+    if not os.path.exists(full_path):
+        logger.warning(f"File not found: {full_path}")
+        raise HTTPException(status_code=404, detail=f"File not found: {file_path}")
+    
+    # Determine MIME type
+    if full_path.endswith('.html'):
+        media_type = 'text/html'
+    elif full_path.endswith('.css'):
+        media_type = 'text/css'
+    elif full_path.endswith('.js'):
+        media_type = 'application/javascript'
+    elif full_path.endswith('.json'):
+        media_type = 'application/json'
+    elif full_path.endswith('.png'):
+        media_type = 'image/png'
+    elif full_path.endswith('.jpg') or full_path.endswith('.jpeg'):
+        media_type = 'image/jpeg'
+    else:
+        media_type = None
+    
+    logger.info(f"Serving file: {full_path}")
+    return FileResponse(full_path, media_type=media_type)
+
+@app.get("/api/serve-website/{folder_name}")
+async def serve_website_index(folder_name: str, request: Request):
+    """
+    Redirect to the folder URL with a trailing slash.
+    This ensures relative URLs in index.html work correctly.
+    
+    Args:
+        folder_name: Name of the website folder
+        request: FastAPI Request object
+    
+    Returns:
+        RedirectResponse to the folder with trailing slash
+    """
+    # Redirect to the same URL with a trailing slash
+    redirect_url = f"/api/serve-website/{folder_name}/index.html"
+    return RedirectResponse(url=redirect_url, status_code=307)
+
+@app.get("/api/serve-website/{folder_name}/")
+async def serve_website_index_with_slash(folder_name: str):
+    """
+    Serve the index.html file from a generated website folder.
+    The trailing slash ensures relative URLs in the HTML work correctly.
+    
+    Args:
+        folder_name: Name of the website folder
+    
+    Returns:
+        FileResponse with index.html
+    """
+    # Sanitize folder_name to prevent directory traversal
+    folder_name = os.path.basename(folder_name)
+    
+    # Construct full path to index.html
+    website_folder = os.path.join(WEBTEMPLATES_DIR, folder_name)
+    index_path = os.path.join(website_folder, "index.html")
+    
+    # Security check: ensure the resolved path is within webtemplates
+    try:
+        real_path = os.path.realpath(index_path)
+        real_webtemplates = os.path.realpath(WEBTEMPLATES_DIR)
+        
+        if not real_path.startswith(real_webtemplates):
+            raise HTTPException(status_code=403, detail="Access denied")
+    except Exception as e:
+        logger.error(f"Security check failed: {str(e)}")
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    # Check if file exists
+    if not os.path.exists(index_path):
+        logger.warning(f"File not found: {index_path}")
+        raise HTTPException(status_code=404, detail="index.html not found")
+    
+    # Check if it's actually a file
+    if not os.path.isfile(index_path):
+        logger.error(f"Path is not a file: {index_path}")
+        raise HTTPException(status_code=500, detail="Invalid file path")
+    
+    logger.info(f"Serving index.html from: {index_path}")
+    return FileResponse(index_path, media_type='text/html')
 
 
 def extract_css_and_replace_style_tags(html: str) -> Tuple[str, str]:
